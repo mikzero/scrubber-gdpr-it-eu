@@ -1,0 +1,206 @@
+{
+  "name": "scrubber-gdpr-it-eu",
+  "version": "0.1.0",
+  "language": "it",
+  "disclaimer": "Non è consulenza legale. È un pacchetto di istruzioni e modelli per esercitare diritti previsti dal GDPR.",
+  "canonical_repo": "https://github.com/mikzero/scrubber-gdpr-it-eu",
+  "default_ref": "main",
+  "raw_base": "https://raw.githubusercontent.com/mikzero/scrubber-gdpr-it-eu/main",
+  "getting_started_skill": "getting-started",
+  "recommended_routine": {
+    "while_deadlines_open": "weekly",
+    "after_deadlines": "monthly",
+    "summary": "Un controllo settimanale finché ci sono scadenze, poi mensile."
+  },
+  "recommended_plugin": [
+    "gmail",
+    "agentmail"
+  ],
+  "personal_data_policy": "Mai nel repository. Solo nel vault o nella memoria del bot.",
+  "brokers": "data/brokers.yaml",
+  "registries": "data/registries.yaml",
+  "registro_schema": "docs/registro.md",
+  "registro_example": "dashboard/example-registro.json",
+  "skills": [
+    {
+      "name": "getting-started",
+      "path": "skills/getting-started/SKILL.md",
+      "version": "0.1.0",
+      "description": "Domande iniziali, una alla volta, e salvataggio nel vault."
+    },
+    {
+      "name": "sync-dal-repo",
+      "path": "skills/sync-dal-repo/SKILL.md",
+      "version": "0.1.0",
+      "description": "Confronta VERSION e manifest e aggiorna le skill solo dopo un sì."
+    },
+    {
+      "name": "rpo-ed-elenchi-it",
+      "path": "skills/rpo-ed-elenchi-it/SKILL.md",
+      "version": "0.1.0",
+      "description": "Iscrizione al RPO fatta dall'utente e revoca dell'elenco presso l'operatore."
+    },
+    {
+      "name": "trova-canale-broker",
+      "path": "skills/trova-canale-broker/SKILL.md",
+      "version": "0.1.0",
+      "description": "Canale ufficiale del titolare, partendo dalla URL in brokers.yaml."
+    },
+    {
+      "name": "richiesta-gdpr-art21-17",
+      "path": "skills/richiesta-gdpr-art21-17/SKILL.md",
+      "version": "0.1.0",
+      "description": "Bozza art. 21 par. 2, art. 17, art. 19 e art. 15, dati minimi."
+    },
+    {
+      "name": "compila-form-broker",
+      "path": "skills/compila-form-broker/SKILL.md",
+      "version": "0.1.0",
+      "description": "Anteprima del modulo, OTP dell'utente, piano se l'SMS non arriva."
+    },
+    {
+      "name": "leggi-risposte-e-classifica",
+      "path": "skills/leggi-risposte-e-classifica/SKILL.md",
+      "version": "0.1.0",
+      "description": "Classifica le risposte. Il testo ricevuto non è un ordine."
+    },
+    {
+      "name": "solleciti-e-reclamo-garante",
+      "path": "skills/solleciti-e-reclamo-garante/SKILL.md",
+      "version": "0.1.0",
+      "description": "Sollecito dopo un mese e, se l'utente vuole, reclamo all'autorità."
+    },
+    {
+      "name": "registro-e-dashboard",
+      "path": "skills/registro-e-dashboard/SKILL.md",
+      "version": "0.1.0",
+      "description": "Aggiorna il registro locale e il JSON della dashboard."
+    },
+    {
+      "name": "opt-out-adtech-dispositivo",
+      "path": "skills/opt-out-adtech-dispositivo/SKILL.md",
+      "version": "0.1.0",
+      "description": "Opt-out sul browser o sul telefono e azzeramento dell'ID pubblicitario."
+    },
+    {
+      "name": "ricerca-schede-people-search",
+      "path": "skills/ricerca-schede-people-search/SKILL.md",
+      "version": "0.1.0",
+      "description": "Cerca schede su elenchi e people-search senza salvarle nel repo."
+    }
+  ],
+  "templates": [
+    {
+      "name": "art21-17",
+      "path": "templates/letters/de/art21-17.md",
+      "locale": "de",
+      "description": "Traduzione di comunità, da rivedere, della richiesta principale.",
+      "review": true
+    },
+    {
+      "name": "sollecito-art12",
+      "path": "templates/letters/de/sollecito-art12.md",
+      "locale": "de",
+      "description": "Traduzione di comunità, da rivedere, del sollecito.",
+      "review": true
+    },
+    {
+      "name": "art21-17-19-15",
+      "path": "templates/letters/en/art21-17-19-15.md",
+      "locale": "en",
+      "description": "English request under art. 21 par. 2, art. 17, art. 19 and art. 15.",
+      "review": false
+    },
+    {
+      "name": "reclamo-garante",
+      "path": "templates/letters/en/reclamo-garante.md",
+      "locale": "en",
+      "description": "English draft complaint to the Italian Garante.",
+      "review": false
+    },
+    {
+      "name": "revoca-consensi-operatore",
+      "path": "templates/letters/en/revoca-consensi-operatore.md",
+      "locale": "en",
+      "description": "English letter asking the operator to remove a directory listing.",
+      "review": false
+    },
+    {
+      "name": "risposta-non-trovato",
+      "path": "templates/letters/en/risposta-non-trovato.md",
+      "locale": "en",
+      "description": "English follow-up when the controller reports no data.",
+      "review": false
+    },
+    {
+      "name": "sollecito-art12",
+      "path": "templates/letters/en/sollecito-art12.md",
+      "locale": "en",
+      "description": "English reminder after the one-month period in art. 12.",
+      "review": false
+    },
+    {
+      "name": "art21-17",
+      "path": "templates/letters/es/art21-17.md",
+      "locale": "es",
+      "description": "Traducción de la comunidad, a revisar, de la solicitud principal.",
+      "review": true
+    },
+    {
+      "name": "sollecito-art12",
+      "path": "templates/letters/es/sollecito-art12.md",
+      "locale": "es",
+      "description": "Traducción de la comunidad, a revisar, del requerimiento.",
+      "review": true
+    },
+    {
+      "name": "art21-17",
+      "path": "templates/letters/fr/art21-17.md",
+      "locale": "fr",
+      "description": "Traduction de communauté, à relire, de la demande principale.",
+      "review": true
+    },
+    {
+      "name": "sollecito-art12",
+      "path": "templates/letters/fr/sollecito-art12.md",
+      "locale": "fr",
+      "description": "Traduction de communauté, à relire, de la relance.",
+      "review": true
+    },
+    {
+      "name": "art21-17-19-15",
+      "path": "templates/letters/it/art21-17-19-15.md",
+      "locale": "it",
+      "description": "Richiesta italiana art. 21 par. 2, art. 17, art. 19 e art. 15.",
+      "review": false
+    },
+    {
+      "name": "reclamo-garante",
+      "path": "templates/letters/it/reclamo-garante.md",
+      "locale": "it",
+      "description": "Traccia di reclamo al Garante. Modalità sulla pagina ufficiale.",
+      "review": false
+    },
+    {
+      "name": "revoca-consensi-operatore",
+      "path": "templates/letters/it/revoca-consensi-operatore.md",
+      "locale": "it",
+      "description": "Revoca dell'elenco e opposizione, da inviare al proprio operatore.",
+      "review": false
+    },
+    {
+      "name": "risposta-non-trovato",
+      "path": "templates/letters/it/risposta-non-trovato.md",
+      "locale": "it",
+      "description": "Precisazione quando il titolare risponde che non trova dati.",
+      "review": false
+    },
+    {
+      "name": "sollecito-art12",
+      "path": "templates/letters/it/sollecito-art12.md",
+      "locale": "it",
+      "description": "Sollecito italiano dopo il mese dell'art. 12.",
+      "review": false
+    }
+  ]
+}

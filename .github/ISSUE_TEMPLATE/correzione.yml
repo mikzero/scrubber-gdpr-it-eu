@@ -1,0 +1,30 @@
+name: Correzione a skill o modello
+description: Errori nei testi, nelle skill o nella dashboard. Senza dati personali.
+title: "[testo] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Indica il file e la correzione. Non incollare bozze già compilate con dati veri.
+        Non è consulenza legale.
+  - type: input
+    id: file
+    attributes:
+      label: File
+      placeholder: skills/richiesta-gdpr-art21-17/SKILL.md
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: Correzione proposta
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Conferma
+      options:
+        - label: Questa issue non contiene dati personali.
+          required: true

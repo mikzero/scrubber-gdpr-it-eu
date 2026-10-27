@@ -1,0 +1,279 @@
+# Registri, elenchi, opt-out di dispositivo e autorità di controllo.
+# Non è consulenza legale. Nessun dato di persona fisica e nessun numero di telefono.
+# Le email presenti sono caselle istituzionali di ruolo, lette su pagine ufficiali.
+# complaint_url_verified false: la URL è la home o un ingresso da controllare, non un modulo già provato.
+version: 0.1.0
+updated: '2026-10-27'
+disclaimer: Non è consulenza legale. I nominativi delle persone fisiche pubblicati dall'EDPB non vanno
+  copiati in questo repo.
+edpb_members: https://www.edpb.europa.eu/about-edpb/about-edpb/members_en
+opposition_registers:
+- id: rpo-it
+  name: Registro Pubblico delle Opposizioni
+  country: IT
+  kind: opposition-register
+  url: https://registrodelleopposizioni.it/cittadino/
+  notes: Servizio pubblico per opporsi all'uso del proprio numero, fisso o mobile, per telemarketing e
+    all'uso dell'indirizzo postale degli elenchi per marketing cartaceo. Non sostituisce la revoca dell'inserimento
+    in elenco presso l'operatore. L'utente agisce dal proprio numero. I numeri di telefono del servizio
+    stanno sulla pagina cittadino e non sono copiati in questo repo.
+  channels:
+  - id: web
+    url: https://cittadino.registrodelleopposizioni.it/autenticazione/iscrizione/
+    notes: SPID, CIE oppure senza autenticazione, secondo il modulo. Poi il sito chiede una chiamata di
+      verifica dal numero da iscrivere. Non chiedere mai la password SPID o il PIN della CIE.
+  - id: phone
+    url: https://registrodelleopposizioni.it/cittadino/
+    notes: Si chiama dal numero da iscrivere il numero pubblicato sulla pagina per le utenze fisse oppure
+      quello per i cellulari. Non trascrivere quei numeri nel repo, in chat di log o in una issue.
+  - id: pdf-email
+    form_url: https://registrodelleopposizioni.it/wp-content/uploads/2022/07/RPO_Modulo_Email_ISCRIZIONE.pdf
+    submission_email: iscrizione@registrodelleopposizioni.it
+    notes: Modulo PDF ufficiale. Va salvato senza cambiare formato e inviato a questa casella istituzionale.
+      L'iscrizione si completa con una chiamata di verifica dal numero, entro il tempo indicato nelle
+      istruzioni che arrivano via email.
+directories:
+- id: elenchi-operatore
+  name: Revoca dell'inserimento negli elenchi telefonici
+  country: IT
+  kind: directory-opt-out
+  url: null
+  notes: Si chiede al proprio operatore telefonico, non al RPO. Il bot prepara la bozza con templates/letters/it/revoca-consensi-operatore.md
+    e invia solo dopo un sì esplicito. Non elencare qui URL di operatori non riverificati.
+- id: paginebianche
+  name: PagineBianche
+  country: IT
+  kind: directory
+  url: https://www.paginebianche.it/
+  automated_check:
+    date: '2026-10-27'
+    http_status: 403
+    result: warning
+  notes: Elenco da consultare nel browser dell'utente. Il controllo automatico ha ricevuto 403. Se la
+    scheda c'è, la rimozione passa dall'operatore e, se serve, dal titolare dell'elenco. Non salvare la
+    scheda nel repo.
+search_delisting:
+- id: google-rtbf
+  name: Modulo Google sul diritto all'oblio
+  kind: search-delisting
+  url: https://reportcontent.google.com/forms/rtbf
+  notes: Riguarda il risultato di ricerca, non la scheda alla fonte. Usalo dopo la richiesta al titolare
+    della pagina, o insieme, se l'utente è d'accordo. Il modulo lo compila l'utente.
+device_opt_out:
+- id: youronlinechoices-eu
+  name: YourOnlineChoices — le tue scelte
+  country: EU
+  url: https://www.youronlinechoices.eu/it/le-tue-scelte
+- id: youronlinechoices-com
+  name: YourOnlineChoices
+  country: EU
+  url: https://www.youronlinechoices.com/it/
+- id: google-ads-settings
+  name: Impostazioni annunci Google
+  country: EU
+  url: https://adssettings.google.com/
+  notes: Opt-out sul browser o sull'account. Non è una richiesta art. 17 al titolare.
+authorities:
+- id: at-dsb
+  name: Österreichische Datenschutzbehörde
+  country: AT
+  website: https://www.dsb.gv.at/
+  complaint_url: https://www.dsb.gv.at/
+  complaint_url_verified: false
+  notes: Reclami a volte ripartiti fra più autorità. Parti dal sito.
+- id: be-apd
+  name: Autorité de la protection des données / Gegevensbeschermingsautoriteit
+  country: BE
+  website: https://www.autoriteprotectiondonnees.be/
+  complaint_url: https://www.autoriteprotectiondonnees.be/
+  complaint_url_verified: false
+  notes: Autorità belga. Controlla se il reclamo è di competenza di un'altra autorità del paese.
+- id: bg-cpdp
+  name: Commission for Personal Data Protection
+  country: BG
+  website: https://www.cpdp.bg/
+  complaint_url: https://www.cpdp.bg/
+  complaint_url_verified: false
+  notes: Il 2026-10-27 il controllo automatico non ha completato la verifica del certificato TLS. Non è un 404. Apri il sito nel browser.
+- id: hr-azop
+  name: Agencija za zaštitu osobnih podataka
+  country: HR
+  website: https://azop.hr/
+  complaint_url: https://azop.hr/
+  complaint_url_verified: false
+- id: cy-dpa
+  name: Office of the Commissioner for Personal Data Protection
+  country: CY
+  website: https://www.dataprotection.gov.cy/
+  complaint_url: https://www.dataprotection.gov.cy/
+  complaint_url_verified: false
+- id: cz-uoou
+  name: Úřad pro ochranu osobních údajů
+  country: CZ
+  website: https://uoou.gov.cz/
+  complaint_url: https://uoou.gov.cz/
+  complaint_url_verified: false
+- id: dk-datatilsynet
+  name: Datatilsynet
+  country: DK
+  website: https://www.datatilsynet.dk/
+  complaint_url: https://www.datatilsynet.dk/
+  complaint_url_verified: false
+- id: ee-aki
+  name: Andmekaitse Inspektsioon
+  country: EE
+  website: https://www.aki.ee/
+  complaint_url: https://www.aki.ee/
+  complaint_url_verified: false
+- id: fi-tietosuoja
+  name: Office of the Data Protection Ombudsman
+  country: FI
+  website: https://tietosuoja.fi/
+  complaint_url: https://tietosuoja.fi/
+  complaint_url_verified: false
+- id: fr-cnil
+  name: Commission nationale de l'informatique et des libertés
+  country: FR
+  website: https://www.cnil.fr/
+  complaint_url: https://www.cnil.fr/fr/plaintes
+  complaint_url_verified: true
+  notes: Pagina reclami verificata il 2026-10-27.
+- id: de-bfdi
+  name: Die Bundesbeauftragte für den Datenschutz und die Informationsfreiheit
+  country: DE
+  website: https://www.bfdi.bund.de/
+  complaint_url: https://www.bfdi.bund.de/DE/Service/Anschriften/Laender/Laender-node.html
+  complaint_url_verified: true
+  notes: I reclami verso privati di solito vanno all'autorità del Land, non al BfDI. La URL di reclamo
+    è l'elenco dei Länder.
+- id: gr-dpa
+  name: Hellenic Data Protection Authority
+  country: GR
+  website: https://www.dpa.gr/
+  complaint_url: https://www.dpa.gr/
+  complaint_url_verified: false
+- id: hu-naih
+  name: Nemzeti Adatvédelmi és Információszabadság Hatóság
+  country: HU
+  website: https://www.naih.hu/
+  complaint_url: https://www.naih.hu/
+  complaint_url_verified: false
+- id: ie-dpc
+  name: Data Protection Commission
+  country: IE
+  website: https://www.dataprotection.ie/
+  complaint_url: https://www.dataprotection.ie/en/individuals/exercising-your-rights/raising-concern-commission
+  complaint_url_verified: true
+  notes: Pagina per segnalare un problema alla DPC, verificata il 2026-10-27.
+- id: it-garante
+  name: Garante per la protezione dei dati personali
+  country: IT
+  website: https://www.garanteprivacy.it/
+  complaint_url: https://www.garanteprivacy.it/diritti/come-agire-per-tutelare-i-tuoi-dati-personali/reclamo
+  complaint_url_verified: true
+  institutional_email: protocollo@pec.gpdp.it
+  notes: 'Canale PEC istituzionale pubblicato sulla pagina reclami. La PEC accetta solo messaggi da PEC.
+    L''indirizzo postale sta sulla stessa pagina: non è copiato qui.'
+- id: lv-dvi
+  name: Datu valsts inspekcija
+  country: LV
+  website: https://www.dvi.gov.lv/
+  complaint_url: https://www.dvi.gov.lv/
+  complaint_url_verified: false
+- id: lt-vdai
+  name: Valstybinė duomenų apsaugos inspekcija
+  country: LT
+  website: https://vdai.lrv.lt/
+  complaint_url: https://vdai.lrv.lt/
+  complaint_url_verified: false
+- id: lu-cnpd
+  name: Commission nationale pour la protection des données
+  country: LU
+  website: https://cnpd.public.lu/
+  complaint_url: https://cnpd.public.lu/
+  complaint_url_verified: false
+- id: mt-idpc
+  name: Office of the Information and Data Protection Commissioner
+  country: MT
+  website: https://idpc.org.mt/
+  complaint_url: https://idpc.org.mt/
+  complaint_url_verified: false
+- id: nl-ap
+  name: Autoriteit Persoonsgegevens
+  country: NL
+  website: https://autoriteitpersoonsgegevens.nl/
+  complaint_url: https://www.autoriteitpersoonsgegevens.nl/een-tip-of-klacht-indienen-bij-de-ap
+  complaint_url_verified: true
+  notes: Pagina per tip o reclamo, verificata il 2026-10-27.
+- id: pl-uodo
+  name: Urząd Ochrony Danych Osobowych
+  country: PL
+  website: https://uodo.gov.pl/
+  complaint_url: https://uodo.gov.pl/
+  complaint_url_verified: false
+- id: pt-cnpd
+  name: Comissão Nacional de Proteção de Dados
+  country: PT
+  website: https://www.cnpd.pt/
+  complaint_url: https://www.cnpd.pt/
+  complaint_url_verified: false
+- id: ro-anspdcp
+  name: Autoritatea Națională de Supraveghere a Prelucrării Datelor cu Caracter Personal
+  country: RO
+  website: https://www.dataprotection.ro/
+  complaint_url: https://www.dataprotection.ro/
+  complaint_url_verified: false
+- id: sk-uoou
+  name: Úrad na ochranu osobných údajov Slovenskej republiky
+  country: SK
+  website: https://dataprotection.gov.sk/
+  complaint_url: https://dataprotection.gov.sk/
+  complaint_url_verified: false
+- id: si-ip
+  name: Informacijski pooblaščenec
+  country: SI
+  website: https://www.ip-rs.si/
+  complaint_url: https://www.ip-rs.si/
+  complaint_url_verified: false
+- id: es-aepd
+  name: Agencia Española de Protección de Datos
+  country: ES
+  website: https://www.aepd.es/
+  complaint_url: https://www.aepd.es/
+  complaint_url_verified: false
+  notes: Il 2026-10-27 una URL della sede elettronica ha risposto HTTP 500. Usa la home e il modulo di
+    reclamo corrente. Non è stata fissata una URL di modulo instabile.
+- id: se-imy
+  name: Integritetsskyddsmyndigheten
+  country: SE
+  website: https://www.imy.se/
+  complaint_url: https://www.imy.se/
+  complaint_url_verified: false
+- id: is-dpa
+  name: Persónuvernd
+  country: IS
+  website: https://www.personuvernd.is/
+  complaint_url: https://www.personuvernd.is/
+  complaint_url_verified: false
+  notes: SEE. Autorità EEA, non uno Stato membro UE.
+- id: li-dss
+  name: Datenschutzstelle Liechtenstein
+  country: LI
+  website: https://www.datenschutzstelle.li/
+  complaint_url: https://www.datenschutzstelle.li/
+  complaint_url_verified: false
+  notes: SEE. Autorità EEA, non uno Stato membro UE.
+- id: no-datatilsynet
+  name: Datatilsynet
+  country: 'NO'
+  website: https://www.datatilsynet.no/
+  complaint_url: https://www.datatilsynet.no/
+  complaint_url_verified: false
+  notes: SEE. Autorità EEA, non uno Stato membro UE.
+- id: eu-edps
+  name: European Data Protection Supervisor
+  country: EU
+  website: https://www.edps.europa.eu/
+  complaint_url: https://www.edps.europa.eu/
+  complaint_url_verified: false
+  notes: Solo per istituzioni e organismi UE. Non è l'autorità a cui reclamare contro un'azienda.

@@ -1,0 +1,99 @@
+{
+  "schema": "scrubber-registro/1",
+  "example": true,
+  "label": "ESEMPIO FINTO — NON SONO DATI REALI",
+  "disclaimer": "File di esempio per provare la dashboard. Nessuna persona reale. Non sostituire questi valori con dati veri dentro il repository.",
+  "subject_ref": "ESEMPIO",
+  "country": "IT",
+  "updated": "2026-10-27",
+  "requests": [
+    {
+      "id": "ex-001",
+      "broker_id": "lusha",
+      "broker_name": "Lusha",
+      "sent_on": "2026-09-02",
+      "channel": "form",
+      "status": "inviata",
+      "deadline": "2026-10-02",
+      "reference": "ESEMPIO-001",
+      "notes": "Riga finta. Scadenza già passata, per provare l'evidenza."
+    },
+    {
+      "id": "ex-002",
+      "broker_id": "apollo",
+      "broker_name": "Apollo",
+      "sent_on": "2026-10-20",
+      "channel": "form",
+      "status": "in attesa",
+      "deadline": "2026-11-20",
+      "reference": "ESEMPIO-002",
+      "notes": "Riga finta. Il modulo può chiedere un'email aziendale."
+    },
+    {
+      "id": "ex-003",
+      "broker_id": "samba",
+      "broker_name": "Samba",
+      "sent_on": "2026-10-22",
+      "channel": "portal",
+      "status": "risposta",
+      "deadline": "2026-11-22",
+      "reference": "ESEMPIO-003",
+      "notes": "Riga finta. Esempio di OTP SMS non arrivato, pratica ancora aperta."
+    },
+    {
+      "id": "ex-004",
+      "broker_id": "north-data",
+      "broker_name": "North Data",
+      "sent_on": "2026-09-27",
+      "channel": "email",
+      "status": "in attesa",
+      "deadline": "2026-10-27",
+      "reference": "ESEMPIO-004",
+      "notes": "Riga finta. Scadenza uguale alla data di esempio della versione 0.1.0."
+    },
+    {
+      "id": "ex-005",
+      "broker_id": "acxiom-optout",
+      "broker_name": "Acxiom optout",
+      "sent_on": "2026-08-10",
+      "channel": "form",
+      "status": "rifiutato",
+      "deadline": "2026-09-10",
+      "reference": "ESEMPIO-005",
+      "notes": "Riga finta. Rifiuto da riesaminare, senza dati ulteriori."
+    },
+    {
+      "id": "ex-006",
+      "broker_id": "192-com",
+      "broker_name": "192.com",
+      "sent_on": "2026-07-01",
+      "channel": "form",
+      "status": "nessun dato",
+      "deadline": "2026-08-01",
+      "reference": "ESEMPIO-006",
+      "notes": "Riga finta. Risposta nessun dato, pratica chiusa nell'esempio."
+    },
+    {
+      "id": "ex-007",
+      "broker_id": "kaspr",
+      "broker_name": "Kaspr",
+      "sent_on": "2026-06-15",
+      "channel": "form",
+      "status": "reclamo",
+      "deadline": "2026-07-15",
+      "reference": "ESEMPIO-007",
+      "notes": "Riga finta. Reclamo già segnato, solo per il filtro."
+    },
+    {
+      "id": "ex-008",
+      "broker_id": "criteo",
+      "broker_name": "Criteo",
+      "sent_on": "2026-04-01",
+      "channel": "email",
+      "status": "cancellato",
+      "deadline": "2026-05-01",
+      "reference": "ESEMPIO-008",
+      "notes": "Riga finta. Cancellazione confermata, riga chiusa."
+    }
+  ]
+}

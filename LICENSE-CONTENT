@@ -1,0 +1,23 @@
+Creative Commons Attribution 4.0 International
+
+The prose in this repository is licensed under CC-BY-4.0.
+This covers skills/, templates/, docs/, CONTRIBUTING.md, CHANGELOG.md,
+the prose of README.md, and the descriptive text inside data/*.yaml.
+
+Code is under the MIT license in LICENSE. That includes scripts/, dashboard/
+(HTML, CSS and JavaScript), and .github/workflows/.
+
+The machine-readable structure of manifest.json, VERSION and the YAML keys
+may be reused under MIT. Descriptive sentences inside those files are CC-BY-4.0.
+
+Public URLs and the names of companies and public authorities are facts.
+Do not remove the disclaimer. This pack is not legal advice.
+
+Canonical text: https://creativecommons.org/licenses/by/4.0/legalcode
+
+You are free to share and adapt the prose for any purpose, including
+commercially, if you give appropriate credit, provide a link to the license,
+and indicate if you made changes. Attribution example:
+
+  Scrubber GDPR IT-EU contributors — https://github.com/mikzero/scrubber-gdpr-it-eu
+  Licensed under CC-BY-4.0.

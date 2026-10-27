@@ -1,0 +1,847 @@
+# Elenco titolari per Scrubber GDPR IT-EU.
+# Non è consulenza legale. Nessun dato di persona fisica.
+# dpo_email è compilata solo se una casella di ruolo è stata letta sulla pagina ufficiale
+# il 2026-10-27. Va rilegguta prima di ogni invio. Le caselle nominative non sono copiate.
+# known_issues con "esperienza operativa" non sono stati riprodotti in questa versione.
+# category: adtech | b2b | credit | lists | people-search
+# channel: email | form | portal
+# identifier_required: email | phone | ad_id | profile_url
+# phone_relevance: high | medium | low
+# dpo_email_basis: named-dpo | rights-contact | cookie-withdrawal | null
+# source: brokers-2026 (41 URL di partenza) | lusha-source | operational
+version: 0.1.0
+updated: '2026-10-27'
+disclaimer: Non è consulenza legale. Verifica il canale sulla pagina ufficiale prima di inviare.
+brokers:
+- id: criteo
+  name: Criteo
+  country: FR
+  category: adtech
+  channel: email
+  url: https://www.criteo.com/privacy/your-rights/
+  dpo_email: dpo@criteo.com
+  dpo_email_basis: named-dpo
+  identifier_required:
+  - ad_id
+  - email
+  phone_relevance: low
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  notes: Il 2026-10-27 la pagina diritti invita a scrivere a questa casella per l'accesso. Rileggila prima
+    di ogni invio.
+- id: adloox
+  name: Adloox
+  country: null
+  category: adtech
+  channel: email
+  url: https://www.adloox.com/legal/privacy-policy
+  dpo_email: privacy@adloox.com
+  dpo_email_basis: cookie-withdrawal
+  identifier_required:
+  - ad_id
+  - email
+  phone_relevance: low
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  notes: La frase letta riguarda la revoca del consenso ai cookie, non una casella chiamata DPO. Usala
+    solo se è ancora il canale per i diritti.
+- id: ogury
+  name: Ogury
+  country: null
+  category: adtech
+  channel: portal
+  url: https://www.ogury.com/user-choice-portal/
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - ad_id
+  phone_relevance: low
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  automated_check:
+    date: '2026-10-27'
+    http_status: 403
+    result: warning
+  notes: 'Portale di scelta utente. Il controllo automatico ha ricevuto 403: apri la pagina nel browser.'
+- id: sirdata
+  name: Sirdata
+  country: FR
+  category: adtech
+  channel: email
+  url: https://www.sirdata.com/en/Privacy
+  dpo_email: dpo@sirdata.fr
+  dpo_email_basis: named-dpo
+  identifier_required:
+  - ad_id
+  - email
+  phone_relevance: low
+  known_issues:
+  - 'Trattano soprattutto identificativi da cookie, non un indirizzo email in chiaro. Per un cookie non
+    chiedere un documento: la pagina dice che il documento non prova il controllo del terminale.'
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  notes: DPO indicato in testa alla privacy policy. Non usare indirizzi di esempio pubblicati nella policy.
+- id: adikteev
+  name: Adikteev
+  country: FR
+  category: adtech
+  channel: email
+  url: https://www.adikteev.com/privacy
+  dpo_email: dpo@adikteev.com
+  dpo_email_basis: named-dpo
+  identifier_required:
+  - ad_id
+  - email
+  phone_relevance: low
+  known_issues:
+  - Può rispondere di essere solo un responsabile del trattamento. La policy letta il 2026-10-27 descrive
+    anche un ruolo di titolare per clienti e prospect. Se si dichiara processor, chiedi chi è il titolare
+    e mantieni l'opposizione sui trattamenti di cui è titolare.
+  last_verified: '2026-10-27'
+  source: brokers-2026
+- id: roq-ad
+  name: Roq.ad
+  country: null
+  category: adtech
+  channel: form
+  url: https://roq.ad/opt-out
+  dpo_email: privacy@roq.ad
+  dpo_email_basis: rights-contact
+  identifier_required:
+  - ad_id
+  - email
+  phone_relevance: low
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  notes: La pagina opt-out dice di scrivere a questa casella per le richieste privacy.
+- id: samba
+  name: Samba
+  country: null
+  category: adtech
+  channel: portal
+  url: https://samba.com/privacy-center/notice-of-right-to-opt-out
+  dpo_email: privacy@samba.tv
+  dpo_email_basis: rights-contact
+  identifier_required:
+  - ad_id
+  - email
+  phone_relevance: low
+  known_issues:
+  - 'Anche noto come Samba TV. Flusso spesso su OneTrust. Esperienza operativa: l''OTP via SMS non arriva
+    ai numeri italiani. Se l''SMS non arriva, non riprovare a oltranza: chiedi un OTP via email o la casella
+    sopra, dopo aver verificato che sia ancora in pagina.'
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  notes: La notice invita a scrivere a privacy@samba.tv per i diritti. Opt-out anche da TV, dispositivo,
+    DAA e NAI, come pubblicato sulla stessa pagina.
+- id: virtual-minds
+  name: Virtual Minds
+  country: DE
+  category: adtech
+  channel: portal
+  url: https://virtualminds.com/privacy-center/
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - ad_id
+  phone_relevance: low
+  known_issues:
+  - Non è stata copiata una casella nominativa comparsa sulla pagina. Non scrivere a persone fisiche.
+    Cerca un modulo o una casella di ruolo.
+  last_verified: '2026-10-27'
+  source: brokers-2026
+- id: captify
+  name: Captify
+  country: null
+  category: adtech
+  channel: form
+  url: https://www.captifytechnologies.com/data-subject-rights-request/
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - ad_id
+  - email
+  phone_relevance: low
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  automated_check:
+    date: '2026-10-27'
+    http_status: 403
+    result: warning
+  notes: 'Modulo diritti. Controllo automatico 403: apri nel browser.'
+- id: sovrn
+  name: Sovrn
+  country: null
+  category: adtech
+  channel: form
+  url: https://privacy.sovrn.com/opt-out
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - ad_id
+  phone_relevance: low
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  automated_check:
+    date: '2026-10-27'
+    http_status: 403
+    result: warning
+  notes: 'Pagina di opt-out. Controllo automatico 403: apri nel browser.'
+- id: blis
+  name: Blis
+  country: null
+  category: adtech
+  channel: portal
+  url: https://blis.com/privacy-centre/
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - ad_id
+  phone_relevance: low
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  automated_check:
+    date: '2026-10-27'
+    http_status: 403
+    result: warning
+  notes: 'Privacy centre. Controllo automatico 403: apri nel browser. Rilevanza telefonica bassa: è adtech
+    di location, lavora su identificativi di dispositivo.'
+- id: loopme
+  name: LoopMe
+  country: null
+  category: adtech
+  channel: portal
+  url: https://legal.loopme.com/privacy-center
+  dpo_email: privacy@loopme.com
+  dpo_email_basis: named-dpo
+  identifier_required:
+  - ad_id
+  - email
+  phone_relevance: low
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  notes: Il privacy center chiama questa casella anche data protection officer e la indica per accesso,
+    rettifica e cancellazione.
+- id: yahoo-ie
+  name: Yahoo IE
+  country: IE
+  category: adtech
+  channel: email
+  url: https://legal.yahoo.com/ie/en/yahoo/privacy/index.html
+  dpo_email: dpo-contact@yahooinc.com
+  dpo_email_basis: named-dpo
+  identifier_required:
+  - ad_id
+  - email
+  phone_relevance: low
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  notes: Pagina privacy di Yahoo Ireland. Il DPO è questa casella. Non copiare l'indirizzo postale della
+    società nel repo né nella bozza, salvo che l'utente scelga la posta cartacea.
+- id: adform
+  name: Adform
+  country: null
+  category: adtech
+  channel: portal
+  url: https://site.adform.com/privacy-center/overview/
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - ad_id
+  phone_relevance: low
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: brokers-2026
+- id: rtb-house
+  name: RTB House
+  country: null
+  category: adtech
+  channel: portal
+  url: https://www.rtbhouse.com/privacy-center
+  dpo_email: dpo@rtbhouse.com
+  dpo_email_basis: named-dpo
+  identifier_required:
+  - ad_id
+  - email
+  phone_relevance: low
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  notes: Opt-out anche su https://optout.rtbhouse.com. La policy indica la casella DPO. Non copiare nominativi
+    o indirizzi postali di persone pubblicati accanto.
+- id: the-trade-desk
+  name: The Trade Desk
+  country: null
+  category: adtech
+  channel: portal
+  url: https://www.thetradedesk.com/legal/privacy
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - ad_id
+  phone_relevance: low
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  notes: Opt-out di dispositivo oltre alla pagina privacy. Nessuna casella DPO verificata su questa URL
+    il 2026-10-27.
+- id: epsilon
+  name: Epsilon
+  country: null
+  category: lists
+  channel: portal
+  url: https://legal.epsilon.com/dsr
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - La pagina DSR mostra una casella riservata a dipendenti e candidati. Non usarla per una persona interessata
+    esterna e non è stata copiata qui.
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  notes: 'Piattaforma di richiesta dell''interessato. Categoria lists: è un broker di dati marketing,
+    non solo un DSP.'
+- id: quantcast
+  name: Quantcast
+  country: null
+  category: adtech
+  channel: portal
+  url: https://data-access.quantserve.com/gdpr/
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - ad_id
+  - email
+  phone_relevance: low
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: brokers-2026
+- id: magnite
+  name: Magnite
+  country: null
+  category: adtech
+  channel: form
+  url: https://www.magnite.com/legal/advertising-platform-privacy-policy/
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - ad_id
+  phone_relevance: low
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  automated_check:
+    date: '2026-10-27'
+    http_status: 403
+    result: warning
+  notes: 'Policy della piattaforma pubblicitaria. Controllo automatico 403: apri nel browser.'
+- id: eyeota
+  name: Eyeota
+  country: null
+  category: adtech
+  channel: form
+  url: https://www.eyeota.com/data-subject-request
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - ad_id
+  - email
+  phone_relevance: low
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: brokers-2026
+- id: cognism
+  name: Cognism
+  country: null
+  category: b2b
+  channel: form
+  url: https://cognism.privacy.saymine.io/cognism
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues:
+  - Modulo SayMine, la stessa piattaforma citata per Kaspr. Un HTTP 400 non è stato riverificato su questo
+    modulo il 2026-10-27. Se il modulo risponde 400, se manca l'opposizione art. 21 par. 2 o se compare
+    un captcha, lo risolve l'utente nel proprio browser. Non aggirare il captcha.
+  last_verified: '2026-10-27'
+  source: brokers-2026
+- id: dealfront
+  name: Dealfront
+  country: null
+  category: b2b
+  channel: portal
+  url: https://privacycockpit.leadfeeder.com/
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  notes: Anche Leadfeeder. Privacy cockpit.
+- id: zoominfo
+  name: ZoomInfo
+  country: null
+  category: b2b
+  channel: form
+  url: https://privacyrequest.zoominfo.com/remove/verify
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  automated_check:
+    date: '2026-10-27'
+    http_status: 403
+    result: warning
+  notes: 'Modulo di rimozione. Controllo automatico 403: apri nel browser.'
+- id: lusha
+  name: Lusha
+  country: null
+  category: b2b
+  channel: form
+  url: https://www.lusha.com/privacy-center/request-removal/
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues:
+  - 'Fonti da chiedere con l''art. 15 par. 1 lett. g, non come fatto riletto sulla notice di Lusha il
+    2026-10-27: L.S Mobile Apps, Mixrank, RampedUp. Chiedi la fonte effettiva, non affermarla come certa.'
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  related_broker_ids:
+  - ls-mobile-apps
+  - mixrank
+  - rampedup
+- id: apollo
+  name: Apollo
+  country: null
+  category: b2b
+  channel: form
+  url: https://www.apollo.io/privacy-policy/remove
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues:
+  - Il modulo di opt-out chiede un'email aziendale. Non inventare un dominio di lavoro. Se l'utente ha
+    solo un'email personale, dillo e cerca sulla pagina un canale che la accetti.
+  last_verified: '2026-10-27'
+  source: brokers-2026
+- id: rocketreach
+  name: RocketReach
+  country: null
+  category: b2b
+  channel: form
+  url: https://rocketreach.co/remove-profile
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: brokers-2026
+- id: dun-bradstreet
+  name: Dun & Bradstreet
+  country: null
+  category: b2b
+  channel: form
+  url: https://www.dnb.com/en-us/why-dnb/data-transparency.html
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - email
+  - phone
+  - profile_url
+  phone_relevance: medium
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  notes: Pagina di trasparenza, non un modulo di cancellazione già verificato. Cerca il canale diritti
+    sul sito ufficiale prima di scrivere. Spesso i dati riguardano società e esponenti.
+- id: equifax-uk
+  name: Equifax UK
+  country: GB
+  category: credit
+  channel: portal
+  url: https://www.equifax.co.uk/privacy-hub
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - Chiedi solo gli identificativi già nel vault. Data di nascita, documento e indirizzo postale solo
+    se l'utente, dopo il richiamo all'art. 12 par. 6 e all'art. 5 par. 1 lett. c, dice sì in modo esplicito.
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  notes: 'Credit bureau. L''opt-out marketing non cancella i dati di credito conservati per obbligo di
+    legge: chiedi cosa tengono e perché.'
+- id: transunion-uk
+  name: TransUnion UK
+  country: GB
+  category: credit
+  channel: portal
+  url: https://www.transunion.co.uk/legal/privacy-centre
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - Chiedi solo gli identificativi già nel vault. Data di nascita, documento e indirizzo postale solo
+    se l'utente, dopo il richiamo all'art. 12 par. 6 e all'art. 5 par. 1 lett. c, dice sì in modo esplicito.
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  automated_check:
+    date: '2026-10-27'
+    http_status: 403
+    result: warning
+  notes: 'Controllo automatico 403: apri nel browser.'
+- id: schufa
+  name: SCHUFA
+  country: DE
+  category: credit
+  channel: portal
+  url: https://www.meineschufa.de/service/datenkopie
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - Chiedi solo gli identificativi già nel vault. Data di nascita, documento e indirizzo postale solo
+    se l'utente, dopo il richiamo all'art. 12 par. 6 e all'art. 5 par. 1 lett. c, dice sì in modo esplicito.
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  notes: 'La URL è il servizio di copia dei dati (art. 15), non da sola una cancellazione. Il credito
+    può avere una base legale che l''art. 17 non supera: chiedi la base e opponiti comunque al marketing.'
+- id: crif-de
+  name: CRIF DE
+  country: DE
+  category: credit
+  channel: portal
+  url: https://www.crif.de/fuer-privatpersonen/selbstauskunft-fuer-privatpersonen/
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - Chiedi solo gli identificativi già nel vault. Data di nascita, documento e indirizzo postale solo
+    se l'utente, dopo il richiamo all'art. 12 par. 6 e all'art. 5 par. 1 lett. c, dice sì in modo esplicito.
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  notes: Selbstauskunft per persone fisiche. Stessa cautela della SCHUFA sui dati di credito.
+- id: creditsafe
+  name: Creditsafe
+  country: GB
+  category: credit
+  channel: form
+  url: https://www.creditsafe.com/gb/en/legal/privacy-policy.html
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - email
+  - phone
+  - profile_url
+  phone_relevance: medium
+  known_issues:
+  - Chiedi solo gli identificativi già nel vault. Data di nascita, documento e indirizzo postale solo
+    se l'utente, dopo il richiamo all'art. 12 par. 6 e all'art. 5 par. 1 lett. c, dice sì in modo esplicito.
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  notes: Dati di imprese e esponenti, pagina UK. Nessuna casella DPO verificata il 2026-10-27.
+- id: experian-uk
+  name: Experian UK
+  country: GB
+  category: credit
+  channel: portal
+  url: https://www.experian.co.uk/privacy/consumer-information-portal/opt-out-options/
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - Chiedi solo gli identificativi già nel vault. Data di nascita, documento e indirizzo postale solo
+    se l'utente, dopo il richiamo all'art. 12 par. 6 e all'art. 5 par. 1 lett. c, dice sì in modo esplicito.
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  notes: Pagina di opt-out. Distingui marketing e dati di credito.
+- id: selectabase
+  name: Selectabase
+  country: GB
+  category: lists
+  channel: form
+  url: https://www.selectabase.co.uk/data-protection/data-optout/
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  notes: Liste marketing UK, telefono rilevante. Non copiare numeri di contatto commerciale dell'azienda.
+- id: 192-com
+  name: 192.com
+  country: GB
+  category: people-search
+  channel: form
+  url: https://www.192.com/misc/privacy-policy/
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - phone
+  - email
+  phone_relevance: high
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  automated_check:
+    date: '2026-10-27'
+    http_status: 403
+    result: warning
+  notes: 'People-search UK. Controllo automatico 403: apri nel browser.'
+- id: acxiom-optout
+  name: Acxiom optout
+  country: null
+  category: lists
+  channel: form
+  url: https://www.acxiom.com/optout/
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues:
+  - 'Esperienza operativa, non riconfermata campo per campo il 2026-10-27: chiedono l''indirizzo postale.
+    Non inviarlo senza un sì esplicito. La pagina statunitense pubblica anche un numero di telefono: non
+    copiarlo qui.'
+  - Chiedi solo gli identificativi già nel vault. Data di nascita, documento e indirizzo postale solo
+    se l'utente, dopo il richiamo all'art. 12 par. 6 e all'art. 5 par. 1 lett. c, dice sì in modo esplicito.
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  notes: 'Opt-out. Nessuna casella DPO copiata: un indirizzo presente nel HTML non aveva una frase chiara
+    che lo indicasse come canale diritti.'
+- id: acxiom-it
+  name: Acxiom IT
+  country: null
+  category: lists
+  channel: form
+  url: https://www.acxiom.com/privacy/it/
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues:
+  - Stesse cautele di Acxiom optout sull'indirizzo postale.
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  notes: Pagina privacy in italiano dello stesso titolare dell'opt-out. Tienile entrambe. La sede non
+    è stata verificata su questa pagina.
+- id: liveramp
+  name: LiveRamp
+  country: null
+  category: adtech
+  channel: email
+  url: https://liveramp.com/privacy
+  dpo_email: privacy.it@liveramp.com
+  dpo_email_basis: rights-contact
+  identifier_required:
+  - ad_id
+  - email
+  phone_relevance: low
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  notes: 'La privacy page elenca caselle per paese. Per l''Italia indica privacy.it@liveramp.com. Non
+    è chiamata DPO nel testo letto. Rileggila: se l''utente non è in Italia, usa la casella del suo paese
+    pubblicata lì, non questa.'
+- id: lexisnexis
+  name: LexisNexis
+  country: null
+  category: b2b
+  channel: form
+  url: https://www.lexisnexis.com/global/privacy/en/privacy-policy.page
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - 'Esperienza operativa, non riverificata su questa URL il 2026-10-27: il flusso può chiedere data di
+    nascita e documento. È in tensione con la minimizzazione. Non inviare quei dati senza un sì esplicito.
+    L''art. 12 par. 6 consente informazioni ulteriori solo se ci sono dubbi ragionevoli sull''identità.'
+  - Chiedi solo gli identificativi già nel vault. Data di nascita, documento e indirizzo postale solo
+    se l'utente, dopo il richiamo all'art. 12 par. 6 e all'art. 5 par. 1 lett. c, dice sì in modo esplicito.
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  notes: Questa URL è la privacy policy globale, non necessariamente il modulo di rimozione. Cerca il
+    modulo partendo da qui.
+- id: companydata
+  name: CompanyData
+  country: null
+  category: b2b
+  channel: form
+  url: https://companydata.com/privacy-statement/
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - email
+  - phone
+  - profile_url
+  phone_relevance: medium
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  notes: Informativa. Nessuna casella di ruolo verificata come canale diritti il 2026-10-27. Non usare
+    un info@ generico se la pagina non lo indica per i diritti.
+- id: north-data
+  name: North Data
+  country: null
+  category: b2b
+  channel: email
+  url: https://www.northdata.com/_privacy
+  dpo_email: privacy@northdata.com
+  dpo_email_basis: named-dpo
+  identifier_required:
+  - profile_url
+  - email
+  phone_relevance: medium
+  known_issues:
+  - Per individuare la scheda serve l'URL del profilo. Non costruire URL con dati che l'utente non ha
+    confermato.
+  last_verified: '2026-10-27'
+  source: brokers-2026
+  notes: La pagina privacy dice che a questa casella si raggiunge il data protection officer.
+- id: kaspr
+  name: Kaspr
+  country: FR
+  category: b2b
+  channel: form
+  url: https://www.kaspr.io/privacy-policy
+  dpo_email: privacy@kaspr.io
+  dpo_email_basis: rights-contact
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues:
+  - 'Esperienza operativa, non riverificata il 2026-10-27: il modulo SayMine può rispondere HTTP 400,
+    in modo compatibile con un reCAPTCHA, e può non offrire l''opposizione art. 21 par. 2. Il captcha
+    lo risolve l''utente. Non aggirarlo.'
+  - 'Esperienza operativa: richieste via email sono state rifiutate. La policy pubblica comunque la casella
+    per esercitare i diritti. Avvisa di questo precedente, mostra la bozza e lascia scegliere all''utente.'
+  last_verified: '2026-10-27'
+  source: operational
+  form_url: https://kaspr.privacy.saymine.io/kaspr
+  notes: Non era nell'elenco iniziale di 41 URL. Aggiunto perché il problema SayMine è noto. La policy
+    dice di scrivere a privacy@kaspr.io per esercitare i diritti.
+- id: ls-mobile-apps
+  name: L.S Mobile Apps
+  country: null
+  category: people-search
+  channel: email
+  url: https://www.lsmapps.com/privacy-policy
+  dpo_email: dpo@lsmapps.com
+  dpo_email_basis: rights-contact
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: lusha-source
+  lusha_source:
+    reported: true
+    confirmed_on_lusha_page: false
+  notes: 'Sito pubblicato come LSM Apps. La privacy policy renderizzata il 2026-10-27 indica dpo@lsmapps.com
+    per i diritti e dice di condividere dati con Lusha, descritta come capogruppo. L''HTML statico è spesso
+    una shell: conferma l''indirizzo sulla pagina prima di inviare.'
+- id: mixrank
+  name: Mixrank
+  country: US
+  category: b2b
+  channel: form
+  url: https://mixrank.com/privacy-policy/
+  dpo_email: privacy@mixrank.com
+  dpo_email_basis: rights-contact
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: lusha-source
+  form_url: https://mixrank.com/privacy-request/
+  lusha_source:
+    reported: true
+    confirmed_on_lusha_page: false
+  notes: La policy indica il Privacy Team a questa casella e il portale privacy-request per accesso, rettifica,
+    cancellazione e opt-out. Fonte Lusha segnalata, non riconfermata sulla notice Lusha in questa versione.
+- id: rampedup
+  name: RampedUp
+  country: null
+  category: b2b
+  channel: form
+  url: https://rampedup.io/privacy-policy
+  dpo_email: null
+  dpo_email_basis: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues:
+  - Il portale Do Not Sell autentica l'email. Non è stata verificata una casella DPO. Se l'email non è
+    autenticata, la loro pagina GDPR dice che la richiesta non viene accolta, richiamando l'art. 12 par.
+    6.
+  last_verified: '2026-10-27'
+  source: lusha-source
+  form_url: https://basic.rampedup.io/app/donotsell
+  alt_urls:
+  - https://rampedup.io/gdpr
+  lusha_source:
+    reported: true
+    confirmed_on_lusha_page: false
+  notes: Fonte Lusha segnalata, non riconfermata sulla notice Lusha in questa versione. Parti dal portale,
+    non da una email generica.
