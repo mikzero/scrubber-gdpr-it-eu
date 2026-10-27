@@ -13,7 +13,7 @@ from __future__ import annotations
 import re
 import sys
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, urlencode, urlparse
 
 import yaml
 
@@ -41,6 +41,8 @@ BAIT = re.compile(
     re.I,
 )
 BASE64_RE = re.compile(r"(?<![A-Za-z0-9+/])[A-Za-z0-9+/]{80,}={0,2}(?![A-Za-z0-9+/])")
+# Public page parameters. A phone or account number in any other parameter still fails.
+PUBLIC_QUERY_KEYS = {"ticket_form_id", "uuid", "groupid"}
 WRITE_RE = re.compile(
     r"git push|git commit|gh issue|gh pr|GITHUB_TOKEN|apri una issue|apri un'issue|"
     r"crea una issue|crea una pull request|apri una pull request|crea un fork",
@@ -122,6 +124,17 @@ def negated(text: str, index: int) -> bool:
     return NEG_RE.search(line_of(text, index)) is not None
 
 
+def url_has_personal_identifier(raw: str) -> bool:
+    """True when a URL contains an email or a long number that is not a public form id."""
+    if "@" in raw:
+        return True
+    parsed = urlparse(raw)
+    query = parse_qs(parsed.query, keep_blank_values=False)
+    kept = {key: values for key, values in query.items() if key.lower() not in PUBLIC_QUERY_KEYS}
+    rest = parsed._replace(query=urlencode(kept, doseq=True)).geturl()
+    return re.search(r"\d{9,}", rest) is not None
+
+
 def scan_file(path: Path, emails: set[str], hosts: set[str]) -> list[str]:
     text = path.read_text(encoding="utf-8", errors="replace")
     relative = path.relative_to(ROOT)
@@ -134,7 +147,7 @@ def scan_file(path: Path, emails: set[str], hosts: set[str]) -> list[str]:
         hits.append(fail_line(path, "HTML comment"))
     if BAIT.search(text):
         hits.append(fail_line(path, "embedded instruction bait"))
-    if BASE64_RE.search(text):
+    if BASE64_RE.search(URL_RE.sub(" ", text)):
         hits.append(fail_line(path, "base64 blob"))
     for match in EMAIL_RE.findall(text):
         if match.lower() not in emails:
@@ -150,7 +163,7 @@ def scan_file(path: Path, emails: set[str], hosts: set[str]) -> list[str]:
         host = (urlparse(raw).hostname or "").lower()
         if host not in hosts:
             hits.append(fail_line(path, f"URL outside allowlist {raw}"))
-        if "@" in raw or re.search(r"\d{9,}", raw):
+        if url_has_personal_identifier(raw):
             hits.append(fail_line(path, f"URL carries identifier-like data {raw}"))
     if relative.parts[0] == "skills":
         for match in BYPASS_RE.finditer(text):
@@ -223,6 +236,13 @@ def self_test() -> int:
         return 1
     if "evil.example" not in new_hosts:
         print("self-test failed: fixture")
+        return 1
+    form = "https://hiyahelp.zendesk.com/hc/en-us/requests/new?ticket_form_id=33394399463699"
+    if url_has_personal_identifier(form):
+        print("self-test failed: public form id flagged")
+        return 1
+    if not url_has_personal_identifier("https://example.com/remove?phone=3331234567"):
+        print("self-test failed: phone in URL not flagged")
         return 1
     print("self-test ok")
     return 0

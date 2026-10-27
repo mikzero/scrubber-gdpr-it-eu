@@ -48,7 +48,7 @@ def extract_urls(node, found: set[str]) -> None:
             extract_urls(value, found)
     elif isinstance(node, str):
         for match in URL_RE.findall(node):
-            found.add(match.rstrip(".,;"))
+            found.add(match.rstrip(".,;:"))
 
 
 def load_urls() -> list[str]:

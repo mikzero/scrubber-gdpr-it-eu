@@ -1693,7 +1693,7 @@ brokers:
   country: US
   category: people-search
   channel: form
-  url: https://hiyahelp.zendesk.com/hc/en-us/requests/new
+  url: https://hiyahelp.zendesk.com/hc/en-us/requests/new?ticket_form_id=33394399463699
   preferred_channel: form
   allow_parallel: true
   emails:
@@ -1708,9 +1708,8 @@ brokers:
   known_issues:
   - 'Fornisce il caller ID e il blocco spam integrati in alcuni smartphone e app di operatori: un''etichetta
     sbagliata può far bloccare le tue chiamate.'
-  - 'Modulo ufficiale Zendesk per aggiornare o togliere il caller ID di un numero personale, letto dalla
-    pagina di aiuto con browser headless. All''indirizzo del modulo aggiungi il parametro ticket_form_id
-    con le cifre 33394/39946/3699 scritte di seguito, senza barre. Richieste avanzate: DPO, oggetto che
+  - 'Modulo per aggiornare o togliere il caller ID di un numero personale: https://hiyahelp.zendesk.com/hc/en-us/requests/new?ticket_form_id=33394399463699
+    (letto dalla pagina di aiuto ufficiale con browser headless). Richieste avanzate: DPO, oggetto che
     inizia con ''Advanced Data Management'', fino a 30 giorni.'
   last_verified: '2026-10-27'
   source: it-2026
@@ -2618,7 +2617,7 @@ brokers:
     page: true
     email: true
     form: false
-  notes: 'Questionario DBU Kena, casella ''Cancellazione''. Informativa privacy Kena https://www.kenamobile.it/wp-content/uploads/Informativa-Privacy-Kena.pdf:
+  notes: 'Questionario DBU Kena, casella ''Cancellazione''. Informativa privacy Kena: https://www.kenamobile.it/wp-content/uploads/Informativa-Privacy-Kena.pdf.
     DPO dedicato e richiesteprivacy@kenamobile.it per i diritti.'
 - id: homobile-elenchi
   name: ho. Mobile (Fastweb S.p.A.), elenchi telefonici
@@ -3785,11 +3784,11 @@ brokers:
   emails:
   - address: dpo.gruppobper@bper.it
     basis: named-dpo
-    source_url: https://www.bper.it/footer/privacy-policy
+    source_url: https://www.bper.it/c/document_library/get_file?uuid=96cfb851-b466-0855-23ce-68dc9bfd90ba&groupId=2084926082
     verified: true
   - address: presidio.privacy@bper.it
     basis: rights
-    source_url: https://www.bper.it/footer/privacy-policy
+    source_url: https://www.bper.it/c/document_library/get_file?uuid=96cfb851-b466-0855-23ce-68dc9bfd90ba&groupId=2084926082
     verified: true
   eu_representative: null
   identifier_required:
@@ -5336,15 +5335,15 @@ brokers:
   emails:
   - address: privacy@sky.it
     basis: rights
-    source_url: https://www.sky.it/info/moduli-contrattuali/privacy-cookie/clienti
+    source_url: https://assets.contentstack.io/v3/assets/blta6c52b9cd5519be3/blt20627294a542f6fb/6ab2a30a44675f4f146f8301/informativa_privacy_completa_sky.pdf
     verified: true
   - address: dpo@sky.it
     basis: named-dpo
-    source_url: https://www.sky.it/info/moduli-contrattuali/privacy-cookie/clienti
+    source_url: https://assets.contentstack.io/v3/assets/blta6c52b9cd5519be3/blt20627294a542f6fb/6ab2a30a44675f4f146f8301/informativa_privacy_completa_sky.pdf
     verified: true
   - address: skyitalia@pec.skytv.it
     basis: rights
-    source_url: https://www.sky.it/info/moduli-contrattuali/privacy-cookie/clienti
+    source_url: https://assets.contentstack.io/v3/assets/blta6c52b9cd5519be3/blt20627294a542f6fb/6ab2a30a44675f4f146f8301/informativa_privacy_completa_sky.pdf
     verified: true
   eu_representative: null
   identifier_required:
