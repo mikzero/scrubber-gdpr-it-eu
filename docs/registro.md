@@ -42,4 +42,4 @@ Stati: `bozza`, `inviata`, `in-attesa`, `risposta-da-leggere`, `richiesta-info`,
 
 `cancellato`, `nessun-dato` ed `escluso` richiedono almeno una prova. `escluso` significa lista di soppressione: non si ricontrolla. Gli altri due si ricontrollano dopo i giorni in `coverage.recheck_days` (60 per `people-search`, 90 per il resto, se non diversamente configurato).
 
-La dashboard calcola la percentuale di esiti finali che hanno una prova, le scadute, le azioni entro 7 giorni e i ricontrolli arrivati a data.
+La dashboard, in prima vista, mostra tre numeri (dati rimossi, in attesa di risposta, interventi tuoi), una barra «quanto sei protetto» e l'elenco delle aziende con un semaforo. Identificativi, date, prove e caricamento del file stanno nella sezione Dettagli.

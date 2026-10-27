@@ -221,7 +221,7 @@ Per ogni scheda compila `case_id`, broker, `channel`, `sent_at`, `deadline`, `ex
 
 `proof_path` è un percorso sul dispositivo dell'utente. Non copiarlo nel repository e non metterci il contenuto della schermata se la schermata mostra dati della persona. Nel file di esempio il percorso è finto.
 
-La dashboard mostra i conteggi per stato, le scadute, le azioni con `next_action_due` entro 7 giorni, i moduli e la cronologia di ogni scheda.
+La dashboard, per chi non è tecnico, mostra tre numeri, la barra di protezione e le azioni da fare. Il resto sta in Dettagli.
 
 ## 6. Moduli web
 

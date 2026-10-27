@@ -26,7 +26,7 @@ Il bot legge `VERSION` e `manifest.json` dal raw di GitHub. Un aggiornamento sos
 
 ## Dashboard
 
-`dashboard/index.html` gira nel browser. Non ha backend, non carica font o script esterni e non invia il registro da nessuna parte. Il registro vero si sceglie con il selettore di file e resta sul dispositivo.
+`dashboard/index.html` gira nel browser, anche offline. Non ha backend, non carica font o script esterni e non invia il registro da nessuna parte. Il registro vero si sceglie nei Dettagli, con un file locale, e resta sul dispositivo.
 
 ## Contributi
 

@@ -144,8 +144,8 @@ def check_skills() -> None:
 def check_manifest(brokers: dict) -> None:
     manifest = json.loads((ROOT / "manifest.json").read_text(encoding="utf-8"))
     version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-    if version != "0.2.0":
-        fail(f"VERSION is {version}, expected 0.2.0")
+    if version != "0.2.1":
+        fail(f"VERSION is {version}, expected 0.2.1")
     if manifest.get("bot_access") != "read-only":
         fail("manifest.bot_access must be read-only")
     policy = manifest.get("update_policy") or {}

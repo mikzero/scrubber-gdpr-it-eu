@@ -6,6 +6,14 @@ prima di applicare l'aggiornamento.
 
 Il formato segue [Keep a Changelog](https://keepachangelog.com/) e il pacchetto usa [SemVer](https://semver.org/).
 
+## 0.2.1 — 2026-10-27
+
+### Changed
+
+- Dashboard riscritta per chi non è tecnico: tre numeri, barra «quanto sei protetto», riquadro «Cosa devi fare tu» e semaforo sulle aziende. Identificativi, prove e caricamento del file stanno in Dettagli.
+
+Non è consulenza legale.
+
 ## 0.2.0 — 2026-10-27
 
 ### Added
