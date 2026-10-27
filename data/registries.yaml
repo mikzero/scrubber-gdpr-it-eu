@@ -71,7 +71,7 @@ device_opt_out:
 - id: google-ads-settings
   name: Impostazioni annunci Google
   country: EU
-  url: https://adssettings.google.com/
+  url: https://support.google.com/My-Ad-Center-Help/answer/12155451
   notes: Opt-out sul browser o sull'account. Non è una richiesta art. 17 al titolare.
 authorities:
 - id: at-dsb

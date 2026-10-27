@@ -68,7 +68,7 @@ def collect_declared_emails() -> set[str]:
         def walk(node) -> None:
             if isinstance(node, dict):
                 for key, value in node.items():
-                    if key in {"dpo_email", "submission_email", "institutional_email"} and isinstance(value, str):
+                    if key in {"dpo_email", "submission_email", "institutional_email", "address", "email"} and isinstance(value, str) and "@" in value:
                         allowed.add(value)
                     else:
                         walk(value)
@@ -144,8 +144,8 @@ def check_skills() -> None:
 def check_manifest(brokers: dict) -> None:
     manifest = json.loads((ROOT / "manifest.json").read_text(encoding="utf-8"))
     version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-    if version != "0.2.1":
-        fail(f"VERSION is {version}, expected 0.2.1")
+    if version != "0.3.0":
+        fail(f"VERSION is {version}, expected 0.3.0")
     if manifest.get("bot_access") != "read-only":
         fail("manifest.bot_access must be read-only")
     policy = manifest.get("update_policy") or {}
@@ -197,10 +197,13 @@ def check_manifest(brokers: dict) -> None:
 
 def check_brokers(brokers: dict) -> None:
     required = [
-        "id", "name", "country", "category", "channel", "url", "dpo_email",
-        "dpo_email_basis", "identifier_required", "phone_relevance",
-        "known_issues", "last_verified", "source",
+        "id", "name", "country", "category", "channel", "url", "emails",
+        "preferred_channel", "allow_parallel", "identifier_required", "phone_relevance",
+        "known_issues", "last_verified", "source", "country_scope", "phone_flow",
+        "letter_language", "reliability",
     ]
+    email_basis = {"rights", "named-dpo", "eu-rep", "general-contact", "cookie-only"}
+    usable_basis = {"rights", "named-dpo", "eu-rep", "general-contact"}
     for item in brokers["brokers"]:
         for key in required:
             if key not in item:
@@ -211,28 +214,37 @@ def check_brokers(brokers: dict) -> None:
             fail(f"{item['id']}: bad channel {item['channel']}")
         if item["phone_relevance"] not in RELEVANCE:
             fail(f"{item['id']}: bad phone_relevance")
-        if item["dpo_email_basis"] not in DPO_BASIS:
-            fail(f"{item['id']}: bad dpo_email_basis")
+        if item["preferred_channel"] not in {"email", "form", "portal", "none"}:
+            fail(f"{item['id']}: bad preferred_channel")
+        if item["phone_flow"] not in {"include", "skip-unless-ties"}:
+            fail(f"{item['id']}: bad phone_flow")
+        if not isinstance(item["emails"], list):
+            fail(f"{item['id']}: emails must be a list")
+        else:
+            for entry in item["emails"]:
+                if entry.get("basis") not in email_basis or "address" not in entry or "source_url" not in entry:
+                    fail(f"{item['id']}: bad email entry")
+                if not isinstance(entry.get("verified"), bool):
+                    fail(f"{item['id']}: email verified must be boolean")
         if not isinstance(item["identifier_required"], list) or not item["identifier_required"]:
             fail(f"{item['id']}: identifier_required must be a non-empty list")
         elif any(value not in IDENTIFIERS for value in item["identifier_required"]):
             fail(f"{item['id']}: unknown identifier")
-        if item["dpo_email"] is None and item["dpo_email_basis"] is not None:
-            fail(f"{item['id']}: basis set without email")
-        if item["dpo_email"] is not None and item["dpo_email_basis"] is None:
-            fail(f"{item['id']}: email set without basis")
         source = item.get("verified_source")
         if not isinstance(source, dict) or any(not isinstance(source.get(key), bool) for key in ("page", "email", "form")):
             fail(f"{item['id']}: verified_source must have boolean page, email, form")
         else:
             blocked = (item.get("automated_check") or {}).get("http_status") == 403
-            if source["page"] is blocked:
-                fail(f"{item['id']}: verified_source.page disagrees with the HTTP check")
-            if source["email"] != (item.get("dpo_email") is not None):
-                fail(f"{item['id']}: verified_source.email disagrees with dpo_email")
-            form_ok = item["channel"] in {"form", "portal"} and source["page"]
-            if source["form"] != form_ok:
-                fail(f"{item['id']}: verified_source.form disagrees with channel and page")
+            if blocked and source["page"]:
+                fail(f"{item['id']}: page marked verified after HTTP 403")
+            usable = any(entry.get("verified") and entry.get("basis") in usable_basis for entry in item["emails"])
+            rep = item.get("eu_representative") or {}
+            if isinstance(rep, dict) and rep.get("verified") and rep.get("email"):
+                usable = True
+            if source["email"] != usable:
+                fail(f"{item['id']}: verified_source.email disagrees with usable addresses")
+            if source["form"] and not source["page"]:
+                fail(f"{item['id']}: form verified while page is not")
         if "form_notes" in item and not isinstance(item["form_notes"], str):
             fail(f"{item['id']}: form_notes must be a string")
         if not str(item["url"]).startswith("https://"):

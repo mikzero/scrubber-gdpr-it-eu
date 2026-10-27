@@ -12,7 +12,17 @@ registers:
 directories:
 - id: paginebianche
   ref: data/registries.yaml
-broker_ids: []
+broker_ids:
+- crif-it
+- creditsafe-it
+- cerved
+- italiaonline
+- chistachiamando
+- truecaller
+- syncme
+- hiya
+- tellows
 letters:
 - it
-notes: RPO, elenchi e broker internazionali già presenti. Manca un censimento completo dei titolari italiani.
+notes: 'Titolari italiani verificati in parte il 2026-10-27. Operatori telefonici: la casella Vodafone
+  indicata in ricerca non è stata trovata su una pagina ufficiale in questa verifica e non è stata copiata.'

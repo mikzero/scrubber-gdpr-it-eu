@@ -61,6 +61,7 @@ Stato:
 - `Scrubber/sollecito`
 - `Scrubber/reclamo`
 - `Scrubber/chiuso`
+- `Scrubber/escluso`
 
 Tipo:
 
@@ -168,6 +169,7 @@ stateDiagram-v2
   nessunDato --> inAttesa: precisazione dopo un si
   nessunDato --> chiuso: l'utente accetta
   cancellato --> chiuso: l'utente chiude
+  inviata --> sollecito: scadenza piu grazia, dopo un si
   inAttesa --> sollecito: scadenza piu grazia, dopo un si
   portaleTicket --> sollecito: scadenza piu grazia, dopo un si
   rifiutato --> sollecito: seconda richiesta dopo un si
@@ -255,9 +257,30 @@ Dopo un submit riuscito:
 
 Nel ciclo settimanale, per ogni scheda `portale-ticket`, apri il portale e registra in `history` solo l'esito («ancora in lavorazione», «concluso», «non trovato»). Non copiare la scheda anagrafica nel registro se contiene dati della persona: basta l'esito e il `ticket_id` già presente.
 
-## 7. Report periodico
+## 7. Autorizzazione e report
+
+Tre modi di autorizzare un invio. Il ciclo settimanale è in sola lettura: prepara bozze, non spedisce.
+
+1. Predefinito: un sì per ogni messaggio, sulla bozza di quel turno.
+2. Autorizzazione di gruppo, salvata nel registro: la frase esatta dell'utente, l'elenco dei `case_id` e dei destinatari, la versione del modello, la scadenza. Ogni passaggio successivo, anche un sottoprocesso, riceve quella frase e quell'elenco e non ne esce. Fuori elenco non si invia.
+3. La parola `STOP` annulla subito la coda, compresi gli invii già autorizzati e non ancora partiti.
+
+## 8. Report periodico
 
 Alla fine di ogni ciclo manda questo testo, con i soli id pratica, stati e date. Senza numero di telefono e senza corpo delle mail.
+
+Formato predefinito, cinque righe. Il formato lungo che segue è facoltativo, solo se l'utente lo chiede.
+
+```text
+Report Scrubber — {{DATA}}
+Inviato: {{CASE_ID}} verso {{BROKER}}, oppure nessuno
+Bloccato: motivo in una riga, oppure nessuno
+Saltato: aziende fuori dal paese o senza legami, oppure nessuno
+Risposte: {{CASE_ID}} — esito in una frase, oppure nessuna
+Prossime azioni: cosa deve fare l'utente, con la data in parole
+```
+
+Formato lungo, facoltativo:
 
 ```text
 Report Scrubber — settimana del {{DATA}}

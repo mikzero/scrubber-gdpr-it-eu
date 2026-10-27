@@ -17,6 +17,10 @@ Ordine:
 4. Paese di residenza abituale. Serve a scegliere autorità, lingua e registri. Proponi Italia e aspetta conferma. Chiave `scrubber.country`.
 5. Canale posta: Gmail o AgentMail. Serve a leggere le risposte. Non chiedere password o token. Chiave `scrubber.mail_channel`.
 6. Cadenza: un controllo a settimana finché c'è una scadenza o un ricontrollo aperto, poi uno al mese. Chiave `scrubber.cadence`.
+7. Email di lavoro, solo se l'utente ne ha una e vuole usarla con i broker di contatti aziendali. Non inventarne una. Chiave `scrubber.work_email`. Si può saltare.
+8. Identificativo pubblicitario, solo se l'utente vuole includere l'adtech a bassa rilevanza. Si può saltare. Chiave `scrubber.ad_id`.
+
+Prima di creare qualcosa, controlla se esistono già una routine, un registro o le etichette `Scrubber`. Se ci sono, proponi di migrarle. Poi deve restare una sola routine, con id fisso `scrubber-main`, e un solo file di registro scritto da un solo bot. La parola `STOP` ferma subito ogni invio in coda.
 
 `scrubber.retention_days` resta 30 se l'utente non dice altro. Il comando `cancella tutto` è in `docs/sicurezza.md`.
 

@@ -68,7 +68,7 @@ Vedi `CONTRIBUTING.md`. Le issue e le pull request hanno un template. Non allega
 
 ### Versione
 
-`VERSION` è la versione semver del pacchetto. La corrente è 0.2.0. Il changelog è `CHANGELOG.md`.
+`VERSION` è la versione semver del pacchetto. La corrente è 0.3.0. Il changelog è `CHANGELOG.md`.
 
 ## English
 

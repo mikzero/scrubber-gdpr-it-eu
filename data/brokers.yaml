@@ -1,18 +1,5 @@
-# Elenco titolari per Scrubber GDPR IT-EU.
-# Non è consulenza legale. Nessun dato di persona fisica.
-# dpo_email è compilata solo se una casella di ruolo è stata letta sulla pagina ufficiale
-# il 2026-10-27. Va rilegguta prima di ogni invio. Le caselle nominative non sono copiate.
-# verified_source: page è false se il controllo automatico ha ricevuto HTTP 403.
-# email è true solo se dpo_email è valorizzata. form è true solo se il canale è form o portal e page è true.
-# Il bot usa un canale solo quando il booleano corrispondente è true.
-# form_notes: note operative sul modulo, solo dove servono.
-# category: adtech | b2b | credit | lists | people-search
-# channel: email | form | portal
-# identifier_required: email | phone | ad_id | profile_url
-# phone_relevance: high | medium | low
-# dpo_email_basis: named-dpo | rights-contact | cookie-withdrawal | null
-# source: brokers-2026 (41 URL di partenza) | lusha-source | operational
-version: 0.2.0
+# Elenco titolari. Non è consulenza legale. Nessun dato di persona fisica.
+version: 0.3.0
 updated: '2026-10-27'
 disclaimer: Non è consulenza legale. Verifica il canale sulla pagina ufficiale prima di inviare.
 brokers:
@@ -22,8 +9,6 @@ brokers:
   category: adtech
   channel: email
   url: https://www.criteo.com/privacy/your-rights/
-  dpo_email: dpo@criteo.com
-  dpo_email_basis: named-dpo
   identifier_required:
   - ad_id
   - email
@@ -37,14 +22,26 @@ brokers:
     page: true
     email: true
     form: false
+  emails:
+  - address: dpo@criteo.com
+    basis: named-dpo
+    source_url: https://www.criteo.com/privacy/your-rights/
+    verified: true
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: email
+  country_scope:
+  - EU
+  phone_flow: include
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: adloox
   name: Adloox
   country: null
   category: adtech
   channel: email
   url: https://www.adloox.com/legal/privacy-policy
-  dpo_email: privacy@adloox.com
-  dpo_email_basis: cookie-withdrawal
   identifier_required:
   - ad_id
   - email
@@ -56,20 +53,34 @@ brokers:
     solo se è ancora il canale per i diritti.
   verified_source:
     page: true
-    email: true
+    email: false
     form: false
+  emails:
+  - address: privacy@adloox.com
+    basis: cookie-only
+    source_url: https://www.adloox.com/legal/privacy-policy
+    verified: true
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: none
+  country_scope:
+  - EU
+  phone_flow: skip-unless-ties
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: ogury
   name: Ogury
   country: null
   category: adtech
   channel: portal
   url: https://www.ogury.com/user-choice-portal/
-  dpo_email: null
-  dpo_email_basis: null
   identifier_required:
   - ad_id
   phone_relevance: low
-  known_issues: []
+  known_issues:
+  - 'La richiesta sull''advertising ID è il canale tipico. La privacy policy ha risposto 403 o 404 da
+    questo controllo: nessun indirizzo copiato.'
   last_verified: '2026-10-27'
   source: brokers-2026
   automated_check:
@@ -83,14 +94,22 @@ brokers:
     form: false
   form_notes: Pagina non verificata in automatico (HTTP 403). Non usare il canale finché verified_source
     non è true.
+  emails: []
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: none
+  country_scope:
+  - EU
+  phone_flow: include
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: sirdata
   name: Sirdata
   country: FR
   category: adtech
   channel: email
   url: https://www.sirdata.com/en/Privacy
-  dpo_email: dpo@sirdata.fr
-  dpo_email_basis: named-dpo
   identifier_required:
   - ad_id
   - email
@@ -98,6 +117,8 @@ brokers:
   known_issues:
   - 'Trattano soprattutto identificativi da cookie, non un indirizzo email in chiaro. Per un cookie non
     chiedere un documento: la pagina dice che il documento non prova il controllo del terminale.'
+  - Per una richiesta sul cookie serve l'identificativo Sirdata letto sulla pagina del cookie, non un
+    documento.
   last_verified: '2026-10-27'
   source: brokers-2026
   notes: DPO indicato in testa alla privacy policy. Non usare indirizzi di esempio pubblicati nella policy.
@@ -105,14 +126,26 @@ brokers:
     page: true
     email: true
     form: false
+  emails:
+  - address: dpo@sirdata.fr
+    basis: named-dpo
+    source_url: https://www.sirdata.com/en/Privacy
+    verified: true
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: email
+  country_scope:
+  - EU
+  phone_flow: include
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: adikteev
   name: Adikteev
   country: FR
   category: adtech
   channel: email
   url: https://www.adikteev.com/privacy
-  dpo_email: dpo@adikteev.com
-  dpo_email_basis: named-dpo
   identifier_required:
   - ad_id
   - email
@@ -127,14 +160,26 @@ brokers:
     page: true
     email: true
     form: false
+  emails:
+  - address: dpo@adikteev.com
+    basis: named-dpo
+    source_url: https://www.adikteev.com/privacy
+    verified: true
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: email
+  country_scope:
+  - EU
+  phone_flow: include
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: roq-ad
   name: Roq.ad
   country: null
   category: adtech
   channel: form
   url: https://roq.ad/opt-out
-  dpo_email: privacy@roq.ad
-  dpo_email_basis: rights-contact
   identifier_required:
   - ad_id
   - email
@@ -147,14 +192,26 @@ brokers:
     page: true
     email: true
     form: true
+  emails:
+  - address: privacy@roq.ad
+    basis: rights
+    source_url: https://roq.ad/opt-out
+    verified: true
+  eu_representative: null
+  allow_parallel: true
+  preferred_channel: form
+  country_scope:
+  - EU
+  phone_flow: skip-unless-ties
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: samba
   name: Samba
   country: null
   category: adtech
   channel: portal
-  url: https://samba.com/privacy-center/notice-of-right-to-opt-out
-  dpo_email: privacy@samba.tv
-  dpo_email_basis: rights-contact
+  url: https://samba.tv/privacy-center/consumer-privacy-center
   identifier_required:
   - ad_id
   - email
@@ -163,6 +220,8 @@ brokers:
   - 'Anche noto come Samba TV. Flusso spesso su OneTrust. Esperienza operativa: l''OTP via SMS non arriva
     ai numeri italiani. Se l''SMS non arriva, non riprovare a oltranza: chiedi un OTP via email o la casella
     sopra, dopo aver verificato che sia ancora in pagina.'
+  - Caso reale chiuso come nessun dato. Il canale UE è il privacy center del consumatore, con modulo e
+    ticket, non l'avviso statunitense di opt-out. L'OTP SMS può non arrivare.
   last_verified: '2026-10-27'
   source: brokers-2026
   notes: La notice invita a scrivere a privacy@samba.tv per i diritti. Opt-out anche da TV, dispositivo,
@@ -173,14 +232,26 @@ brokers:
     form: true
   form_notes: 'Spesso OneTrust. OTP via SMS verso numeri italiani: al massimo due invii, poi verification_status
     fallito-sms e lettera di riserva solo se verified_source.email è true.'
+  emails:
+  - address: privacy@samba.tv
+    basis: rights
+    source_url: https://samba.com/privacy-center/notice-of-right-to-opt-out
+    verified: true
+  eu_representative: null
+  allow_parallel: true
+  preferred_channel: portal
+  country_scope:
+  - EU
+  phone_flow: include
+  letter_language: en
+  reliability: low
+  case_type: broker
 - id: virtual-minds
   name: Virtual Minds
   country: DE
   category: adtech
   channel: portal
   url: https://virtualminds.com/privacy-center/
-  dpo_email: null
-  dpo_email_basis: null
   identifier_required:
   - ad_id
   phone_relevance: low
@@ -193,14 +264,22 @@ brokers:
     page: true
     email: false
     form: true
+  emails: []
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: portal
+  country_scope:
+  - EU
+  phone_flow: skip-unless-ties
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: captify
   name: Captify
   country: null
   category: adtech
   channel: form
   url: https://www.captifytechnologies.com/data-subject-rights-request/
-  dpo_email: null
-  dpo_email_basis: null
   identifier_required:
   - ad_id
   - email
@@ -219,14 +298,22 @@ brokers:
     form: false
   form_notes: Pagina non verificata in automatico (HTTP 403). Non usare il canale finché verified_source
     non è true.
+  emails: []
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: none
+  country_scope:
+  - EU
+  phone_flow: skip-unless-ties
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: sovrn
   name: Sovrn
   country: null
   category: adtech
   channel: form
   url: https://privacy.sovrn.com/opt-out
-  dpo_email: null
-  dpo_email_basis: null
   identifier_required:
   - ad_id
   phone_relevance: low
@@ -244,14 +331,22 @@ brokers:
     form: false
   form_notes: Pagina non verificata in automatico (HTTP 403). Non usare il canale finché verified_source
     non è true.
+  emails: []
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: none
+  country_scope:
+  - EU
+  phone_flow: skip-unless-ties
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: blis
   name: Blis
   country: null
   category: adtech
   channel: portal
   url: https://blis.com/privacy-centre/
-  dpo_email: null
-  dpo_email_basis: null
   identifier_required:
   - ad_id
   phone_relevance: low
@@ -270,14 +365,22 @@ brokers:
     form: false
   form_notes: Pagina non verificata in automatico (HTTP 403). Non usare il canale finché verified_source
     non è true.
+  emails: []
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: none
+  country_scope:
+  - EU
+  phone_flow: skip-unless-ties
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: loopme
   name: LoopMe
   country: null
   category: adtech
   channel: portal
   url: https://legal.loopme.com/privacy-center
-  dpo_email: privacy@loopme.com
-  dpo_email_basis: named-dpo
   identifier_required:
   - ad_id
   - email
@@ -291,19 +394,33 @@ brokers:
     page: true
     email: true
     form: true
+  emails:
+  - address: privacy@loopme.com
+    basis: named-dpo
+    source_url: https://legal.loopme.com/privacy-center
+    verified: true
+  eu_representative: null
+  allow_parallel: true
+  preferred_channel: portal
+  country_scope:
+  - EU
+  phone_flow: skip-unless-ties
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: yahoo-ie
   name: Yahoo IE
   country: IE
   category: adtech
   channel: email
   url: https://legal.yahoo.com/ie/en/yahoo/privacy/index.html
-  dpo_email: dpo-contact@yahooinc.com
-  dpo_email_basis: named-dpo
   identifier_required:
   - ad_id
   - email
   phone_relevance: low
-  known_issues: []
+  known_issues:
+  - La ricerca sul modulo risulta limitata all'email. Se il dato che interessa è il telefono, chiedere
+    esplicitamente una ricerca anche sul numero, senza aggiungere altri dati.
   last_verified: '2026-10-27'
   source: brokers-2026
   notes: Pagina privacy di Yahoo Ireland. Il DPO è questa casella. Non copiare l'indirizzo postale della
@@ -312,14 +429,26 @@ brokers:
     page: true
     email: true
     form: false
+  emails:
+  - address: dpo-contact@yahooinc.com
+    basis: named-dpo
+    source_url: https://legal.yahoo.com/ie/en/yahoo/privacy/index.html
+    verified: true
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: email
+  country_scope:
+  - EU
+  phone_flow: include
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: adform
   name: Adform
   country: null
   category: adtech
   channel: portal
   url: https://site.adform.com/privacy-center/overview/
-  dpo_email: null
-  dpo_email_basis: null
   identifier_required:
   - ad_id
   phone_relevance: low
@@ -330,14 +459,22 @@ brokers:
     page: true
     email: false
     form: true
+  emails: []
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: portal
+  country_scope:
+  - EU
+  phone_flow: skip-unless-ties
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: rtb-house
   name: RTB House
   country: null
   category: adtech
   channel: portal
   url: https://www.rtbhouse.com/privacy-center
-  dpo_email: dpo@rtbhouse.com
-  dpo_email_basis: named-dpo
   identifier_required:
   - ad_id
   - email
@@ -351,14 +488,26 @@ brokers:
     page: true
     email: true
     form: true
+  emails:
+  - address: dpo@rtbhouse.com
+    basis: named-dpo
+    source_url: https://www.rtbhouse.com/privacy-center
+    verified: true
+  eu_representative: null
+  allow_parallel: true
+  preferred_channel: portal
+  country_scope:
+  - EU
+  phone_flow: include
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: the-trade-desk
   name: The Trade Desk
   country: null
   category: adtech
   channel: portal
   url: https://www.thetradedesk.com/legal/privacy
-  dpo_email: null
-  dpo_email_basis: null
   identifier_required:
   - ad_id
   phone_relevance: low
@@ -371,14 +520,22 @@ brokers:
     page: true
     email: false
     form: true
+  emails: []
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: portal
+  country_scope:
+  - EU
+  phone_flow: skip-unless-ties
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: epsilon
   name: Epsilon
   country: null
   category: lists
   channel: portal
   url: https://legal.epsilon.com/dsr
-  dpo_email: null
-  dpo_email_basis: null
   identifier_required:
   - email
   - phone
@@ -386,6 +543,8 @@ brokers:
   known_issues:
   - La pagina DSR mostra una casella riservata a dipendenti e candidati. Non usarla per una persona interessata
     esterna e non è stata copiata qui.
+  - Sulla pagina DSR la casella del gruppo è riservata a dipendenti e candidati. Non usarla per una persona
+    esterna. Un indirizzo del DPO per urgenze non è stato trovato su questa verifica.
   last_verified: '2026-10-27'
   source: brokers-2026
   notes: 'Piattaforma di richiesta dell''interessato. Categoria lists: è un broker di dati marketing,
@@ -394,14 +553,22 @@ brokers:
     page: true
     email: false
     form: true
+  emails: []
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: portal
+  country_scope:
+  - EU
+  phone_flow: include
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: quantcast
   name: Quantcast
   country: null
   category: adtech
   channel: portal
   url: https://data-access.quantserve.com/gdpr/
-  dpo_email: null
-  dpo_email_basis: null
   identifier_required:
   - ad_id
   - email
@@ -413,14 +580,22 @@ brokers:
     page: true
     email: false
     form: true
+  emails: []
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: portal
+  country_scope:
+  - EU
+  phone_flow: skip-unless-ties
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: magnite
   name: Magnite
   country: null
   category: adtech
   channel: form
   url: https://www.magnite.com/legal/advertising-platform-privacy-policy/
-  dpo_email: null
-  dpo_email_basis: null
   identifier_required:
   - ad_id
   phone_relevance: low
@@ -438,14 +613,22 @@ brokers:
     form: false
   form_notes: Pagina non verificata in automatico (HTTP 403). Non usare il canale finché verified_source
     non è true.
+  emails: []
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: none
+  country_scope:
+  - EU
+  phone_flow: skip-unless-ties
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: eyeota
   name: Eyeota
   country: null
   category: adtech
   channel: form
   url: https://www.eyeota.com/data-subject-request
-  dpo_email: null
-  dpo_email_basis: null
   identifier_required:
   - ad_id
   - email
@@ -457,14 +640,22 @@ brokers:
     page: true
     email: false
     form: true
+  emails: []
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: form
+  country_scope:
+  - EU
+  phone_flow: skip-unless-ties
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: cognism
   name: Cognism
   country: null
   category: b2b
   channel: form
   url: https://cognism.privacy.saymine.io/cognism
-  dpo_email: null
-  dpo_email_basis: null
   identifier_required:
   - email
   - phone
@@ -477,37 +668,67 @@ brokers:
   source: brokers-2026
   verified_source:
     page: true
-    email: false
+    email: true
     form: true
   form_notes: Stesso portale SayMine di Kaspr. Stessi limiti di tentativi e di captcha.
+  emails:
+  - address: privacy@cognism.com
+    basis: rights
+    source_url: https://www.cognism.com/en/privacy-policy
+    verified: true
+  eu_representative: null
+  allow_parallel: true
+  preferred_channel: form
+  country_scope:
+  - EU
+  phone_flow: include
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: dealfront
   name: Dealfront
   country: null
   category: b2b
   channel: portal
-  url: https://privacycockpit.leadfeeder.com/
-  dpo_email: null
-  dpo_email_basis: null
+  url: https://www.leadfeeder.com/privacy/privacy-notice/
   identifier_required:
   - email
   - phone
   phone_relevance: high
-  known_issues: []
+  known_issues:
+  - L'autoreply indica una risposta entro un mese e uno strumento privacy. La casella va usata insieme
+    al portale, non al posto della prova.
   last_verified: '2026-10-27'
   source: brokers-2026
   notes: Anche Leadfeeder. Privacy cockpit.
   verified_source:
     page: true
-    email: false
+    email: true
     form: true
+  emails:
+  - address: privacy@leadfeeder.com
+    basis: rights
+    source_url: https://www.leadfeeder.com/privacy/privacy-notice/
+    verified: true
+  - address: dpo@leadfeeder.com
+    basis: named-dpo
+    source_url: https://www.leadfeeder.com/privacy/privacy-notice/
+    verified: true
+  eu_representative: null
+  allow_parallel: true
+  preferred_channel: portal
+  country_scope:
+  - EU
+  phone_flow: include
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: zoominfo
   name: ZoomInfo
   country: null
   category: b2b
   channel: form
-  url: https://privacyrequest.zoominfo.com/remove/verify
-  dpo_email: null
-  dpo_email_basis: null
+  url: https://www.zoominfo.com/legal/privacy-policy
   identifier_required:
   - email
   - phone
@@ -515,25 +736,34 @@ brokers:
   known_issues: []
   last_verified: '2026-10-27'
   source: brokers-2026
-  automated_check:
-    date: '2026-10-27'
-    http_status: 403
-    result: warning
   notes: 'Modulo di rimozione. Controllo automatico 403: apri nel browser.'
   verified_source:
     page: false
-    email: false
+    email: true
     form: false
   form_notes: 'Controllo automatico HTTP 403: verified_source.form è false finché un umano non conferma
     la pagina. Non inviare prima.'
+  form_url: https://privacyrequest.zoominfo.com/remove/verify
+  emails:
+  - address: privacy@zoominfo.com
+    basis: rights
+    source_url: https://www.zoominfo.com/legal/privacy-policy
+    verified: true
+  eu_representative: null
+  allow_parallel: true
+  preferred_channel: email
+  country_scope:
+  - EU
+  phone_flow: include
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: lusha
   name: Lusha
   country: null
   category: b2b
   channel: form
   url: https://www.lusha.com/privacy-center/request-removal/
-  dpo_email: null
-  dpo_email_basis: null
   identifier_required:
   - email
   - phone
@@ -541,6 +771,9 @@ brokers:
   known_issues:
   - 'Fonti da chiedere con l''art. 15 par. 1 lett. g, non come fatto riletto sulla notice di Lusha il
     2026-10-27: L.S Mobile Apps, Mixrank, RampedUp. Chiedi la fonte effettiva, non affermarla come certa.'
+  - 'Caso reale: la cancellazione e le fonti sono arrivate via email. L''indirizzo non era nel testo statico
+    della notice il 2026-10-27: non è stato copiato. Il modulo di accesso OneTrust può chiedere dati in
+    più.'
   last_verified: '2026-10-27'
   source: brokers-2026
   related_broker_ids:
@@ -553,14 +786,22 @@ brokers:
     form: true
   form_notes: Modulo di rimozione. Dopo il submit conserva ticket_id e proof_path sulla scheda locale,
     non nel repository.
+  emails: []
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: form
+  country_scope:
+  - EU
+  phone_flow: include
+  letter_language: en
+  reliability: medium
+  case_type: broker
 - id: apollo
   name: Apollo
   country: null
   category: b2b
   channel: form
   url: https://www.apollo.io/privacy-policy/remove
-  dpo_email: null
-  dpo_email_basis: null
   identifier_required:
   - email
   - phone
@@ -568,43 +809,77 @@ brokers:
   known_issues:
   - Il modulo di opt-out chiede un'email aziendale. Non inventare un dominio di lavoro. Se l'utente ha
     solo un'email personale, dillo e cerca sulla pagina un canale che la accetti.
+  - L'autoreply rimanda al modulo. Il modulo può non mostrare una conferma. Conservare comunque lo screenshot.
   last_verified: '2026-10-27'
   source: brokers-2026
   verified_source:
     page: true
-    email: false
+    email: true
     form: true
   form_notes: Il modulo chiede un'email aziendale. Non inventarla. Se manca, lascia il campo vuoto. Se
     il submit è impossibile, stato blocco-modulo.
+  emails:
+  - address: privacy@apollo.io
+    basis: rights
+    source_url: https://www.apollo.io/privacy-policy
+    verified: true
+  - address: dpo@apollo.io
+    basis: named-dpo
+    source_url: https://www.apollo.io/privacy-policy
+    verified: true
+  eu_representative:
+    name: Lionheart Squared
+    email: apollo@lionheartsquared.eu
+    source_url: https://www.apollo.io/privacy-policy
+    verified: true
+  allow_parallel: true
+  preferred_channel: form
+  country_scope:
+  - EU
+  phone_flow: include
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: rocketreach
   name: RocketReach
   country: null
   category: b2b
   channel: form
   url: https://rocketreach.co/remove-profile
-  dpo_email: null
-  dpo_email_basis: null
   identifier_required:
   - email
   - phone
   phone_relevance: high
-  known_issues: []
+  known_issues:
+  - Il ticket può indicare 24 ore. Agganciare la conferma con dominio e ticket.
   last_verified: '2026-10-27'
   source: brokers-2026
   verified_source:
     page: true
-    email: false
+    email: true
     form: true
   form_notes: Dopo il submit può restare un portale. Stato portale-ticket. Aggancia la mail di conferma
     con dominio e ticket, non con l'oggetto.
+  emails:
+  - address: privacy@rocketreach.co
+    basis: general-contact
+    source_url: https://rocketreach.co/privacy
+    verified: true
+  eu_representative: null
+  allow_parallel: true
+  preferred_channel: form
+  country_scope:
+  - EU
+  phone_flow: include
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: dun-bradstreet
   name: Dun & Bradstreet
   country: null
   category: b2b
   channel: form
   url: https://www.dnb.com/en-us/why-dnb/data-transparency.html
-  dpo_email: null
-  dpo_email_basis: null
   identifier_required:
   - email
   - phone
@@ -619,14 +894,22 @@ brokers:
     page: true
     email: false
     form: true
+  emails: []
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: form
+  country_scope:
+  - EU
+  phone_flow: include
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: equifax-uk
   name: Equifax UK
   country: GB
   category: credit
   channel: portal
   url: https://www.equifax.co.uk/privacy-hub
-  dpo_email: null
-  dpo_email_basis: null
   identifier_required:
   - email
   - phone
@@ -642,14 +925,22 @@ brokers:
     page: true
     email: false
     form: true
+  emails: []
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: portal
+  country_scope:
+  - GB
+  phone_flow: skip-unless-ties
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: transunion-uk
   name: TransUnion UK
   country: GB
   category: credit
   channel: portal
   url: https://www.transunion.co.uk/legal/privacy-centre
-  dpo_email: null
-  dpo_email_basis: null
   identifier_required:
   - email
   - phone
@@ -670,14 +961,22 @@ brokers:
     form: false
   form_notes: Pagina non verificata in automatico (HTTP 403). Non usare il canale finché verified_source
     non è true.
+  emails: []
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: none
+  country_scope:
+  - GB
+  phone_flow: skip-unless-ties
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: schufa
   name: SCHUFA
   country: DE
   category: credit
   channel: portal
   url: https://www.meineschufa.de/service/datenkopie
-  dpo_email: null
-  dpo_email_basis: null
   identifier_required:
   - email
   - phone
@@ -693,14 +992,22 @@ brokers:
     page: true
     email: false
     form: true
+  emails: []
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: portal
+  country_scope:
+  - DE
+  phone_flow: skip-unless-ties
+  letter_language: de
+  reliability: unknown
+  case_type: broker
 - id: crif-de
   name: CRIF DE
   country: DE
   category: credit
   channel: portal
   url: https://www.crif.de/fuer-privatpersonen/selbstauskunft-fuer-privatpersonen/
-  dpo_email: null
-  dpo_email_basis: null
   identifier_required:
   - email
   - phone
@@ -715,14 +1022,22 @@ brokers:
     page: true
     email: false
     form: true
+  emails: []
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: portal
+  country_scope:
+  - DE
+  phone_flow: skip-unless-ties
+  letter_language: de
+  reliability: unknown
+  case_type: broker
 - id: creditsafe
   name: Creditsafe
   country: GB
   category: credit
   channel: form
   url: https://www.creditsafe.com/gb/en/legal/privacy-policy.html
-  dpo_email: null
-  dpo_email_basis: null
   identifier_required:
   - email
   - phone
@@ -738,14 +1053,22 @@ brokers:
     page: true
     email: false
     form: true
+  emails: []
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: form
+  country_scope:
+  - GB
+  phone_flow: skip-unless-ties
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: experian-uk
   name: Experian UK
   country: GB
   category: credit
   channel: portal
   url: https://www.experian.co.uk/privacy/consumer-information-portal/opt-out-options/
-  dpo_email: null
-  dpo_email_basis: null
   identifier_required:
   - email
   - phone
@@ -760,14 +1083,22 @@ brokers:
     page: true
     email: false
     form: true
+  emails: []
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: portal
+  country_scope:
+  - GB
+  phone_flow: skip-unless-ties
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: selectabase
   name: Selectabase
   country: GB
   category: lists
   channel: form
   url: https://www.selectabase.co.uk/data-protection/data-optout/
-  dpo_email: null
-  dpo_email_basis: null
   identifier_required:
   - email
   - phone
@@ -780,14 +1111,22 @@ brokers:
     page: true
     email: false
     form: true
+  emails: []
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: form
+  country_scope:
+  - EU
+  phone_flow: include
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: 192-com
   name: 192.com
   country: GB
   category: people-search
   channel: form
   url: https://www.192.com/misc/privacy-policy/
-  dpo_email: null
-  dpo_email_basis: null
   identifier_required:
   - phone
   - email
@@ -806,14 +1145,22 @@ brokers:
     form: false
   form_notes: Pagina non verificata in automatico (HTTP 403). Non usare il canale finché verified_source
     non è true.
+  emails: []
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: none
+  country_scope:
+  - GB
+  phone_flow: skip-unless-ties
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: acxiom-optout
   name: Acxiom optout
   country: null
   category: lists
   channel: form
   url: https://www.acxiom.com/optout/
-  dpo_email: null
-  dpo_email_basis: null
   identifier_required:
   - email
   - phone
@@ -824,47 +1171,73 @@ brokers:
     copiarlo qui.'
   - Chiedi solo gli identificativi già nel vault. Data di nascita, documento e indirizzo postale solo
     se l'utente, dopo il richiamo all'art. 12 par. 6 e all'art. 5 par. 1 lett. c, dice sì in modo esplicito.
+  - 'AskPrivacy è sulla pagina GDPR. datenschutz comparso solo nell''HTML dell''opt-out: non usarlo.'
   last_verified: '2026-10-27'
   source: brokers-2026
   notes: 'Opt-out. Nessuna casella DPO copiata: un indirizzo presente nel HTML non aveva una frase chiara
     che lo indicasse come canale diritti.'
   verified_source:
     page: true
-    email: false
+    email: true
     form: true
   form_notes: Il modulo può chiedere l'indirizzo postale. Lascialo vuoto. Se è obbligatorio, non inviare
     e prepara la richiesta art. 12 sulla minimizzazione.
+  emails:
+  - address: AskPrivacy@acxiom.com
+    basis: named-dpo
+    source_url: https://www.acxiom.com/privacy/gdpr/
+    verified: true
+  eu_representative: null
+  allow_parallel: true
+  preferred_channel: form
+  country_scope:
+  - EU
+  phone_flow: include
+  letter_language: en
+  reliability: medium
+  case_type: broker
 - id: acxiom-it
   name: Acxiom IT
   country: null
   category: lists
   channel: form
   url: https://www.acxiom.com/privacy/it/
-  dpo_email: null
-  dpo_email_basis: null
   identifier_required:
   - email
   - phone
   phone_relevance: high
   known_issues:
   - Stesse cautele di Acxiom optout sull'indirizzo postale.
+  - 'Stessa regola: non usare un indirizzo letto solo nell''HTML dell''opt-out.'
   last_verified: '2026-10-27'
   source: brokers-2026
   notes: Pagina privacy in italiano dello stesso titolare dell'opt-out. Tienile entrambe. La sede non
     è stata verificata su questa pagina.
   verified_source:
     page: true
-    email: false
+    email: true
     form: true
   form_notes: Stessa regola di Acxiom optout sull'indirizzo postale.
+  emails:
+  - address: AskPrivacy@acxiom.com
+    basis: named-dpo
+    source_url: https://www.acxiom.com/privacy/gdpr/
+    verified: true
+  eu_representative: null
+  allow_parallel: true
+  preferred_channel: form
+  country_scope:
+  - EU
+  phone_flow: include
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: liveramp
   name: LiveRamp
   country: null
   category: adtech
   channel: email
   url: https://liveramp.com/privacy
-  dpo_email: privacy.it@liveramp.com
-  dpo_email_basis: rights-contact
   identifier_required:
   - ad_id
   - email
@@ -879,14 +1252,26 @@ brokers:
     page: true
     email: true
     form: false
+  emails:
+  - address: privacy.it@liveramp.com
+    basis: rights
+    source_url: https://liveramp.com/privacy
+    verified: true
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: email
+  country_scope:
+  - EU
+  phone_flow: include
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: lexisnexis
   name: LexisNexis
   country: null
   category: b2b
   channel: form
   url: https://www.lexisnexis.com/global/privacy/en/privacy-policy.page
-  dpo_email: null
-  dpo_email_basis: null
   identifier_required:
   - email
   - phone
@@ -907,36 +1292,59 @@ brokers:
     form: true
   form_notes: Il flusso può chiedere data di nascita e documento. Campi da lasciare vuoti. Se sono obbligatori,
     stop e modello richiesta-dati-sproporzionata.
+  emails: []
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: form
+  country_scope:
+  - EU
+  phone_flow: include
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: companydata
   name: CompanyData
   country: null
   category: b2b
   channel: form
   url: https://companydata.com/privacy-statement/
-  dpo_email: null
-  dpo_email_basis: null
   identifier_required:
   - email
   - phone
   - profile_url
   phone_relevance: medium
-  known_issues: []
+  known_issues:
+  - Non trattano dati privati nel senso di una scheda di persona. Offrono la rimozione di una scheda di
+    impresa, fuori dal GDPR. La casella info è un contatto generale, non un DPO, ed è l'unico recapito
+    pubblicato.
   last_verified: '2026-10-27'
   source: brokers-2026
   notes: Informativa. Nessuna casella di ruolo verificata come canale diritti il 2026-10-27. Non usare
     un info@ generico se la pagina non lo indica per i diritti.
   verified_source:
     page: true
-    email: false
+    email: true
     form: true
+  emails:
+  - address: info@companydata.com
+    basis: general-contact
+    source_url: https://companydata.com/privacy-statement/
+    verified: true
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: email
+  country_scope:
+  - EU
+  phone_flow: include
+  letter_language: en
+  reliability: medium
+  case_type: non-gdpr
 - id: north-data
   name: North Data
   country: null
   category: b2b
   channel: email
   url: https://www.northdata.com/_privacy
-  dpo_email: privacy@northdata.com
-  dpo_email_basis: named-dpo
   identifier_required:
   - profile_url
   - email
@@ -951,14 +1359,26 @@ brokers:
     page: true
     email: true
     form: false
+  emails:
+  - address: privacy@northdata.com
+    basis: named-dpo
+    source_url: https://www.northdata.com/_privacy
+    verified: true
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: email
+  country_scope:
+  - EU
+  phone_flow: include
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: kaspr
   name: Kaspr
   country: FR
   category: b2b
   channel: form
   url: https://www.kaspr.io/privacy-policy
-  dpo_email: privacy@kaspr.io
-  dpo_email_basis: rights-contact
   identifier_required:
   - email
   - phone
@@ -969,6 +1389,8 @@ brokers:
     lo risolve l''utente. Non aggirarlo.'
   - 'Esperienza operativa: richieste via email sono state rifiutate. La policy pubblica comunque la casella
     per esercitare i diritti. Avvisa di questo precedente, mostra la bozza e lascia scegliere all''utente.'
+  - 'L''autoreply rifiuta l''email e rimanda al modulo. Non citare le linee guida EDPB 01/2022 finché
+    non si è riletto il passaggio sui canali: il testo non è stato estratto in questa versione.'
   last_verified: '2026-10-27'
   source: operational
   form_url: https://kaspr.privacy.saymine.io/kaspr
@@ -980,19 +1402,33 @@ brokers:
     form: true
   form_notes: 'SayMine. HTTP 400 o captcha: al massimo due submit, poi blocco-modulo. In passato l''email
     è stata rifiutata: dillo all''utente prima della lettera di riserva.'
+  emails:
+  - address: privacy@kaspr.io
+    basis: rights
+    source_url: https://www.kaspr.io/privacy-policy
+    verified: true
+  eu_representative: null
+  allow_parallel: true
+  preferred_channel: form
+  country_scope:
+  - EU
+  phone_flow: include
+  letter_language: en
+  reliability: low
+  case_type: broker
 - id: ls-mobile-apps
   name: L.S Mobile Apps
   country: null
   category: people-search
   channel: email
-  url: https://www.lsmapps.com/privacy-policy
-  dpo_email: dpo@lsmapps.com
-  dpo_email_basis: rights-contact
+  url: https://lsmapps.com/privacy-policy
   identifier_required:
   - email
   - phone
   phone_relevance: high
-  known_issues: []
+  known_issues:
+  - 'Un OTP SMS OneTrust non è arrivato in un caso reale. Dopo due tentativi, stato blocco-modulo. Un
+    recapito di rappresentante UE non era nel HTML statico: non è stato copiato.'
   last_verified: '2026-10-27'
   source: lusha-source
   lusha_source:
@@ -1005,14 +1441,26 @@ brokers:
     page: true
     email: true
     form: false
+  emails:
+  - address: dpo@lsmapps.com
+    basis: rights
+    source_url: https://www.lsmapps.com/privacy-policy
+    verified: true
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: email
+  country_scope:
+  - EU
+  phone_flow: include
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: mixrank
   name: Mixrank
   country: US
   category: b2b
   channel: form
   url: https://mixrank.com/privacy-policy/
-  dpo_email: privacy@mixrank.com
-  dpo_email_basis: rights-contact
   identifier_required:
   - email
   - phone
@@ -1031,14 +1479,26 @@ brokers:
     email: true
     form: true
   form_notes: Modulo sul form_url. Anteprima di ogni campo prima del submit.
+  emails:
+  - address: privacy@mixrank.com
+    basis: rights
+    source_url: https://mixrank.com/privacy-policy/
+    verified: true
+  eu_representative: null
+  allow_parallel: true
+  preferred_channel: form
+  country_scope:
+  - EU
+  phone_flow: include
+  letter_language: en
+  reliability: unknown
+  case_type: broker
 - id: rampedup
   name: RampedUp
   country: null
   category: b2b
   channel: form
-  url: https://rampedup.io/privacy-policy
-  dpo_email: null
-  dpo_email_basis: null
+  url: https://rampedup.io/privacy-policy-1
   identifier_required:
   - email
   - phone
@@ -1063,3 +1523,598 @@ brokers:
     form: true
   form_notes: Il portale autentica l'email. verification_status attesa-otp finché l'utente non incolla
     il codice. Non ripetere il codice in chat.
+  emails: []
+  eu_representative: null
+  allow_parallel: false
+  preferred_channel: form
+  country_scope:
+  - EU
+  phone_flow: include
+  letter_language: en
+  reliability: unknown
+  case_type: broker
+- country: IT
+  known_issues:
+  - La casella italiana è il recapito della società sulla pagina privacy, non il DPO. Il DPO indicato
+    in pagina è la casella di gruppo.
+  last_verified: '2026-10-27'
+  source: verified-2026-10-27
+  form_url: null
+  eu_representative: null
+  emails:
+  - address: italiainfo@creditsafe.it
+    basis: general-contact
+    source_url: https://www.creditsafe.com/it/it/legal/informativa-privacy.html
+    verified: true
+  - address: dpocsgroup@creditsafe.com
+    basis: named-dpo
+    source_url: https://www.creditsafe.com/it/it/legal/informativa-privacy.html
+    verified: true
+  allow_parallel: false
+  reliability: unknown
+  case_type: broker
+  letter_language: it
+  country_scope:
+  - IT
+  phone_flow: include
+  id: creditsafe-it
+  name: Creditsafe Italia
+  category: credit
+  channel: email
+  url: https://www.creditsafe.com/it/it/legal/informativa-privacy.html
+  preferred_channel: email
+  phone_relevance: medium
+  identifier_required:
+  - email
+  - phone
+  notes: Non copiare telefoni o sedi dalla pagina.
+  verified_source:
+    page: true
+    email: true
+    form: false
+- country: IT
+  known_issues:
+  - La pagina crif.it/privacy ha risposto 404. Le caselle sono sulla privacy policy di crif.com, come
+    recapito del titolare.
+  last_verified: '2026-10-27'
+  source: verified-2026-10-27
+  form_url: null
+  eu_representative: null
+  emails:
+  - address: dirprivacy@crif.com
+    basis: rights
+    source_url: https://www.crif.com/privacy-policy/
+    verified: true
+  - address: crif@pec.crif.com
+    basis: general-contact
+    source_url: https://www.crif.com/privacy-policy/
+    verified: true
+  allow_parallel: false
+  reliability: unknown
+  case_type: broker
+  letter_language: it
+  country_scope:
+  - IT
+  phone_flow: include
+  id: crif-it
+  name: CRIF S.p.A.
+  category: credit
+  channel: email
+  url: https://www.crif.com/privacy-policy/
+  preferred_channel: email
+  phone_relevance: medium
+  identifier_required:
+  - email
+  - phone
+  notes: Non copiare la sede dalla pagina.
+  verified_source:
+    page: true
+    email: true
+    form: false
+- country: null
+  known_issues:
+  - La rimozione è un unlist del numero, non reversibile secondo la pagina. Nessuna casella di ruolo verificata.
+  last_verified: '2026-10-27'
+  source: verified-2026-10-27
+  form_url: null
+  eu_representative: null
+  emails: []
+  allow_parallel: false
+  reliability: unknown
+  case_type: sito-terzo
+  letter_language: en
+  country_scope:
+  - EU
+  - IT
+  phone_flow: include
+  id: truecaller
+  name: Truecaller
+  category: people-search
+  channel: form
+  url: https://www.truecaller.com/unlisting
+  preferred_channel: form
+  phone_relevance: high
+  identifier_required:
+  - phone
+  verified_source:
+    page: true
+    email: false
+    form: true
+- country: null
+  known_issues:
+  - La casella è indicata per chiedere i destinatari dei dati. Usare anche il modello per chi non è utente
+    dell'app.
+  last_verified: '2026-10-27'
+  source: verified-2026-10-27
+  form_url: null
+  eu_representative: null
+  emails:
+  - address: privacy@sync.me
+    basis: rights
+    source_url: https://sync.me/privacy/
+    verified: true
+  allow_parallel: false
+  reliability: unknown
+  case_type: sito-terzo
+  letter_language: en
+  country_scope:
+  - EU
+  - IT
+  phone_flow: include
+  id: syncme
+  name: Sync.me
+  category: people-search
+  channel: email
+  url: https://sync.me/privacy/
+  preferred_channel: email
+  phone_relevance: high
+  identifier_required:
+  - phone
+  verified_source:
+    page: true
+    email: true
+    form: false
+- country: null
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: verified-2026-10-27
+  form_url: null
+  eu_representative: null
+  emails:
+  - address: dpo@hiya.com
+    basis: named-dpo
+    source_url: https://www.hiya.com/legal/privacy
+    verified: true
+  allow_parallel: false
+  reliability: unknown
+  case_type: sito-terzo
+  letter_language: en
+  country_scope:
+  - EU
+  - IT
+  phone_flow: include
+  id: hiya
+  name: Hiya
+  category: people-search
+  channel: email
+  url: https://www.hiya.com/legal/privacy
+  preferred_channel: email
+  phone_relevance: high
+  identifier_required:
+  - phone
+  verified_source:
+    page: true
+    email: true
+    form: false
+- country: IT
+  known_issues:
+  - 'Elenco italiano da monitorare. In questa verifica non è stato letto un canale di rimozione: non inviare
+    finché non si trova una pagina ufficiale.'
+  last_verified: '2026-10-27'
+  source: verified-2026-10-27
+  form_url: null
+  eu_representative: null
+  emails: []
+  allow_parallel: false
+  reliability: unknown
+  case_type: sito-terzo
+  letter_language: it
+  country_scope:
+  - IT
+  phone_flow: include
+  id: chistachiamando
+  name: Chi sta chiamando
+  category: people-search
+  channel: form
+  url: https://www.chistachiamando.it/privacy-policy
+  preferred_channel: none
+  phone_relevance: high
+  identifier_required:
+  - phone
+  verified_source:
+    page: true
+    email: false
+    form: false
+- country: IT
+  known_issues:
+  - La pagina privacy vista il 2026-10-27 non espone una casella di ruolo nel testo. Non usare un info
+    generico non letto nella frase sui diritti.
+  last_verified: '2026-10-27'
+  source: verified-2026-10-27
+  form_url: null
+  eu_representative: null
+  emails: []
+  allow_parallel: false
+  reliability: unknown
+  case_type: broker
+  letter_language: it
+  country_scope:
+  - IT
+  phone_flow: include
+  id: cerved
+  name: Cerved
+  category: credit
+  channel: form
+  url: https://www.cerved.com/privacy
+  preferred_channel: none
+  phone_relevance: medium
+  identifier_required:
+  - email
+  verified_source:
+    page: true
+    email: false
+    form: false
+- country: IT
+  known_issues:
+  - Titolare collegato a PagineBianche. La pagina di archivio non mostrava una casella DPO in questa verifica.
+  last_verified: '2026-10-27'
+  source: verified-2026-10-27
+  form_url: null
+  eu_representative: null
+  emails: []
+  allow_parallel: false
+  reliability: unknown
+  case_type: sito-terzo
+  letter_language: it
+  country_scope:
+  - IT
+  phone_flow: include
+  id: italiaonline
+  name: Italiaonline
+  category: people-search
+  channel: form
+  url: https://www.italiaonline.it/archivio/informativa-privacy/
+  preferred_channel: none
+  phone_relevance: high
+  identifier_required:
+  - phone
+  verified_source:
+    page: true
+    email: false
+    form: false
+- country: null
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: verified-2026-10-27
+  form_url: null
+  eu_representative: null
+  emails:
+  - address: privacy@id5.io
+    basis: rights
+    source_url: https://id5.io/trust/privacy-policy
+    verified: true
+  allow_parallel: false
+  reliability: unknown
+  case_type: broker
+  letter_language: en
+  country_scope:
+  - EU
+  phone_flow: skip-unless-ties
+  id: id5
+  name: ID5
+  category: adtech
+  channel: email
+  url: https://id5.io/trust/privacy-policy
+  preferred_channel: email
+  phone_relevance: low
+  identifier_required:
+  - ad_id
+  - email
+  verified_source:
+    page: true
+    email: true
+    form: false
+- country: null
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: verified-2026-10-27
+  form_url: null
+  eu_representative:
+    name: Privacity GmbH
+    email: representative@privacity.de
+    source_url: https://snov.io/privacy-policy
+    verified: true
+  emails:
+  - address: snovio_dpo@snov.io
+    basis: named-dpo
+    source_url: https://snov.io/privacy-policy
+    verified: true
+  - address: help@snov.io
+    basis: rights
+    source_url: https://snov.io/privacy-policy
+    verified: true
+  allow_parallel: false
+  reliability: unknown
+  case_type: broker
+  letter_language: en
+  country_scope:
+  - EU
+  phone_flow: include
+  id: snov-io
+  name: Snov.io
+  category: b2b
+  channel: email
+  url: https://snov.io/privacy-policy
+  preferred_channel: email
+  phone_relevance: high
+  identifier_required:
+  - email
+  - phone
+  verified_source:
+    page: true
+    email: true
+    form: false
+- country: null
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: verified-2026-10-27
+  form_url: null
+  eu_representative: null
+  emails:
+  - address: privacy@pipl.com
+    basis: rights
+    source_url: https://pipl.com/privacy-center
+    verified: true
+  allow_parallel: false
+  reliability: unknown
+  case_type: broker
+  letter_language: en
+  country_scope:
+  - EU
+  phone_flow: include
+  id: pipl
+  name: Pipl
+  category: people-search
+  channel: email
+  url: https://pipl.com/privacy-center
+  preferred_channel: email
+  phone_relevance: high
+  identifier_required:
+  - email
+  - phone
+  verified_source:
+    page: true
+    email: true
+    form: false
+- country: null
+  known_issues: []
+  last_verified: '2026-10-27'
+  source: verified-2026-10-27
+  form_url: null
+  eu_representative:
+    name: Instant EU GDPR Representative Ltd
+    email: contact@gdprlocal.com
+    source_url: https://hunter.io/privacy-policy
+    verified: true
+  emails:
+  - address: privacy@hunter.io
+    basis: rights
+    source_url: https://hunter.io/privacy-policy
+    verified: true
+  allow_parallel: false
+  reliability: unknown
+  case_type: broker
+  letter_language: en
+  country_scope:
+  - EU
+  phone_flow: include
+  id: hunter
+  name: Hunter
+  category: b2b
+  channel: email
+  url: https://hunter.io/privacy-policy
+  preferred_channel: email
+  phone_relevance: medium
+  identifier_required:
+  - email
+  verified_source:
+    page: true
+    email: true
+    form: false
+- country: null
+  known_issues:
+  - La pagina risponde 200 ma non ha mostrato una casella nel testo letto. Non inventare un indirizzo.
+  last_verified: '2026-10-27'
+  source: verified-2026-10-27
+  form_url: null
+  eu_representative: null
+  emails: []
+  allow_parallel: false
+  reliability: unknown
+  case_type: broker
+  letter_language: en
+  country_scope:
+  - EU
+  phone_flow: include
+  id: people-data-labs
+  name: People Data Labs
+  category: b2b
+  channel: form
+  url: https://privacy.peopledatalabs.com/policies?name=privacy-policy
+  preferred_channel: none
+  phone_relevance: high
+  identifier_required:
+  - email
+  - phone
+  verified_source:
+    page: true
+    email: false
+    form: false
+- country: null
+  known_issues:
+  - Nessuna casella di ruolo nel testo letto il 2026-10-27.
+  last_verified: '2026-10-27'
+  source: verified-2026-10-27
+  form_url: null
+  eu_representative: null
+  emails: []
+  allow_parallel: false
+  reliability: unknown
+  case_type: broker
+  letter_language: en
+  country_scope:
+  - EU
+  phone_flow: include
+  id: uplead
+  name: UpLead
+  category: b2b
+  channel: form
+  url: https://www.uplead.com/privacy-policy-2021/
+  preferred_channel: none
+  phone_relevance: high
+  identifier_required:
+  - email
+  verified_source:
+    page: true
+    email: false
+    form: false
+- country: null
+  known_issues:
+  - La privacy policy ha risposto 403 in questa verifica. Non inviare finché un umano non conferma la
+    pagina.
+  last_verified: '2026-10-27'
+  source: verified-2026-10-27
+  form_url: null
+  eu_representative: null
+  emails: []
+  allow_parallel: false
+  reliability: unknown
+  case_type: broker
+  letter_language: en
+  country_scope:
+  - EU
+  phone_flow: skip-unless-ties
+  automated_check:
+    date: '2026-10-27'
+    http_status: 403
+    result: warning
+  id: liveintent
+  name: LiveIntent
+  category: adtech
+  channel: form
+  url: https://www.liveintent.com/privacy-policy/
+  preferred_channel: none
+  phone_relevance: low
+  identifier_required:
+  - ad_id
+  verified_source:
+    page: false
+    email: false
+    form: false
+- country: null
+  known_issues:
+  - HTTP 403 in questa verifica. Nessuna casella copiata.
+  last_verified: '2026-10-27'
+  source: verified-2026-10-27
+  form_url: null
+  eu_representative: null
+  emails: []
+  allow_parallel: false
+  reliability: unknown
+  case_type: broker
+  letter_language: en
+  country_scope:
+  - EU
+  phone_flow: include
+  automated_check:
+    date: '2026-10-27'
+    http_status: 403
+    result: warning
+  id: salesintel
+  name: SalesIntel
+  category: b2b
+  channel: form
+  url: https://www.salesintel.io/privacy-policy
+  preferred_channel: none
+  phone_relevance: high
+  identifier_required:
+  - email
+  verified_source:
+    page: false
+    email: false
+    form: false
+- country: null
+  known_issues:
+  - HTTP 403 in questa verifica. Nessuna casella copiata.
+  last_verified: '2026-10-27'
+  source: verified-2026-10-27
+  form_url: null
+  eu_representative: null
+  emails: []
+  allow_parallel: false
+  reliability: unknown
+  case_type: broker
+  letter_language: en
+  country_scope:
+  - EU
+  phone_flow: include
+  automated_check:
+    date: '2026-10-27'
+    http_status: 403
+    result: warning
+  id: ekata
+  name: Ekata
+  category: b2b
+  channel: form
+  url: https://ekata.com/privacy-policy/
+  preferred_channel: none
+  phone_relevance: medium
+  identifier_required:
+  - email
+  - phone
+  verified_source:
+    page: false
+    email: false
+    form: false
+- id: tellows
+  name: tellows
+  country: IT
+  category: people-search
+  channel: form
+  url: https://www.tellows.it/
+  preferred_channel: none
+  allow_parallel: false
+  emails: []
+  eu_representative: null
+  identifier_required:
+  - phone
+  phone_relevance: high
+  known_issues:
+  - 'Il sito ha risposto 403 in questa verifica. Nessun canale di rimozione copiato: solo monitoraggio,
+    finché un umano non conferma una pagina ufficiale.'
+  last_verified: '2026-10-27'
+  source: verified-2026-10-27
+  country_scope:
+  - IT
+  phone_flow: include
+  letter_language: it
+  reliability: unknown
+  case_type: sito-terzo
+  verified_source:
+    page: false
+    email: false
+    form: false
+  automated_check:
+    date: '2026-10-27'
+    http_status: 403
+    result: warning

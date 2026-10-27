@@ -17,7 +17,10 @@ Ogni scheda:
 | `case_id` | `GDPR-` anno `-` progressivo. Nell'oggetto delle email |
 | `broker_id` | `id` in `data/brokers.yaml` |
 | `broker_name` | Nome da mostrare |
-| `channel` | `email`, `form`, `portal`, `phone` o `pdf` |
+| `channel` | `email`, `form` o `portal` come in `brokers.yaml`. `phone` e `pdf` solo per RPO e operatore |
+| `case_type` | `broker`, `operatore`, `sito-terzo`, `rpo`, `motore-ricerca`, `non-gdpr` |
+| `related_case_ids` | Schede collegate, per esempio le fonti dichiarate da un titolare |
+| `listings` | URL controllati prima e dopo, senza copiare la scheda |
 | `identifier_mask` | Maschera, per esempio `+00 *** *** 12`. Mai il dato intero |
 | `sent_at` | Data di invio o di submit, `AAAA-MM-GG` |
 | `submitted_at` | Uguale a `sent_at` se il canale è un modulo, altrimenti vuoto |

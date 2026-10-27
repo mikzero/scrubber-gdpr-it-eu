@@ -6,6 +6,25 @@ prima di applicare l'aggiornamento.
 
 Il formato segue [Keep a Changelog](https://keepachangelog.com/) e il pacchetto usa [SemVer](https://semver.org/).
 
+## 0.3.0 — 2026-10-27
+
+### Added
+
+- Più caselle per titolare, con base e pagina di verifica. L'email verificata per i diritti resta ammessa anche se esiste un modulo.
+- Titolari italiani e di elenchi telefonici verificati in questa passata, più alcuni broker UE la cui casella è stata letta sulla pagina ufficiale.
+- `country_scope` e `phone_flow`: un residente in Italia non parte dall'adtech a bassa rilevanza né dal credito DE/UK o da 192.com senza un legame.
+- Autorizzazione singola, di gruppo o `STOP`. Report settimanale compatto in cinque righe.
+- Modelli per canale non obbligatorio, scheda d'impresa, delega art. 80 e app di cui la persona non è utente.
+- Le skill si installano solo da un tag firmato. L'allowlist dei domini è quella già installata. Il lint rifiuta «invia senza chiedere il sì».
+
+### Changed
+
+- Adloox resta un contatto solo per i cookie: non è un canale email per il GDPR.
+- Samba punta al privacy center del consumatore. RampedUp e L.S Mobile Apps usano l'URL che risponde.
+- Gli annunci Google puntano alla guida di My Ad Center.
+
+Non è consulenza legale.
+
 ## 0.2.1 — 2026-10-27
 
 ### Changed
