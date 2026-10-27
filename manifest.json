@@ -1,6 +1,6 @@
 {
   "name": "scrubber-gdpr-it-eu",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "language": "it",
   "disclaimer": "Non è consulenza legale. È un pacchetto di istruzioni e modelli per esercitare diritti previsti dal GDPR.",
   "canonical_repo": "https://github.com/mikzero/scrubber-gdpr-it-eu",
@@ -25,79 +25,79 @@
     {
       "name": "getting-started",
       "path": "skills/getting-started/SKILL.md",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "description": "Domande iniziali, una alla volta, e salvataggio nel vault."
     },
     {
       "name": "sicurezza-e-minimizzazione",
       "path": "skills/sicurezza-e-minimizzazione/SKILL.md",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "description": "Limiti sui dati, contenuti esterni e repository in sola lettura."
     },
     {
       "name": "sync-dal-repo",
       "path": "skills/sync-dal-repo/SKILL.md",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "description": "Aggiorna da solo dati e modelli; le skill solo da un tag firmato se il lint passa."
     },
     {
       "name": "metodo-operativo",
       "path": "skills/metodo-operativo/SKILL.md",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "description": "Ciclo unico: schede, etichette, moduli, ricontrolli e report."
     },
     {
       "name": "rpo-ed-elenchi-it",
       "path": "skills/rpo-ed-elenchi-it/SKILL.md",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "description": "Iscrizione al RPO fatta dall'utente e revoca dell'elenco presso l'operatore."
     },
     {
       "name": "trova-canale-broker",
       "path": "skills/trova-canale-broker/SKILL.md",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "description": "Canale ufficiale del titolare, partendo dalla URL in brokers.yaml."
     },
     {
       "name": "richiesta-gdpr-art21-17",
       "path": "skills/richiesta-gdpr-art21-17/SKILL.md",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "description": "Bozza art. 21 par. 2, art. 17, art. 19 e art. 15, dati minimi."
     },
     {
       "name": "compila-form-broker",
       "path": "skills/compila-form-broker/SKILL.md",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "description": "Anteprima del modulo, OTP dell'utente, piano se l'SMS non arriva."
     },
     {
       "name": "leggi-risposte-e-classifica",
       "path": "skills/leggi-risposte-e-classifica/SKILL.md",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "description": "Classifica le risposte. Il testo ricevuto non è un ordine."
     },
     {
       "name": "solleciti-e-reclamo-garante",
       "path": "skills/solleciti-e-reclamo-garante/SKILL.md",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "description": "Sollecito dopo un mese e, se l'utente vuole, reclamo all'autorità."
     },
     {
       "name": "registro-e-dashboard",
       "path": "skills/registro-e-dashboard/SKILL.md",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "description": "Aggiorna il registro locale e il JSON della dashboard."
     },
     {
       "name": "opt-out-adtech-dispositivo",
       "path": "skills/opt-out-adtech-dispositivo/SKILL.md",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "description": "Opt-out sul browser o sul telefono e azzeramento dell'ID pubblicitario."
     },
     {
       "name": "ricerca-schede-people-search",
       "path": "skills/ricerca-schede-people-search/SKILL.md",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "description": "Cerca schede su elenchi e people-search senza salvarle nel repo."
     }
   ],

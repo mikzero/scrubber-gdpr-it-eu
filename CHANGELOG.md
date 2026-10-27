@@ -6,6 +6,20 @@ prima di applicare l'aggiornamento.
 
 Il formato segue [Keep a Changelog](https://keepachangelog.com/) e il pacchetto usa [SemVer](https://semver.org/).
 
+## 0.3.1 — 2026-10-27
+
+### Added
+
+- Copertura Italia fase 1: elenchi, operatori del database unico, liste, credito, caller ID e portale ANCIC. Le note sono in `docs/italia.md`.
+- Categorie `directory`, `telco`, `registry` e `authority`. Le voci `uncertain` non si contattano.
+
+### Changed
+
+- RPO e Garante restano solo in `data/registries.yaml`. Il reclamo è l'unico canale del Garante: la pagina di segnalazione risponde 404.
+- `crif-it`, `creditsafe-it` e `cribis-dnb` restano titolari distinti dalle voci di altri paesi.
+
+Non è consulenza legale.
+
 ## 0.3.0 — 2026-10-27
 
 ### Added

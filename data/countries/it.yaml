@@ -13,16 +13,54 @@ directories:
 - id: paginebianche
   ref: data/registries.yaml
 broker_ids:
+- italiaonline-elenchi
+- tuttocitta
+- pronto-892424
+- tim-1254
+- infobel-it
+- dbu-elenchi
+- tim-elenchi
+- vodafone-elenchi
+- windtre-elenchi
+- iliad-elenchi
+- fastweb-elenchi
+- postemobile-elenchi
+- kena-elenchi
+- homobile-elenchi
+- very-elenchi
+- coopvoce-elenchi
+- tiscali-elenchi
+- ediscom
+- concorsiweb
+- digital-metrics
+- foryou
+- realmaps
+- toleadoo
+- mxt-international
+- consodata
 - crif-it
-- creditsafe-it
+- experian-it
+- ctc
 - cerved
-- italiaonline
-- chistachiamando
+- creditsafe-it
+- cribis-dnb
+- coface-it
+- spaziodati-atoka
+- openapi
+- tinexta-visura
+- tellows-it
 - truecaller
+- michiama
+- ghostcallers
+- nocall
+- getcontact
 - syncme
+- callapp
 - hiya
-- tellows
+- agcom-antispoofing
+- occhio-al-numero
+- ancic-portale
 letters:
 - it
-notes: 'Titolari italiani verificati in parte il 2026-10-27. Operatori telefonici: la casella Vodafone
-  indicata in ricerca non è stata trovata su una pagina ufficiale in questa verifica e non è stata copiata.'
+notes: Fase 1 Italia, 27 ottobre 2026. RPO e Garante restano in data/registries.yaml. Le voci uncertain
+  non si contattano. Vedi docs/italia.md.

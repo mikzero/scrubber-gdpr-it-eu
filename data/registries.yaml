@@ -13,10 +13,11 @@ opposition_registers:
   country: IT
   kind: opposition-register
   url: https://registrodelleopposizioni.it/cittadino/
-  notes: Servizio pubblico per opporsi all'uso del proprio numero, fisso o mobile, per telemarketing e
-    all'uso dell'indirizzo postale degli elenchi per marketing cartaceo. Non sostituisce la revoca dell'inserimento
-    in elenco presso l'operatore. L'utente agisce dal proprio numero. I numeri di telefono del servizio
-    stanno sulla pagina cittadino e non sono copiati in questo repo.
+  notes: 'Dal 2022 copre fissi e cellulari, anche non in elenco, e le chiamate automatiche. L''iscrizione
+    annulla i consensi al telemarketing dati prima, tranne quelli dati dopo e i contratti continuativi
+    (telefono, luce, gas). Non copre SMS, email, chat né i call center abusivi o esteri. Non sostituisce
+    la revoca dell''elenco presso l''operatore. L''utente agisce dal proprio numero. I numeri del servizio
+    stanno sulla pagina cittadino e non sono copiati qui.'
   channels:
   - id: web
     url: https://cittadino.registrodelleopposizioni.it/autenticazione/iscrizione/
@@ -173,8 +174,9 @@ authorities:
   complaint_url: https://www.garanteprivacy.it/diritti/come-agire-per-tutelare-i-tuoi-dati-personali/reclamo
   complaint_url_verified: true
   institutional_email: protocollo@pec.gpdp.it
-  notes: 'Canale PEC istituzionale pubblicato sulla pagina reclami. La PEC accetta solo messaggi da PEC.
-    L''indirizzo postale sta sulla stessa pagina: non è copiato qui.'
+  notes: 'Il reclamo è l''unico canale. Il 2026-10-27 la pagina di segnalazione separata risponde 404:
+    non proporla. La PEC istituzionale accetta solo messaggi da PEC. L''indirizzo postale sta sulla pagina
+    reclami e non è copiato qui. Temi telemarketing: https://www.garanteprivacy.it/temi/telemarketing'
 - id: lv-dvi
   name: Datu valsts inspekcija
   country: LV

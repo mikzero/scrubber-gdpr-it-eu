@@ -19,7 +19,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILL_DIRS = sorted(path for path in (ROOT / "skills").iterdir() if path.is_dir())
-CATEGORIES = {"adtech", "b2b", "credit", "lists", "people-search"}
+CATEGORIES = {"adtech", "b2b", "credit", "lists", "people-search", "directory", "telco", "registry", "authority"}
 CHANNELS = {"email", "form", "portal"}
 IDENTIFIERS = {"email", "phone", "ad_id", "profile_url"}
 RELEVANCE = {"high", "medium", "low"}
@@ -144,8 +144,8 @@ def check_skills() -> None:
 def check_manifest(brokers: dict) -> None:
     manifest = json.loads((ROOT / "manifest.json").read_text(encoding="utf-8"))
     version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-    if version != "0.3.0":
-        fail(f"VERSION is {version}, expected 0.3.0")
+    if version != "0.3.1":
+        fail(f"VERSION is {version}, expected 0.3.1")
     if manifest.get("bot_access") != "read-only":
         fail("manifest.bot_access must be read-only")
     policy = manifest.get("update_policy") or {}
@@ -245,8 +245,12 @@ def check_brokers(brokers: dict) -> None:
                 fail(f"{item['id']}: verified_source.email disagrees with usable addresses")
             if source["form"] and not source["page"]:
                 fail(f"{item['id']}: form verified while page is not")
-        if "form_notes" in item and not isinstance(item["form_notes"], str):
+        if "form_notes" in item and item["form_notes"] is not None and not isinstance(item["form_notes"], str):
             fail(f"{item['id']}: form_notes must be a string")
+        if "uncertain" in item and not isinstance(item["uncertain"], bool):
+            fail(f"{item['id']}: uncertain must be a boolean")
+        if item.get("uncertain") and item.get("preferred_channel") not in {None, "none"}:
+            fail(f"{item['id']}: uncertain entries must not have an automatic channel")
         if not str(item["url"]).startswith("https://"):
             fail(f"{item['id']}: url must be https")
         if not isinstance(item["known_issues"], list):

@@ -30,7 +30,7 @@ Salva tutto nel vault. Non scrivere questi valori nel repository. Se l'utente li
 
 Quando i punti ci sono, riassumi le scelte senza allegare il numero e proponi il passo successivo:
 
-- Italia: `rpo-ed-elenchi-it`, poi i broker con `phone_relevance` alta.
+- Italia: `rpo-ed-elenchi-it` e l'ordine delle prime 15 voci in `docs/italia.md`. Salta le voci `uncertain` e quelle con `phone_flow: skip-unless-ties`, salvo un legame detto dall'utente.
 - Altro paese: autorità in `data/registries.yaml`, poi i broker.
 
 Ogni titolare avrà una scheda caso con id `GDPR-` anno `-` progressivo, creata al momento della prima richiesta, non ora. Il minimo da mettere in quella richiesta è nel capitolo 1 di `docs/metodo.md`.
