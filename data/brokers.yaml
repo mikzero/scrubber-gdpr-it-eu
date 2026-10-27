@@ -1,10 +1,9 @@
 # Elenco titolari. Non è consulenza legale. Nessun dato di persona fisica.
 # emails[].basis: rights | named-dpo | eu-rep | general-contact | cookie-only
-# Le caselle general-contact dei moduli elenco non sono il DPO: servono solo a inviare il modulo, dopo l'area clienti.
-# uncertain true: non contattare. Mostrare come da verificare.
-# category include anche directory, telco, registry, authority.
-# phone_flow skip-unless-ties: un residente in Italia non parte da questi titolari senza un legame con country_scope.
-version: 0.3.1
+# uncertain true: nessun canale automatico. Caselle segnate non verificate nelle note non sono copiate.
+# category contract e alcuni operatori: phone_flow opt-in. Azione di default = revoca consensi, non cancellazione del contratto.
+# crif-it, creditsafe-it e cribis-dnb restano distinti dalle voci di altri paesi.
+version: 0.3.2
 updated: '2026-10-27'
 disclaimer: Non è consulenza legale. Verifica il canale sulla pagina ufficiale prima di inviare.
 brokers:
@@ -1645,7 +1644,7 @@ brokers:
   last_verified: '2026-10-27'
   source: it-2026
   country_scope:
-  - IT
+  - SE
   phone_flow: include
   letter_language: it
   reliability: unknown
@@ -1678,7 +1677,7 @@ brokers:
   last_verified: '2026-10-27'
   source: it-2026
   country_scope:
-  - IT
+  - IL
   phone_flow: include
   letter_language: it
   reliability: unknown
@@ -1693,10 +1692,10 @@ brokers:
   name: Hiya
   country: US
   category: people-search
-  channel: email
-  url: https://www.hiya.com/legal/hiya-data-policy
-  preferred_channel: email
-  allow_parallel: false
+  channel: form
+  url: https://hiyahelp.zendesk.com/hc/en-us/requests/new
+  preferred_channel: form
+  allow_parallel: true
   emails:
   - address: dpo@hiya.com
     basis: named-dpo
@@ -1709,11 +1708,14 @@ brokers:
   known_issues:
   - 'Fornisce il caller ID e il blocco spam integrati in alcuni smartphone e app di operatori: un''etichetta
     sbagliata può far bloccare le tue chiamate.'
-  - La pagina di supporto con il modulo 'Change or Remove Caller ID' risponde 403 ai controlli automatici.
+  - 'Modulo ufficiale Zendesk per aggiornare o togliere il caller ID di un numero personale, letto dalla
+    pagina di aiuto con browser headless. All''indirizzo del modulo aggiungi il parametro ticket_form_id
+    con le cifre 33394/39946/3699 scritte di seguito, senza barre. Richieste avanzate: DPO, oggetto che
+    inizia con ''Advanced Data Management'', fino a 30 giorni.'
   last_verified: '2026-10-27'
   source: it-2026
   country_scope:
-  - IT
+  - US
   phone_flow: include
   letter_language: it
   reliability: unknown
@@ -1722,7 +1724,7 @@ brokers:
   verified_source:
     page: true
     email: true
-    form: false
+    form: true
   notes: DPO indicato nella data policy.
 - country: IT
   known_issues:
@@ -1767,7 +1769,7 @@ brokers:
     source_url: https://www.cerved.com/privacy/privacy-policy-sito
     verified: true
   - address: privacybusinessinfo@iongroup.com
-    basis: general-contact
+    basis: rights
     source_url: https://www.cerved.com/privacy/privacy-policy-sito
     verified: true
   eu_representative: null
@@ -2221,7 +2223,7 @@ brokers:
   category: directory
   channel: form
   url: https://www.gruppotim.it/it/footer/privacy.html
-  preferred_channel: none
+  preferred_channel: form
   allow_parallel: false
   emails: []
   eu_representative: null
@@ -2229,8 +2231,9 @@ brokers:
   - phone
   phone_relevance: medium
   known_issues:
-  - 'Il 1254 legge il DBU: per uscirne basta la cancellazione dagli elenchi presso il proprio operatore.'
-  - 'Voce da verificare: non contattare in automatico. Mostrala all''utente come da verificare.'
+  - 'Nessun canale dedicato: il modulo DBU ufficiale di TIM cita il 1254 come servizio di informazione
+    abbonati alimentato dalle scelte nel DBU. Si esce rispondendo NO alla domanda 1 e senza barrare l''opzione
+    ''solo servizio di informazione abbonati''.'
   last_verified: '2026-10-27'
   source: it-2026
   country_scope:
@@ -2239,12 +2242,12 @@ brokers:
   letter_language: it
   reliability: unknown
   case_type: sito-terzo
-  uncertain: true
+  uncertain: false
   verified_source:
-    page: false
+    page: true
     email: false
-    form: false
-  notes: Servizio 12xy di TIM. Non serve una richiesta a parte se il numero è già stato tolto dal DBU.
+    form: true
+  notes: Servizio 12xy di TIM. Basta la cancellazione dal DBU presso il proprio operatore (qualsiasi operatore).
 - id: infobel-it
   name: Infobel Italia (Infobel SA)
   country: BE
@@ -2265,7 +2268,7 @@ brokers:
   last_verified: '2026-10-27'
   source: it-2026
   country_scope:
-  - IT
+  - BE
   phone_flow: include
   letter_language: it
   reliability: unknown
@@ -2331,7 +2334,7 @@ brokers:
     source_url: https://www.gruppotim.it/content/dam/gt/footer/privacy/it/Questionario%20DBU%20TIM%20Mobile%20Consumer-Business_Ed.dic2022.pdf
     verified: true
   - address: dpo.clientibusiness.tim@telecomitalia.it
-    basis: general-contact
+    basis: named-dpo
     source_url: https://www.gruppotim.it/content/dam/gt/footer/privacy/it/Questionario%20DBU%20TIM%20Mobile%20Consumer-Business_Ed.dic2022.pdf
     verified: true
   eu_representative: null
@@ -2453,6 +2456,10 @@ brokers:
   preferred_channel: portal
   allow_parallel: true
   emails:
+  - address: dpo@it.iliad.com
+    basis: named-dpo
+    source_url: https://cdn001.iliad.it/strapi/inserimento_dei_dati_negli_elenchi_telefonici_82d111101c.pdf
+    verified: true
   - address: privacy@it.iliad.com
     basis: general-contact
     source_url: https://cdn001.iliad.it/strapi/inserimento_dei_dati_negli_elenchi_telefonici_82d111101c.pdf
@@ -2480,8 +2487,8 @@ brokers:
     page: true
     email: true
     form: true
-  notes: 'La pagina privacy iliad.it è caricata via JavaScript e non è stata letta dal box: nessuna casella
-    DPO copiata.'
+  notes: 'DPO e casella del titolare (privacy@it.iliad.com) letti nell''informativa utenti privati https://www.iliad.it/docs/informativa_privacy/informativa_privacy.pdf.
+    L''informativa elenchi riporta varianti @iliad.it: usa quelle dell''informativa principale.'
 - id: fastweb-elenchi
   name: Fastweb, elenchi telefonici
   country: IT
@@ -2489,8 +2496,16 @@ brokers:
   channel: portal
   url: https://www.fastweb.it/myfastweb/assistenza/guide/come-posso-gestire-il-mio-numero-di-telefono/
   preferred_channel: portal
-  allow_parallel: false
-  emails: []
+  allow_parallel: true
+  emails:
+  - address: dpo@fastweb.it
+    basis: named-dpo
+    source_url: https://www.fastweb.it/myfastweb/assistenza/guide/come-posso-gestire-il-mio-numero-di-telefono/
+    verified: true
+  - address: privacy@fastweb.it
+    basis: rights
+    source_url: https://www.fastweb.it/myfastweb/assistenza/guide/come-posso-gestire-il-mio-numero-di-telefono/
+    verified: true
   eu_representative: null
   identifier_required:
   - phone
@@ -2498,6 +2513,7 @@ brokers:
   known_issues:
   - Solo form online in Area Clienti MyFastweb; non disponibile per la tecnologia FWA. Le modifiche vanno
     online in circa 20 giorni.
+  - 'Copre anche Fastweb Mobile: una sola richiesta per fisso e mobile.'
   last_verified: '2026-10-27'
   source: it-2026
   country_scope:
@@ -2509,9 +2525,10 @@ brokers:
   uncertain: false
   verified_source:
     page: true
-    email: false
+    email: true
     form: true
-  notes: Se non si chiede la pubblicazione, Fastweb non pubblica. Nessuna casella DPO verificata il 2026-10-27.
+  notes: Se non si chiede la pubblicazione, Fastweb non pubblica. DPO e privacy@fastweb.it letti su https://www.fastweb.it/adsl-fibra-ottica/privacy/
+    (pagina JS, letta con browser headless). Copre anche Fastweb Mobile.
 - id: postemobile-elenchi
   name: PosteMobile (PostePay S.p.A.), elenchi telefonici
   country: IT
@@ -2530,7 +2547,7 @@ brokers:
     source_url: https://www.postemobile.it/Assistenza/ModulisticaPrivati/Richiesta_Inserimento_Elenchi_Telefonici.pdf
     verified: true
   - address: privacypostemobile@posteitaliane.it
-    basis: general-contact
+    basis: rights
     source_url: https://www.postemobile.it/Assistenza/ModulisticaPrivati/Richiesta_Inserimento_Elenchi_Telefonici.pdf
     verified: true
   eu_representative: null
@@ -2567,8 +2584,16 @@ brokers:
   preferred_channel: email
   allow_parallel: false
   emails:
+  - address: dpo.kenamobile@telecomitalia.it
+    basis: named-dpo
+    source_url: https://www.kenamobile.it/wp-content/uploads/Questionario-DBU-Elenchi-Telefonici-Kena.pdf
+    verified: true
   - address: assistenzaclienti@kenamobile.it
     basis: general-contact
+    source_url: https://www.kenamobile.it/wp-content/uploads/Questionario-DBU-Elenchi-Telefonici-Kena.pdf
+    verified: true
+  - address: richiesteprivacy@kenamobile.it
+    basis: rights
     source_url: https://www.kenamobile.it/wp-content/uploads/Questionario-DBU-Elenchi-Telefonici-Kena.pdf
     verified: true
   eu_representative: null
@@ -2593,17 +2618,25 @@ brokers:
     page: true
     email: true
     form: false
-  notes: Questionario DBU Kena, casella 'Cancellazione'. Per i diritti GDPR vale anche il DPO TIM (vedi
-    tim-elenchi).
+  notes: 'Questionario DBU Kena, casella ''Cancellazione''. Informativa privacy Kena https://www.kenamobile.it/wp-content/uploads/Informativa-Privacy-Kena.pdf:
+    DPO dedicato e richiesteprivacy@kenamobile.it per i diritti.'
 - id: homobile-elenchi
-  name: ho. Mobile (Vodafone), elenchi telefonici
+  name: ho. Mobile (Fastweb S.p.A.), elenchi telefonici
   country: IT
   category: telco
   channel: form
   url: https://www.ho-mobile.it/content/dam/lean/pdf/Mod_Inserimento_Cancellazione_Elenchi_Tel_Pubblici.pdf
   preferred_channel: form
-  allow_parallel: false
-  emails: []
+  allow_parallel: true
+  emails:
+  - address: dpo@fastweb.it
+    basis: named-dpo
+    source_url: https://www.ho-mobile.it/content/dam/lean/pdf/Mod_Inserimento_Cancellazione_Elenchi_Tel_Pubblici.pdf
+    verified: true
+  - address: privacy@mail.ho-mobile.it
+    basis: rights
+    source_url: https://www.ho-mobile.it/content/dam/lean/pdf/Mod_Inserimento_Cancellazione_Elenchi_Tel_Pubblici.pdf
+    verified: true
   eu_representative: null
   identifier_required:
   - phone
@@ -2625,10 +2658,11 @@ brokers:
   uncertain: false
   verified_source:
     page: true
-    email: false
+    email: true
     form: true
-  notes: 'Casella ''Cancellazione dei dati personali precedentemente comunicati''. Pagina privacy di ho.
-    non letta dal box: nessuna casella DPO copiata.'
+  notes: 'Casella ''Cancellazione dei dati personali precedentemente comunicati''. Dal 2026 il titolare
+    di ho. è Fastweb S.p.A.: l''informativa https://www.ho-mobile.it/content/dam/lean/pdf/ho_Mobile-Informativa_Privacy_2026.pdf
+    indica privacy@mail.ho-mobile.it anche per i diritti e il DPO dpo@fastweb.it.'
 - id: very-elenchi
   name: Very Mobile (WINDTRE), elenchi telefonici
   country: IT
@@ -2675,6 +2709,10 @@ brokers:
   preferred_channel: email
   allow_parallel: false
   emails:
+  - address: responsabileprotezionedati@coopvoce.it
+    basis: named-dpo
+    source_url: https://www.coopvoce.it/content/dam/coopvoce/documenti-pdf/documenti/documenti-e-modulistica/informative-privacy/644b614c-bebe-14bd-9248-5a582b68eb65.pdf
+    verified: true
   - address: comunicazioni@coopvoce.it
     basis: general-contact
     source_url: https://www.coopvoce.it/content/dam/coopvoce/documenti-pdf/documenti/documenti-e-modulistica/informative-privacy/644b614c-bebe-14bd-9248-5a582b68eb65.pdf
@@ -2701,30 +2739,32 @@ brokers:
     page: true
     email: true
     form: false
-  notes: Informativa e modulo 'Cancellazione di utenza CoopVoce da elenco telefonico'.
+  notes: Informativa e modulo 'Cancellazione di utenza CoopVoce da elenco telefonico'. DPO letto nell'informativa
+    base https://www.coopvoce.it/content/dam/coopvoce/documenti-pdf/informative-privacy/Informativa_Privacy_Coopvoce_Base_Rev_AI_luglio_2025.pdf
 - id: tiscali-elenchi
   name: Tiscali (Smeraldo S.p.A.), elenchi telefonici
   country: IT
   category: telco
   channel: email
-  url: https://assistenza.tiscali.it/modulistica/moduli-modifiche-contrattuali/
+  url: https://www.tiscali.it/privacy/informativa_policy_privacy.html
   preferred_channel: none
   allow_parallel: false
   emails:
-  - address: servizioclienti.tiscali@tiscalipec.it
-    basis: general-contact
-    source_url: https://assistenza.tiscali.it/modulistica/moduli-modifiche-contrattuali/
+  - address: privacy@tiscali.com
+    basis: named-dpo
+    source_url: https://www.tiscali.it/privacy/informativa_policy_privacy.html
     verified: false
   eu_representative: null
   identifier_required:
   - phone
   phone_relevance: medium
   known_issues:
-  - 'Il 2026-10-27 la pagina modulistica non mostra più un modulo elenchi; esiste solo un vecchio PDF
-    sotto assistenza.tiscali.it che il box non è riuscito a scaricare. Chiedi la cancellazione dal DBU
-    al servizio clienti o via PEC servizioclienti.tiscali@tiscalipec.it (casella indicata per altri moduli:
-    da confermare).'
-  - 'Voce da verificare: non contattare in automatico. Mostrala all''utente come da verificare.'
+  - 'Il 2026-10-27, anche con browser headless, nessuna pagina di modulistica (modifiche contrattuali,
+    Tiscali Mobile) contiene un modulo elenchi/DBU. Canale proposto: richiesta scritta di cancellazione
+    dal DBU al DPO, che la privacy policy indica come privacy@tiscali.com (titolare Smeraldo S.p.A., gruppo
+    Canarbino).'
+  - 'Voce da verificare: non contattare in automatico. Mostrala come da verificare.'
+  - 'Copre anche Tiscali Mobile. Nessun modulo elenchi: non contattare in automatico.'
   last_verified: '2026-10-27'
   source: it-2026
   country_scope:
@@ -2738,7 +2778,8 @@ brokers:
     page: false
     email: false
     form: false
-  notes: Marchio Tiscali concesso in licenza a Smeraldo S.p.A. Canale da riverificare a mano.
+  notes: Il DPO è confermato; resta incerto solo che esista un modulo DBU dedicato. Copre anche Tiscali
+    Mobile.
 - id: ediscom
   name: Ediscom S.p.A.
   country: IT
@@ -2753,7 +2794,7 @@ brokers:
     source_url: https://www.ediscom.it/privacy.htm
     verified: true
   - address: responsabileprivacy@ediscom.com
-    basis: general-contact
+    basis: rights
     source_url: https://www.ediscom.it/privacy.htm
     verified: true
   eu_representative: null
@@ -2829,7 +2870,7 @@ brokers:
     source_url: https://www.digitalmetrics.eu/informativa-privacy/
     verified: true
   - address: privacy@digitalmetrics.eu
-    basis: general-contact
+    basis: rights
     source_url: https://www.digitalmetrics.eu/informativa-privacy/
     verified: true
   eu_representative: null
@@ -2895,17 +2936,17 @@ brokers:
   category: lists
   channel: email
   url: https://realmaps.it/privacy-policy/
-  preferred_channel: email
+  preferred_channel: none
   allow_parallel: false
   emails:
   - address: info@realmaps.it
     basis: general-contact
     source_url: https://realmaps.it/privacy-policy/
-    verified: true
+    verified: false
   - address: realmaps@legalmail.it
     basis: general-contact
     source_url: https://realmaps.it/privacy-policy/
-    verified: true
+    verified: false
   eu_representative: null
   identifier_required:
   - phone
@@ -2925,7 +2966,7 @@ brokers:
   uncertain: false
   verified_source:
     page: true
-    email: true
+    email: false
     form: false
   notes: La policy del sito indica info@realmaps.it e PEC realmaps@legalmail.it come contatti del titolare,
     non come canale diritti per gli interessati delle liste.
@@ -2953,7 +2994,7 @@ brokers:
   last_verified: '2026-10-27'
   source: it-2026
   country_scope:
-  - IT
+  - DE
   phone_flow: include
   letter_language: it
   reliability: unknown
@@ -2966,36 +3007,41 @@ brokers:
   notes: La privacy in pagina indica info@de.toleadoo.com anche come contatto dei responsabili protezione
     dati.
 - id: mxt-international
-  name: MXT International, liste per call center
-  country: IT
+  name: Mxt Ltd (MXT International), liste per call center
+  country: CY
   category: lists
   channel: email
-  url: https://listepercallcenter.mxtinternational.com/
-  preferred_channel: none
+  url: https://listepercallcenter.mxtinternational.com/privacy/
+  preferred_channel: email
   allow_parallel: false
-  emails: []
+  emails:
+  - address: privacy@listepercallcenter.mxtinternational.com
+    basis: rights
+    source_url: https://listepercallcenter.mxtinternational.com/privacy/
+    verified: true
   eu_representative: null
   identifier_required:
   - phone
   phone_relevance: high
   known_issues:
-  - 'Dichiara un database di oltre 45 milioni di contatti. La pagina privacy ha risposto 202 senza contenuto:
-    titolare e canale non verificati.'
-  - 'Voce da verificare: non contattare in automatico. Mostrala all''utente come da verificare.'
+  - 'Dichiara un database di oltre 45 milioni di contatti, ottenuto tramite aziende partner. La policy
+    (letta con browser headless) riguarda il sito: chiedi anche l''origine delle liste e i partner (art.
+    14 e 15).'
   last_verified: '2026-10-27'
   source: it-2026
   country_scope:
-  - IT
+  - CY
   phone_flow: include
   letter_language: it
   reliability: unknown
   case_type: broker
-  uncertain: true
+  uncertain: false
   verified_source:
-    page: false
-    email: false
+    page: true
+    email: true
     form: false
-  notes: Da verificare a mano nel browser prima di aprire un caso.
+  notes: Titolare Mxt Ltd, Nicosia (Cipro). La policy indica questa casella per reclami ed esercizio dei
+    diritti.
 - id: consodata
   name: Consodata
   country: IT
@@ -3013,8 +3059,11 @@ brokers:
   known_issues:
   - 'Storico database consumer per direct marketing, sanzionato più volte dal Garante (es. doc. web 2438949).
     Un''informativa di terzi la indica come Consodata S.p.A. in liquidazione: titolare attuale da verificare.'
-  - Il PDF privacy citato da guide esterne risponde 404 il 2026-10-27; il sito è caricato via JavaScript.
-  - 'Voce da verificare: non contattare in automatico. Mostrala all''utente come da verificare.'
+  - 'Il 2026-10-27 il sito ufficiale (letto con browser headless) mostra solo ''Sito in costruzione'':
+    nessuna informativa né canale. Dai registri camerali risultano due soggetti: Consodata S.p.A. in liquidazione
+    (Assago, gruppo Italiaonline in passato) e una nuova Consodata S.r.l. (Milano, 2022). Non è chiaro
+    chi detenga il database.'
+  - 'Voce da verificare: non contattare in automatico. Mostrala come da verificare.'
   last_verified: '2026-10-27'
   source: it-2026
   country_scope:
@@ -3157,7 +3206,7 @@ brokers:
     source_url: https://www.coface.it/protezione-dei-dati-personali
     verified: true
   - address: coface_dpo@coface.com
-    basis: general-contact
+    basis: named-dpo
     source_url: https://www.coface.it/protezione-dei-dati-personali
     verified: true
   eu_representative: null
@@ -3196,7 +3245,7 @@ brokers:
     source_url: https://atoka.io/pages/it/data-privacy/
     verified: true
   - address: privacy@atoka.io
-    basis: general-contact
+    basis: rights
     source_url: https://atoka.io/pages/it/data-privacy/
     verified: true
   eu_representative: null
@@ -3263,17 +3312,24 @@ brokers:
   category: b2b
   channel: email
   url: https://policies.visura.it/
-  preferred_channel: none
+  preferred_channel: email
   allow_parallel: false
-  emails: []
+  emails:
+  - address: dpo_tinexta@legalmail.it
+    basis: named-dpo
+    source_url: https://policies.visura.it/wp-content/uploads/sites/21/2026/05/Informativa-Privacy-Clienti-Prospect-Servizi-web-generali-1.pdf
+    verified: true
+  - address: privacy@visura.it
+    basis: general-contact
+    source_url: https://policies.visura.it/wp-content/uploads/sites/21/2026/05/Informativa-Privacy-Clienti-Prospect-Servizi-web-generali-1.pdf
+    verified: true
   eu_representative: null
   identifier_required:
   - profile_url
   phone_relevance: low
   known_issues:
-  - 'Rivenditore di visure camerali e catastali. La pagina informative è caricata via JavaScript: canale
-    non letto.'
-  - 'Voce da verificare: non contattare in automatico. Mostrala all''utente come da verificare.'
+  - 'Rivenditore di visure camerali e catastali. La casella DPO è su legalmail (probabile PEC): da una
+    casella normale usa privacy@visura.it, indicata nella stessa informativa per la protezione dati.'
   last_verified: '2026-10-27'
   source: it-2026
   country_scope:
@@ -3282,12 +3338,13 @@ brokers:
   letter_language: it
   reliability: unknown
   case_type: broker
-  uncertain: true
+  uncertain: false
   verified_source:
-    page: false
-    email: false
+    page: true
+    email: true
     form: false
-  notes: Aderente ANCIC. Verifica la casella sulla pagina informative prima di scrivere.
+  notes: Per i dati da registri pubblici c'è anche un'informativa ANCIC dedicata sullo stesso portale
+    policies.visura.it.
 - id: tellows-it
   name: tellows (tellows.it)
   country: DE
@@ -3312,7 +3369,7 @@ brokers:
   last_verified: '2026-10-27'
   source: it-2026
   country_scope:
-  - IT
+  - DE
   phone_flow: include
   letter_language: it
   reliability: unknown
@@ -3413,7 +3470,7 @@ brokers:
   last_verified: '2026-10-27'
   source: it-2026
   country_scope:
-  - IT
+  - ES
   phone_flow: include
   letter_language: it
   reliability: unknown
@@ -3484,7 +3541,7 @@ brokers:
   last_verified: '2026-10-27'
   source: it-2026
   country_scope:
-  - IT
+  - IL
   phone_flow: include
   letter_language: it
   reliability: unknown
@@ -3590,3 +3647,1785 @@ brokers:
     form: true
   notes: 'Elenco aderenti: https://www.informativaprivacyancic.it/imprese-iscritte.aspx. Alcune voci in
     quell''elenco sono caselle nominative: non copiarle.'
+- id: eyecon
+  name: Eyecon Caller ID (Instabridge Sweden AB)
+  country: SE
+  category: people-search
+  channel: email
+  url: https://www.eyecon-app.com/privacy-policy/
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: support@eyecon-app.com
+    basis: rights
+    source_url: https://www.eyecon-app.com/privacy-policy/
+    verified: true
+  - address: privacy@instabridge.com
+    basis: general-contact
+    source_url: https://www.eyecon-app.com/privacy-policy/
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - 'Non esiste una pagina di unlisting pubblica (il 2026-10-27 /unlist risponde 404). La policy dice
+    che Eyecon costruisce profili anche di ''Non-Eyecon user'': per loro la richiesta va al titolare.'
+  - 'Rappresentante UE e contatto privacy indicato in policy: privacy@instabridge.com.'
+  last_verified: '2026-10-27'
+  source: it-2026
+  country_scope:
+  - SE
+  phone_flow: include
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: Titolare Instabridge Sweden AB. Il contatto del titolare indicato nella policy è support@eyecon-app.com.
+- id: unicredit
+  name: UniCredit S.p.A.
+  country: IT
+  category: contract
+  channel: email
+  url: https://www.unicreditgroup.eu/it/info/privacy.html
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: diritti.privacy@unicredit.eu
+    basis: rights
+    source_url: https://www.unicredit.it/it/info/reclami-ricorsi-e-conciliazione.html
+    verified: true
+  - address: Group.DPO@unicredit.eu
+    basis: named-dpo
+    source_url: https://www.unicredit.it/it/info/reclami-ricorsi-e-conciliazione.html
+    verified: true
+  - address: Group.DPO@pec.unicredit.eu
+    basis: named-dpo
+    source_url: https://www.unicredit.it/it/info/reclami-ricorsi-e-conciliazione.html
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [banca] Diritti: diritti.privacy@unicredit.eu.
+    DPO: Group.DPO@unicredit.eu (PEC Group.DPO@pec.unicredit.eu).'
+  default_action: consent-withdrawal
+- id: intesa-sanpaolo
+  name: Intesa Sanpaolo S.p.A.
+  country: IT
+  category: contract
+  channel: email
+  url: https://www.intesasanpaolo.com/it/common/footer/privacy.html
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: dpo@intesasanpaolo.com
+    basis: rights
+    source_url: https://www.intesasanpaolo.com/it/common/footer/privacy.html
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [banca] La pagina indica dpo@intesasanpaolo.com
+    per domande sul trattamento e per esercitare i diritti. I consensi marketing si cambiano anche dall''app.'
+  default_action: consent-withdrawal
+- id: bper
+  name: BPER Banca S.p.A.
+  country: IT
+  category: contract
+  channel: email
+  url: https://www.bper.it/footer/privacy-policy
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: dpo.gruppobper@bper.it
+    basis: named-dpo
+    source_url: https://www.bper.it/footer/privacy-policy
+    verified: true
+  - address: presidio.privacy@bper.it
+    basis: rights
+    source_url: https://www.bper.it/footer/privacy-policy
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [banca] Informativa clienti persone
+    fisiche: DPO dpo.gruppobper@bper.it; titolare presidio.privacy@bper.it.'
+  default_action: consent-withdrawal
+- id: banco-bpm
+  name: Banco BPM S.p.A.
+  country: IT
+  category: contract
+  channel: email
+  url: https://gruppo.bancobpm.it/privacy
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: protezionedati@bancobpm.it
+    basis: named-dpo
+    source_url: https://gruppo.bancobpm.it/privacy
+    verified: true
+  - address: protezionedati@pec.bancobpmspa.it
+    basis: named-dpo
+    source_url: https://gruppo.bancobpm.it/privacy
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [banca] PEC del DPO: protezionedati@pec.bancobpmspa.it.'
+  default_action: consent-withdrawal
+- id: mps
+  name: Banca Monte dei Paschi di Siena S.p.A.
+  country: IT
+  category: contract
+  channel: email
+  url: https://www.mps.it/hp-privacy.html
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: responsabileprotezionedeidati@mps.it
+    basis: named-dpo
+    source_url: https://www.mps.it/hp-privacy.html
+    verified: true
+  - address: responsabileprotezionedeidati@postacert.gruppo.mps.it
+    basis: named-dpo
+    source_url: https://www.mps.it/hp-privacy.html
+    verified: true
+  - address: privacy@mps.it
+    basis: rights
+    source_url: https://www.mps.it/hp-privacy.html
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [banca] PEC DPO responsabileprotezionedeidati@postacert.gruppo.mps.it;
+    modulo diritti anche a privacy@mps.it (Staff DPO). L''informativa PDF persone fisiche è solo immagine.'
+  default_action: consent-withdrawal
+- id: poste-bancoposta
+  name: Poste Italiane S.p.A. (BancoPosta, PosteMobile esclusa)
+  country: IT
+  category: contract
+  channel: email
+  url: https://www.poste.it/privacy-policy
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: ufficiorpd@posteitaliane.it
+    basis: named-dpo
+    source_url: https://www.poste.it/privacy-policy
+    verified: true
+  - address: centroserviziprivacy@posteitaliane.it
+    basis: rights
+    source_url: https://www.poste.it/privacy-policy
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [banca/servizi] Richieste diritti
+    anche a centroserviziprivacy@posteitaliane.it (Centro Servizi Privacy, Cosenza). Per PosteMobile vedi
+    l''informativa del servizio mobile.'
+  default_action: consent-withdrawal
+- id: fineco
+  name: FinecoBank S.p.A.
+  country: IT
+  category: contract
+  channel: email
+  url: https://it.finecobank.com/privacy/
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: privacy@finecobank.com
+    basis: rights
+    source_url: https://it.finecobank.com/privacy/
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [banca] La pagina indica privacy@finecobank.com
+    per l''esercizio dei diritti. Casella DPO non letta sulla pagina: non inserita.'
+  default_action: consent-withdrawal
+- id: findomestic
+  name: Findomestic Banca S.p.A.
+  country: IT
+  category: contract
+  channel: email
+  url: https://secure.findomestic.it/documenti/trasparenza/PYPRIV.pdf
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: diritticliente@findomesticbanca.telecompost.it
+    basis: rights
+    source_url: https://secure.findomestic.it/documenti/trasparenza/PYPRIV.pdf
+    verified: true
+  - address: responsabileprotezionedati@findomestic.com
+    basis: named-dpo
+    source_url: https://secure.findomestic.it/documenti/trasparenza/PYPRIV.pdf
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [credito al consumo] DPO responsabileprotezionedati@findomestic.com;
+    per i diritti l''informativa indica la casella diritticliente e il modulo TA7610.'
+  default_action: consent-withdrawal
+- id: agos
+  name: Agos Ducato S.p.A.
+  country: IT
+  category: contract
+  channel: email
+  url: https://www.agoscorporate.it/privacy.aspx
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: dpo@agos.it
+    basis: named-dpo
+    source_url: https://www.agoscorporate.it/privacy.aspx
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [credito al consumo] La pagina
+    rimanda a una sezione dedicata per i diritti; dpo@agos.it è il DPO.'
+  default_action: consent-withdrawal
+- id: compass
+  name: Compass Banca S.p.A. (Gruppo Mediobanca)
+  country: IT
+  category: contract
+  channel: email
+  url: https://www.compass.it/privacy.html
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: dpo.mediobanca@mediobanca.com
+    basis: named-dpo
+    source_url: https://www.compass.it/privacy.html
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [credito al consumo] DPO di gruppo
+    Mediobanca.'
+  default_action: consent-withdrawal
+- id: generali-italia
+  name: Generali Italia S.p.A.
+  country: IT
+  category: contract
+  channel: email
+  url: https://www.generali.it/privacy/informativa-privacy/
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: privacy.it@generali.com
+    basis: rights
+    source_url: https://www.generali.it/privacy/informativa-privacy/
+    verified: true
+  - address: RPD.it@generali.com
+    basis: named-dpo
+    source_url: https://www.generali.it/privacy/informativa-privacy/
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [assicurazione] Diritti: privacy.it@generali.com;
+    RPD: RPD.it@generali.com.'
+  default_action: consent-withdrawal
+- id: allianz
+  name: Allianz S.p.A.
+  country: IT
+  category: contract
+  channel: email
+  url: https://www.allianz.it/note-legali-privacy/privacy/privacy-sito-allianz.html
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: dpo.allianz@allianz.it
+    basis: named-dpo
+    source_url: https://www.allianz.it/note-legali-privacy/privacy/privacy-sito-allianz.html
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  - 'Allianz dichiara di non fare marketing dai dati di navigazione: per i clienti la revoca va comunque
+    chiesta, perché i consensi marketing assicurativi sono raccolti in polizza.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [assicurazione] Diritti dei clienti:
+    Pronto Allianz (numero verde 800686868) o modulo su allianz.it/privacy; DPO dpo.allianz@allianz.it.'
+  default_action: consent-withdrawal
+- id: unipol
+  name: Unipol Assicurazioni S.p.A.
+  country: IT
+  category: contract
+  channel: email
+  url: https://www.unipol.it/privacy
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: privacy@unipol.it
+    basis: named-dpo
+    source_url: https://www.unipol.it/privacy
+    verified: true
+  - address: revocaconsenso@unipol.it
+    basis: rights
+    source_url: https://www.unipol.it/privacy
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [assicurazione] Revoca consensi:
+    revocaconsenso@unipol.it (casella dedicata, usarla come destinatario principale).'
+  default_action: consent-withdrawal
+- id: axa-italia
+  name: AXA Assicurazioni S.p.A.
+  country: IT
+  category: contract
+  channel: email
+  url: https://www.axa.it/privacy
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: privacy@axa.it
+    basis: rights
+    source_url: https://www.axa.it/privacy
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [assicurazione] La stessa casella
+    vale anche all''attenzione del DPO.'
+  default_action: consent-withdrawal
+- id: reale-mutua
+  name: Reale Mutua Assicurazioni
+  country: IT
+  category: contract
+  channel: email
+  url: https://www.realemutua.it/privacy
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: dpo@realemutua.it
+    basis: named-dpo
+    source_url: https://www.realemutua.it/privacy
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [assicurazione]'
+  default_action: consent-withdrawal
+- id: prima-assicurazioni
+  name: Prima Assicurazioni S.p.A.
+  country: IT
+  category: contract
+  channel: email
+  url: https://www.prima.it/privacy
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: dpo@prima.it
+    basis: named-dpo
+    source_url: https://www.prima.it/privacy
+    verified: true
+  - address: privacy@prima.it
+    basis: rights
+    source_url: https://www.prima.it/privacy
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [assicurazione/broker online] Titolare:
+    privacy@prima.it.'
+  default_action: consent-withdrawal
+- id: enel-energia
+  name: Enel Energia S.p.A.
+  country: IT
+  category: contract
+  channel: email
+  url: https://www.enel.it/it-it/assistenza/privacy
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: privacy.enelenergia@enel.com
+    basis: rights
+    source_url: https://www.enel.it/it-it/assistenza/privacy
+    verified: true
+  - address: dpo.enelenergia@enel.com
+    basis: named-dpo
+    source_url: https://www.enel.it/it-it/assistenza/privacy
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [energia] RPD dpo.enelenergia@enel.com.'
+  default_action: consent-withdrawal
+- id: eni-plenitude
+  name: Eni Plenitude S.p.A. Società Benefit
+  country: IT
+  category: contract
+  channel: email
+  url: https://eniplenitude.com/content/dam/plenitude-it/documenti/pdf/info/privacy-policy/Informativa_Privacy_Plenitude.pdf
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: dpo@eniplenitude.com
+    basis: named-dpo
+    source_url: https://eniplenitude.com/content/dam/plenitude-it/documenti/pdf/info/privacy-policy/Informativa_Privacy_Plenitude.pdf
+    verified: true
+  - address: privacy@eniplenitude.com
+    basis: rights
+    source_url: https://eniplenitude.com/content/dam/plenitude-it/documenti/pdf/info/privacy-policy/Informativa_Privacy_Plenitude.pdf
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [energia] Titolare: privacy@eniplenitude.com.'
+  default_action: consent-withdrawal
+- id: edison-energia
+  name: Edison Energia S.p.A. (Gruppo Edison)
+  country: IT
+  category: contract
+  channel: email
+  url: https://www.edison.it/it/privacy
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: privacy@edison.it
+    basis: named-dpo
+    source_url: https://www.edison.it/it/privacy
+    verified: true
+  - address: privacy.gruppoedison@pec.edison.it
+    basis: named-dpo
+    source_url: https://www.edison.it/it/privacy
+    verified: true
+  - address: privacy.edisonenergia@gruppoedison.it
+    basis: rights
+    source_url: https://www.edison.it/it/privacy
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  - 'Il sito edisonenergia.it era in manutenzione il 2026-10-27: verificato sulla pagina di gruppo edison.it.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [energia] Pagina privacy di gruppo:
+    diritti all''attenzione del DPO a privacy@edison.it (PEC privacy.gruppoedison@pec.edison.it); per
+    i clienti Edison Energia indica anche privacy.edisonenergia@gruppoedison.it.'
+  default_action: consent-withdrawal
+- id: a2a-energia
+  name: A2A Energia S.p.A.
+  country: IT
+  category: contract
+  channel: email
+  url: https://www.a2a.it/casa/sites/default/files/NoIndex/documenti/InformativaPrivacy/INFORMATIVA-PRIVACY-CLIENTI-AEN.pdf
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: privacy@a2aenergia.it
+    basis: rights
+    source_url: https://www.a2a.it/casa/sites/default/files/NoIndex/documenti/InformativaPrivacy/INFORMATIVA-PRIVACY-CLIENTI-AEN.pdf
+    verified: true
+  - address: dpo.privacy@a2a.it
+    basis: named-dpo
+    source_url: https://www.a2a.it/casa/sites/default/files/NoIndex/documenti/InformativaPrivacy/INFORMATIVA-PRIVACY-CLIENTI-AEN.pdf
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [energia] RPD dpo.privacy@a2a.it.'
+  default_action: consent-withdrawal
+- id: hera-comm
+  name: Hera Comm S.p.A.
+  country: IT
+  category: contract
+  channel: email
+  url: https://heracomm.gruppohera.it/informativa-privacy
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: dpo.heracomm@gruppohera.it
+    basis: named-dpo
+    source_url: https://heracomm.gruppohera.it/informativa-privacy
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [energia/acqua] La pagina indica
+    il nuovo indirizzo DPO valido dal 1 luglio 2026.'
+  default_action: consent-withdrawal
+- id: iren-mercato
+  name: Iren Mercato S.p.A.
+  country: IT
+  category: contract
+  channel: email
+  url: https://www.irenlucegas.it/privacy-e-cookie-policy
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: dpo@gruppoiren.it
+    basis: named-dpo
+    source_url: https://www.irenlucegas.it/content/dam/iren/evergreen/footer/privacy-e-cookie-policy/documenti/privacy/Informativa-Privacy_ml_IME_2025-02.pdf
+    verified: true
+  - address: privacy.irenmercato@gruppoiren.it
+    basis: rights
+    source_url: https://www.irenlucegas.it/content/dam/iren/evergreen/footer/privacy-e-cookie-policy/documenti/privacy/Informativa-Privacy_ml_IME_2025-02.pdf
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [energia] Titolare: privacy.irenmercato@gruppoiren.it.'
+  default_action: consent-withdrawal
+- id: acea-energia
+  name: Acea Energia S.p.A.
+  country: IT
+  category: contract
+  channel: email
+  url: https://www.aceaenergia.it/privacy
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: privacy@aceaspa.it
+    basis: named-dpo
+    source_url: https://www.aceaenergia.it/content/dam/acea-energia/documenti-che-fanno-chiarezza/CMN_privacy.pdf
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [energia/acqua] L''informativa
+    mercato libero di Acea Energia indica il DPO a privacy@aceaspa.it (casella di gruppo Acea).'
+  default_action: consent-withdrawal
+- id: engie-italia
+  name: ENGIE Italia S.p.A.
+  country: IT
+  category: contract
+  channel: email
+  url: https://casa.engie.it/privacy/
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: privacy-ita@engie.com
+    basis: named-dpo
+    source_url: https://casa.engie.it/privacy/
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [energia]'
+  default_action: consent-withdrawal
+- id: sorgenia
+  name: Sorgenia S.p.A.
+  country: IT
+  category: contract
+  channel: email
+  url: https://www.sorgenia.it/shared/files/2026-09/Sorgenia_Informativa_Privacy_Clienti__092026_1.pdf
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: customers.privacy@sorgenia.it
+    basis: named-dpo
+    source_url: https://www.sorgenia.it/shared/files/2026-09/Sorgenia_Informativa_Privacy_Clienti__092026_1.pdf
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [energia]'
+  default_action: consent-withdrawal
+- id: esselunga-fidaty
+  name: Esselunga S.p.A. (carta Fìdaty)
+  country: IT
+  category: contract
+  channel: email
+  url: https://www.esselunga.it/it-it/privacy/dpo.html
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: dpo@esselunga.it
+    basis: named-dpo
+    source_url: https://www.esselunga.it/media/fidaty/carte-fidaty/Informativa-sulla-privacy.pdf
+    verified: true
+  - address: privacy@esselunga.it
+    basis: rights
+    source_url: https://www.esselunga.it/media/fidaty/carte-fidaty/Informativa-sulla-privacy.pdf
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [retail/fidelity] Titolare: privacy@esselunga.it.'
+  default_action: consent-withdrawal
+- id: conad
+  name: Conad Soc. Coop.
+  country: IT
+  category: contract
+  channel: email
+  url: https://www.conad.it/informativa-privacy
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: dpo@conad.it
+    basis: named-dpo
+    source_url: https://www.conad.it/informativa-privacy
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [retail/fidelity] Le carte fedeltà
+    sono spesso gestite dalla cooperativa o dal punto vendita: se la carta è di una cooperativa associata,
+    la revoca va anche a quel titolare.'
+  default_action: consent-withdrawal
+- id: coop-alleanza
+  name: Coop Alleanza 3.0 Soc. Coop.
+  country: IT
+  category: contract
+  channel: email
+  url: https://www.coopalleanza3-0.it/privacy-policy-socio.html
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: info.privacy@alleanza3-0.coop.it
+    basis: named-dpo
+    source_url: https://www.coopalleanza3-0.it/dam/relation/attachments/files/info-privacy-socio-e-socio-prestatore_gen26.pdf
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [retail/fidelity] Informativa soci
+    gen. 2026. Solo Coop Alleanza 3.0: le altre cooperative Coop (Coop Lombardia, Unicoop Firenze, Nova
+    Coop...) sono titolari distinti, non ancora coperte.'
+  default_action: consent-withdrawal
+- id: carrefour-italia
+  name: GS S.p.A. (Carrefour Italia)
+  country: IT
+  category: contract
+  channel: email
+  url: https://www.carrefour.it/privacy/privacy-policy-sito-web-app.html
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: dpo_italia@gsprincesretail.com
+    basis: named-dpo
+    source_url: https://www.carrefour.it/privacy/privacy-policy-sito-web-app.html
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [retail/fidelity] Dominio del gruppo
+    che ha rilevato Carrefour Italia.'
+  default_action: consent-withdrawal
+- id: lidl-italia
+  name: Lidl Italia S.r.l. (anche Lidl Plus)
+  country: IT
+  category: contract
+  channel: email
+  url: https://www.lidl.it/c/informativa-privacy-clienti/s10018369
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: dpo@lidl.it
+    basis: named-dpo
+    source_url: https://www.lidl.it/c/informativa-privacy-clienti/s10018369
+    verified: true
+  - address: privacy@lidlplus.it
+    basis: rights
+    source_url: https://www.lidl.it/c/informativa-privacy-clienti/s10018369
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [retail/fidelity] Per l''app Lidl
+    Plus la casella è privacy@lidlplus.it.'
+  default_action: consent-withdrawal
+- id: mediaworld
+  name: MediaMarket S.p.A. (MediaWorld)
+  country: IT
+  category: contract
+  channel: email
+  url: https://www.mediaworld.it/it/legal/privacy-policy
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: privacy@mediaworld.it
+    basis: rights
+    source_url: https://www.mediaworld.it/it/legal/privacy-policy
+    verified: true
+  - address: dpo@mediaworld.it
+    basis: named-dpo
+    source_url: https://www.mediaworld.it/it/legal/privacy-policy
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [retail elettronica] RPD: dpo@mediaworld.it.'
+  default_action: consent-withdrawal
+- id: unieuro
+  name: Unieuro S.p.A.
+  country: IT
+  category: contract
+  channel: email
+  url: https://www.unieuro.it/online/tuteliamo-la-tua-privacy
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: dpo@unieuro.com
+    basis: named-dpo
+    source_url: https://www.unieuro.it/online/tuteliamo-la-tua-privacy
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: medium
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [retail elettronica]'
+  default_action: consent-withdrawal
+- id: facile-it
+  name: Facile.it S.p.A.
+  country: IT
+  category: contract
+  channel: email
+  url: https://www.facile.it/privacy.html
+  preferred_channel: none
+  allow_parallel: false
+  emails: []
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  - 'I comparatori cedono i contatti a partner (assicurazioni, energia, banche): la revoca deve citare
+    anche la comunicazione a terzi.'
+  - 'Voce da verificare: non contattare in automatico. Mostrala come da verificare.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: true
+  verified_source:
+    page: false
+    email: false
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [comparatore] Pagina non leggibile
+    dal box (errore HTTP2 / 404 al fetch esterno) il 2026-10-27. Le piste trovate solo con ricerca web non sono state copiate. Verificare prima dell''uso.'
+  default_action: consent-withdrawal
+- id: segugio
+  name: Segugio.it (Gruppo MutuiOnline)
+  country: IT
+  category: contract
+  channel: email
+  url: https://www.segugio.it/condizioni-di-utilizzo.asp
+  preferred_channel: none
+  allow_parallel: false
+  emails: []
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  - 'I comparatori cedono i contatti a partner: la revoca deve citare anche la comunicazione a terzi.'
+  - 'Voce da verificare: non contattare in automatico. Mostrala come da verificare.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: true
+  verified_source:
+    page: false
+    email: false
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [comparatore] Il sito risponde
+    401/403 al box il 2026-10-27. Il titolare varia per verticale (assicurazioni, energia/telefonia via
+    SOStariffe). Le piste trovate solo con ricerca web non sono state copiate.'
+  default_action: consent-withdrawal
+- id: supermoney
+  name: SuperMoney S.p.A.
+  country: IT
+  category: contract
+  channel: email
+  url: https://www.supermoney.it/privacy/
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: privacy@supermoney.it
+    basis: rights
+    source_url: https://www.supermoney.it/privacy/
+    verified: true
+  - address: dpo@supermoney.it
+    basis: named-dpo
+    source_url: https://www.supermoney.it/privacy/
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  - 'I comparatori cedono i contatti a partner: la revoca deve citare anche la comunicazione a terzi.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: broker
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [comparatore] DPO: dpo@supermoney.it.'
+  default_action: consent-withdrawal
+- id: lycamobile-it
+  name: Lycamobile S.r.l.
+  country: IT
+  category: telco
+  channel: email
+  url: https://www.lycamobile.it/it/help/lycamobile-privacy-policy/
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: DPO@universalservice.it
+    basis: rights
+    source_url: https://www.lycamobile.it/it/help/lycamobile-privacy-policy/
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: operatore
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [operatore] La policy indica questa
+    casella per esercitare i diritti (dominio diverso da lycamobile.it, ma è quello pubblicato). Per gli
+    elenchi telefonici usa anche il modulo DBU dell''operatore.'
+  default_action: consent-withdrawal
+- id: spusu-it
+  name: spusu Italia s.r.l.
+  country: IT
+  category: telco
+  channel: email
+  url: https://www.spusu.it/protezionedati
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: legale@spusu.it
+    basis: rights
+    source_url: https://www.spusu.it/protezionedati
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: operatore
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [operatore] Nessun DPO indicato
+    sulla pagina protezione dati (stato 23.01.2024): unico recapito del titolare.'
+  default_action: consent-withdrawal
+- id: 1mobile
+  name: CIM Compagnia Italia Mobile S.r.l. (1Mobile)
+  country: IT
+  category: telco
+  channel: email
+  url: https://unomobile.it/privacy-policy
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: privacy@unomobile.it
+    basis: rights
+    source_url: https://unomobile.it/privacy-policy
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: operatore
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [operatore] Il DPO è un professionista
+    esterno raggiungibile solo a una casella nominativa: non inserita per regola. Usare privacy@unomobile.it.'
+  default_action: consent-withdrawal
+- id: optima-italia
+  name: Optima Italia S.p.A.
+  country: IT
+  category: telco
+  channel: email
+  url: https://www.optimaitalia.com/public/files/pdf/informativa_privacy_sito.pdf
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: privacy@optimaitalia.com
+    basis: named-dpo
+    source_url: https://www.optimaitalia.com/public/files/pdf/informativa_privacy_sito.pdf
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: operatore
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [operatore multiservizi: energia,
+    fisso, mobile] Informativa del sito; l''informativa clienti contrattuale non è stata letta.'
+  default_action: consent-withdrawal
+- id: sky-mobile
+  name: Sky Italia S.r.l. (Sky Mobile, Sky Wifi, Sky TV)
+  country: IT
+  category: telco
+  channel: email
+  url: https://www.sky.it/info/moduli-contrattuali/privacy-cookie/clienti
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: privacy@sky.it
+    basis: rights
+    source_url: https://www.sky.it/info/moduli-contrattuali/privacy-cookie/clienti
+    verified: true
+  - address: dpo@sky.it
+    basis: named-dpo
+    source_url: https://www.sky.it/info/moduli-contrattuali/privacy-cookie/clienti
+    verified: true
+  - address: skyitalia@pec.skytv.it
+    basis: rights
+    source_url: https://www.sky.it/info/moduli-contrattuali/privacy-cookie/clienti
+    verified: true
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: operatore
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [operatore/pay TV] Revoca consensi
+    e diritti: privacy@sky.it; DPO dpo@sky.it; opposizione anche via PEC skyitalia@pec.skytv.it.'
+  default_action: consent-withdrawal
+- id: digi-it
+  name: Digi Italy S.r.l. (DIGI Mobil)
+  country: IT
+  category: telco
+  channel: email
+  url: https://www.digi.it/it/privacy
+  preferred_channel: email
+  allow_parallel: false
+  emails:
+  - address: dpo@digi.it
+    basis: named-dpo
+    source_url: https://www.digi.it/it/privacy
+    verified: true
+  - address: privacy@digi.it
+    basis: rights
+    source_url: https://www.digi.it/it/privacy
+    verified: true
+  - address: digimobil@pec.it
+    basis: general-contact
+    source_url: https://www.digi.it/it/privacy
+    verified: true
+  - address: dpo@digimobil.it
+    basis: general-contact
+    source_url: https://www.digi.it/it/privacy
+    verified: false
+  - address: privacy@digimobil.it
+    basis: general-contact
+    source_url: https://www.digi.it/it/privacy
+    verified: false
+  eu_representative: null
+  identifier_required:
+  - email
+  - phone
+  phone_relevance: high
+  known_issues:
+  - 'Cliente attivo: spesso basta l''area clienti o l''app (consensi già verificati). Se il titolare chiede
+    un documento per una semplice revoca, la richiesta è sproporzionata (art. 12 par. 6): basta scrivere
+    dall''email registrata.'
+  last_verified: '2026-10-27'
+  source: it-1b-2026
+  country_scope:
+  - IT
+  phone_flow: opt-in
+  letter_language: it
+  reliability: unknown
+  case_type: operatore
+  uncertain: false
+  verified_source:
+    page: true
+    email: true
+    form: false
+  notes: 'Azione di default: revoca dei consensi marketing/profilazione/cessione a terzi + opposizione
+    art. 21 par. 2 (lettere templates/letters/it/revoca-consensi-operatore.md e art21-17-19-15.md). Non
+    chiedere la cancellazione del rapporto: il contratto resta attivo. [operatore] Titolare privacy@digi.it,
+    PEC digimobil@pec.it. L''informativa MioConto più vecchia usa ancora dpo@digimobil.it / privacy@digimobil.it.'
+  default_action: consent-withdrawal

@@ -19,6 +19,7 @@ Ordine:
 6. Cadenza: un controllo a settimana finché c'è una scadenza o un ricontrollo aperto, poi uno al mese. Chiave `scrubber.cadence`.
 7. Email di lavoro, solo se l'utente ne ha una e vuole usarla con i broker di contatti aziendali. Non inventarne una. Chiave `scrubber.work_email`. Si può saltare.
 8. Identificativo pubblicitario, solo se l'utente vuole includere l'adtech a bassa rilevanza. Si può saltare. Chiave `scrubber.ad_id`.
+9. In Italia, chiedi di quali banche, assicurazioni, energia, supermercati o comparatori in `data/brokers.yaml` con categoria `contract` è cliente. Una domanda, si può saltare. Non chiedere numeri di conto, polizza o utenza. Salva solo gli id scelti in `scrubber.contract_ids`. Quelle schede restano chiuse finché non sono in questo elenco.
 
 Prima di creare qualcosa, controlla se esistono già una routine, un registro o le etichette `Scrubber`. Se ci sono, proponi di migrarle. Poi deve restare una sola routine, con id fisso `scrubber-main`, e un solo file di registro scritto da un solo bot. La parola `STOP` ferma subito ogni invio in coda.
 

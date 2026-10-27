@@ -19,7 +19,10 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILL_DIRS = sorted(path for path in (ROOT / "skills").iterdir() if path.is_dir())
-CATEGORIES = {"adtech", "b2b", "credit", "lists", "people-search", "directory", "telco", "registry", "authority"}
+CATEGORIES = {
+    "adtech", "b2b", "credit", "lists", "people-search",
+    "directory", "telco", "registry", "authority", "contract",
+}
 CHANNELS = {"email", "form", "portal"}
 IDENTIFIERS = {"email", "phone", "ad_id", "profile_url"}
 RELEVANCE = {"high", "medium", "low"}
@@ -144,8 +147,8 @@ def check_skills() -> None:
 def check_manifest(brokers: dict) -> None:
     manifest = json.loads((ROOT / "manifest.json").read_text(encoding="utf-8"))
     version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-    if version != "0.3.1":
-        fail(f"VERSION is {version}, expected 0.3.1")
+    if version != "0.3.2":
+        fail(f"VERSION is {version}, expected 0.3.2")
     if manifest.get("bot_access") != "read-only":
         fail("manifest.bot_access must be read-only")
     policy = manifest.get("update_policy") or {}
@@ -216,7 +219,7 @@ def check_brokers(brokers: dict) -> None:
             fail(f"{item['id']}: bad phone_relevance")
         if item["preferred_channel"] not in {"email", "form", "portal", "none"}:
             fail(f"{item['id']}: bad preferred_channel")
-        if item["phone_flow"] not in {"include", "skip-unless-ties"}:
+        if item["phone_flow"] not in {"include", "skip-unless-ties", "opt-in"}:
             fail(f"{item['id']}: bad phone_flow")
         if not isinstance(item["emails"], list):
             fail(f"{item['id']}: emails must be a list")

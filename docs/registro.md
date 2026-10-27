@@ -4,7 +4,7 @@ Non è consulenza legale. Il registro vero sta nel vault o in `dashboard/registr
 
 `schema` vale `scrubber-registro/2`.
 
-Le categorie di un titolare, in `data/brokers.yaml`, sono `adtech`, `b2b`, `credit`, `lists`, `people-search`, `directory`, `telco`, `registry`, `authority`. `uncertain: true` è facoltativo: quelle voci non si contattano da soli. `verified_source` può essere l'oggetto con `page`, `email` e `form`, oppure assente.
+Le categorie di un titolare, in `data/brokers.yaml`, sono `adtech`, `b2b`, `credit`, `lists`, `people-search`, `directory`, `telco`, `registry`, `authority`, `contract`. `contract` è un rapporto in corso: di norma si revoca il marketing, non si chiede la cancellazione del contratto. `uncertain: true` è facoltativo: quelle voci non si contattano da soli. `verified_source` può essere l'oggetto con `page`, `email` e `form`, oppure assente.
 
 | Campo | Obbligatorio | Senso |
 | --- | --- | --- |

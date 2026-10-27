@@ -6,6 +6,21 @@ prima di applicare l'aggiornamento.
 
 Il formato segue [Keep a Changelog](https://keepachangelog.com/) e il pacchetto usa [SemVer](https://semver.org/).
 
+## 0.3.2 — 2026-10-27
+
+### Added
+
+- Seconda passata Italia: TIM 1254, MXT, Tinexta Visura, Eyecon e le caselle di Iliad, Fastweb, ho., Kena e CoopVoce.
+- Fase 1b: banche, assicurazioni, energia, fidelizzazione, comparatori e operatori mobili in più. Categoria `contract`.
+- Per un contratto attivo la richiesta di default è la revoca dei consensi e l'opposizione al marketing, non la cancellazione del rapporto. Si parte solo se l'utente dice di essere cliente.
+
+### Changed
+
+- Hiya usa il modulo ufficiale. Fastweb Mobile e Tiscali Mobile non sono schede doppie.
+- Restano da verificare, senza canale automatico: Tiscali, Consodata, Facile.it e Segugio.
+
+Non è consulenza legale.
+
 ## 0.3.1 — 2026-10-27
 
 ### Added
