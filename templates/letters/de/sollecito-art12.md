@@ -4,7 +4,7 @@ Non è consulenza legale. Not legal advice. Traduzione di comunità, non rivista
 
 # Schreiben
 
-Betreff: Erinnerung art. 12 — Antrag vom {{DATA_INVIO}} — art. 21 par. 2, art. 17, art. 19 und art. 15
+Betreff: {{CASE_ID}} — Erinnerung art. 12 — Antrag vom {{DATA_INVIO}} — art. 21 par. 2, art. 17, art. 19 und art. 15
 
 {{BROKER}}
 

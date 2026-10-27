@@ -5,18 +5,14 @@ description: Use when aggiorni il registro locale delle richieste o esporti il J
 
 # Registro e dashboard
 
-Non è consulenza legale. Il registro è la memoria delle pratiche. Non è un invio: non spedire nulla da questa skill. Se l'utente chiede di scrivere a un titolare, passa alla skill della lettera o del modulo e chiedi un sì esplicito sulla bozza.
+Non è consulenza legale. Il registro segue `docs/metodo.md` e lo schema `docs/registro.md` (`scrubber-registro/2`). Non è un invio. Se occorre scrivere, passa alla skill della lettera o del modulo e chiedi un sì esplicito sulla bozza.
 
-Tieni il registro nel vault o in un file locale fuori dal repository, per esempio `dashboard/registro.local.json`, che è ignorato da git. Il file `dashboard/example-registro.json` è finto: non sovrascriverlo con dati veri e non copiare dati veri dentro il repo.
+Tieni il JSON nel vault o in `dashboard/registro.local.json`, ignorato da git. Non sovrascrivere `dashboard/example-registro.json` con dati veri.
 
-Schema: `docs/registro.md`. Stati ammessi, solo questi: `inviata`, `in attesa`, `risposta`, `cancellato`, `nessun dato`, `rifiutato`, `reclamo`.
+Per ogni scheda: `case_id`, broker, `channel`, `identifier_mask`, `sent_at`, `deadline`, `extended_deadline`, `status`, `labels`, `last_reply_at`, `next_action`, `next_action_due`, `next_recheck_at`, `cycle_count`, `proof`, `history`. Per un modulo anche `form_url`, `submitted_at`, `ticket_id`, `proof_path`, `verification_status`. `identifier_mask` non è il dato intero. `cancellato`, `nessun-dato` ed `escluso` richiedono una prova. `escluso` non ha ricontrollo. Gli intervalli 60 e 90 giorni sono in `coverage.recheck_days`. `proof_path` resta sul dispositivo.
 
-Per ogni richiesta registra: id locale, `broker_id` come in `brokers.yaml`, nome, data di invio `sent_on`, canale, stato, `deadline`, riferimento libero senza dati non necessari, note brevi. La scadenza è un mese di calendario dopo l'invio. Non anticiparla e non spostarla se il titolare tace.
+Stati ammessi: `bozza`, `inviata`, `in-attesa`, `risposta-da-leggere`, `richiesta-info`, `verifica-otp`, `blocco-modulo`, `portale-ticket`, `cancellato`, `nessun-dato`, `escluso`, `rifiutato`, `sollecito`, `reclamo`, `chiuso`. Una transizione è ammessa solo se è nella tabella di `docs/metodo.md`.
 
-Quando mostri lo stato all'utente, evidenzia le righe la cui scadenza è prima di oggi e il cui stato è `inviata`, `in attesa` o `risposta`. Per quelle, proponi `solleciti-e-reclamo-garante`. Le righe `cancellato` e `nessun dato` non sono in ritardo. `rifiutato` e `reclamo` vanno richiamate, non nascoste.
+La dashboard (`dashboard/index.html`) mostra i conteggi, la percentuale di prove sugli esiti finali, le scadute, le azioni entro 7 giorni, i ricontrolli, i moduli e la cronologia. Aprendola si vede l'esempio finto. I dati veri si caricano dal selettore di file. Nessun backend e nessuna chiamata esterna.
 
-Per vedere la dashboard, l'utente apre `dashboard/index.html` nel browser. Il file di esempio si carica da solo ed è marcato come finto. Per i dati veri usa «Carica registro JSON» e sceglie il file locale. La dashboard non ha backend e non chiama siti esterni. Non mettere il registro vero in una issue o in una pull request per «far vedere» la schermata: fai uno screenshot solo se il registro a schermo è l'esempio.
-
-Cadenza da `getting-started`: un controllo a settimana finché esiste una scadenza non chiusa, poi un controllo al mese. A ogni controllo esegui anche `sync-dal-repo`.
-
-Se esporti un riepilogo in chat, preferisci id del broker, stato e date. Evita di ripetere il numero di telefono se non serve a distinguere due pratiche.
+Alla fine del ciclo settimanale, o mensile se non ci sono scadenze, scrivi il report del capitolo 7 di `docs/metodo.md`. Prima del ciclo esegui `sync-dal-repo`. Nel report non ripetere il numero di telefono.

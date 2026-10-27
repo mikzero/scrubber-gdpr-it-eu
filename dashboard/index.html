@@ -21,7 +21,7 @@
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      font: 16px/1.45 "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      font: 16px/1.45 "Iowan Old Style", Palatino, Georgia, serif;
       color: var(--ink);
       background: var(--paper);
     }
@@ -59,15 +59,16 @@
     button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
     table { width: 100%; border-collapse: collapse; background: var(--card); }
     th, td { text-align: left; padding: 0.55rem 0.6rem; border-bottom: 1px solid var(--line); vertical-align: top; }
-    th { font-size: 0.8rem; letter-spacing: 0.03em; text-transform: uppercase; color: var(--muted); }
+    th { font-size: 0.78rem; letter-spacing: 0.03em; text-transform: uppercase; color: var(--muted); }
     tr.overdue { background: #fdecee; }
     tr.today { background: #fff6df; }
     tr.closed { color: var(--muted); }
     .tag { font-size: 0.85rem; }
     .tag.overdue { color: var(--overdue); font-weight: 700; }
     .tag.ok { color: var(--ok); }
+    details { margin-top: 0.3rem; }
     footer { width: min(1100px, calc(100% - 2rem)); margin: 1.5rem auto 2rem; color: var(--muted); font-size: 0.9rem; }
-    @media (max-width: 720px) {
+    @media (max-width: 800px) {
       table, thead, tbody, th, td, tr { display: block; }
       thead { display: none; }
       td { border-bottom: 0; padding: 0.2rem 0.6rem; }
@@ -79,7 +80,7 @@
 <body>
   <header>
     <h1><span>Scrubber GDPR</span> — registro</h1>
-    <p class="disclaimer">Non è consulenza legale. Pagina statica, senza backend e senza richieste a terzi. Il registro vero resta sul tuo dispositivo.</p>
+    <p class="disclaimer">Non è consulenza legale. Pagina statica, senza backend e senza richieste a terzi. Il registro vero resta sul dispositivo. Qui compaiono solo maschere e id pratica.</p>
     <div id="banner" class="banner" hidden></div>
     <div id="error" class="error" hidden></div>
     <div class="toolbar">
@@ -89,18 +90,20 @@
   </header>
   <main>
     <section class="cards" id="cards" aria-label="Riepilogo"></section>
-    <div class="toolbar" id="filters" role="toolbar" aria-label="Filtro per stato"></div>
+    <div class="toolbar" id="filters" role="toolbar" aria-label="Filtri"></div>
     <div style="overflow-x:auto; margin-top:0.8rem">
       <table>
         <thead>
           <tr>
+            <th>Pratica</th>
             <th>Titolare</th>
             <th>Stato</th>
+            <th>Canale</th>
             <th>Inviata</th>
             <th>Scadenza</th>
-            <th>Canale</th>
-            <th>Riferimento</th>
-            <th>Note</th>
+            <th>Ricontrollo</th>
+            <th>Prossima azione</th>
+            <th>Prova</th>
           </tr>
         </thead>
         <tbody id="rows"></tbody>
@@ -109,117 +112,429 @@
     <p id="empty" hidden>Nessuna riga con questo filtro.</p>
   </main>
   <footer>
-    Schema in docs/registro.md. Gli stati aperti sono inviata, in attesa e risposta: se la scadenza è passata, la riga è evidenziata. Non caricare questo file su un sito pubblico se contiene dati veri.
+    Schema scrubber-registro/2 in docs/registro.md. Gli esiti cancellato, nessun-dato ed escluso contano nella copertura prove solo se hanno una prova. Non caricare un registro vero su un sito pubblico.
   </footer>
   <script id="example-registro" type="application/json">{
-  "schema": "scrubber-registro/1",
+  "schema": "scrubber-registro/2",
   "example": true,
   "label": "ESEMPIO FINTO — NON SONO DATI REALI",
-  "disclaimer": "File di esempio per provare la dashboard. Nessuna persona reale. Non sostituire questi valori con dati veri dentro il repository.",
+  "disclaimer": "File di esempio. Maschere e ticket non appartengono a una persona. Non sostituirli con dati veri nel repository.",
   "subject_ref": "ESEMPIO",
   "country": "IT",
   "updated": "2026-10-27",
   "requests": [
     {
-      "id": "ex-001",
+      "case_id": "GDPR-2026-001",
       "broker_id": "lusha",
       "broker_name": "Lusha",
-      "sent_on": "2026-09-02",
       "channel": "form",
-      "status": "inviata",
+      "identifier_mask": "+00 *** *** 12",
+      "sent_at": "2026-09-02",
+      "submitted_at": "2026-09-02",
       "deadline": "2026-10-02",
-      "reference": "ESEMPIO-001",
-      "notes": "Riga finta. Scadenza già passata, per provare l'evidenza."
+      "extended_deadline": null,
+      "status": "inviata",
+      "labels": [
+        "Scrubber/inviata",
+        "Scrubber/tipo/modulo"
+      ],
+      "last_reply_at": null,
+      "next_action": "sollecito",
+      "next_action_due": "2026-10-09",
+      "next_recheck_at": "2026-12-01",
+      "cycle_count": 1,
+      "form_url": "https://www.lusha.com/privacy-center/request-removal/",
+      "ticket_id": "TKT-ESEMPIO-1001",
+      "proof_path": "example-proof/GDPR-2026-001.txt",
+      "verification_status": "non-richiesto",
+      "proof": [
+        {
+          "kind": "ticket",
+          "ref": "TKT-ESEMPIO-1001",
+          "at": "2026-09-02"
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-09-02",
+          "event": "stato",
+          "from": "bozza",
+          "to": "inviata",
+          "note": "Modulo di esempio inviato."
+        }
+      ],
+      "notes": "Riga finta. Scadenza passata, sollecito in attesa di un sì."
     },
     {
-      "id": "ex-002",
+      "case_id": "GDPR-2026-002",
       "broker_id": "apollo",
       "broker_name": "Apollo",
-      "sent_on": "2026-10-20",
       "channel": "form",
-      "status": "in attesa",
+      "identifier_mask": "m***",
+      "sent_at": "2026-10-20",
+      "submitted_at": "2026-10-20",
       "deadline": "2026-11-20",
-      "reference": "ESEMPIO-002",
-      "notes": "Riga finta. Il modulo può chiedere un'email aziendale."
+      "extended_deadline": null,
+      "status": "in-attesa",
+      "labels": [
+        "Scrubber/in-attesa",
+        "Scrubber/tipo/modulo"
+      ],
+      "last_reply_at": "2026-10-20",
+      "next_action": "attendi",
+      "next_action_due": "2026-11-20",
+      "next_recheck_at": "2027-01-18",
+      "cycle_count": 1,
+      "form_url": "https://www.apollo.io/privacy-policy/remove",
+      "ticket_id": "TKT-ESEMPIO-1002",
+      "proof_path": "example-proof/GDPR-2026-002.txt",
+      "verification_status": "verificato",
+      "proof": [
+        {
+          "kind": "email",
+          "ref": "conferma-esempio",
+          "at": "2026-10-20"
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-10-20",
+          "event": "stato",
+          "from": "bozza",
+          "to": "in-attesa",
+          "note": "Ticket automatico, senza merito."
+        }
+      ],
+      "notes": "Riga finta. Campo email aziendale lasciato vuoto."
     },
     {
-      "id": "ex-003",
+      "case_id": "GDPR-2026-003",
       "broker_id": "samba",
       "broker_name": "Samba",
-      "sent_on": "2026-10-22",
       "channel": "portal",
-      "status": "risposta",
+      "identifier_mask": "+00 *** *** 12",
+      "sent_at": "2026-10-22",
+      "submitted_at": null,
       "deadline": "2026-11-22",
-      "reference": "ESEMPIO-003",
-      "notes": "Riga finta. Esempio di OTP SMS non arrivato, pratica ancora aperta."
+      "extended_deadline": null,
+      "status": "blocco-modulo",
+      "labels": [
+        "Scrubber/blocco-modulo"
+      ],
+      "last_reply_at": null,
+      "next_action": "passa-a-email",
+      "next_action_due": "2026-10-29",
+      "next_recheck_at": null,
+      "cycle_count": 0,
+      "form_url": "https://samba.com/privacy-center/notice-of-right-to-opt-out",
+      "ticket_id": null,
+      "proof_path": null,
+      "verification_status": "fallito-sms",
+      "proof": [],
+      "history": [
+        {
+          "at": "2026-10-22",
+          "event": "stato",
+          "from": "verifica-otp",
+          "to": "blocco-modulo",
+          "note": "SMS non arrivato dopo due invii."
+        }
+      ],
+      "notes": "Riga finta. OTP non ripetuto."
     },
     {
-      "id": "ex-004",
+      "case_id": "GDPR-2026-004",
       "broker_id": "north-data",
       "broker_name": "North Data",
-      "sent_on": "2026-09-27",
       "channel": "email",
-      "status": "in attesa",
+      "identifier_mask": "profilo ***",
+      "sent_at": "2026-09-27",
+      "submitted_at": null,
       "deadline": "2026-10-27",
-      "reference": "ESEMPIO-004",
-      "notes": "Riga finta. Scadenza uguale alla data di esempio della versione 0.1.0."
+      "extended_deadline": null,
+      "status": "in-attesa",
+      "labels": [
+        "Scrubber/in-attesa",
+        "Scrubber/tipo/richiesta"
+      ],
+      "last_reply_at": null,
+      "next_action": "sollecito",
+      "next_action_due": "2026-11-03",
+      "next_recheck_at": "2026-12-26",
+      "cycle_count": 1,
+      "form_url": null,
+      "ticket_id": null,
+      "proof_path": null,
+      "verification_status": "non-richiesto",
+      "proof": [],
+      "history": [
+        {
+          "at": "2026-09-27",
+          "event": "stato",
+          "from": "bozza",
+          "to": "inviata",
+          "note": "Lettera di esempio."
+        },
+        {
+          "at": "2026-09-28",
+          "event": "stato",
+          "from": "inviata",
+          "to": "in-attesa",
+          "note": "Ricevuta automatica."
+        }
+      ],
+      "notes": "Riga finta. Scade nella data di esempio 0.2.0."
     },
     {
-      "id": "ex-005",
+      "case_id": "GDPR-2026-005",
       "broker_id": "acxiom-optout",
       "broker_name": "Acxiom optout",
-      "sent_on": "2026-08-10",
       "channel": "form",
-      "status": "rifiutato",
-      "deadline": "2026-09-10",
-      "reference": "ESEMPIO-005",
-      "notes": "Riga finta. Rifiuto da riesaminare, senza dati ulteriori."
+      "identifier_mask": "m***",
+      "sent_at": "2026-10-10",
+      "submitted_at": null,
+      "deadline": "2026-11-10",
+      "extended_deadline": null,
+      "status": "richiesta-info",
+      "labels": [
+        "Scrubber/richiesta-info"
+      ],
+      "last_reply_at": "2026-10-18",
+      "next_action": "bozza-risposta",
+      "next_action_due": "2026-10-30",
+      "next_recheck_at": null,
+      "cycle_count": 1,
+      "form_url": "https://www.acxiom.com/optout/",
+      "ticket_id": "TKT-ESEMPIO-1005",
+      "proof_path": null,
+      "verification_status": "non-richiesto",
+      "proof": [],
+      "history": [
+        {
+          "at": "2026-10-18",
+          "event": "stato",
+          "from": "in-attesa",
+          "to": "richiesta-info",
+          "note": "Chiesto un indirizzo. Campo lasciato vuoto."
+        }
+      ],
+      "notes": "Riga finta. Modello art. 12 par. 6 e art. 11 in attesa di sì."
     },
     {
-      "id": "ex-006",
-      "broker_id": "192-com",
-      "broker_name": "192.com",
-      "sent_on": "2026-07-01",
+      "case_id": "GDPR-2026-006",
+      "broker_id": "rocketreach",
+      "broker_name": "RocketReach",
       "channel": "form",
-      "status": "nessun dato",
-      "deadline": "2026-08-01",
-      "reference": "ESEMPIO-006",
-      "notes": "Riga finta. Risposta nessun dato, pratica chiusa nell'esempio."
+      "identifier_mask": "m***",
+      "sent_at": "2026-10-15",
+      "submitted_at": "2026-10-15",
+      "deadline": "2026-11-15",
+      "extended_deadline": null,
+      "status": "portale-ticket",
+      "labels": [
+        "Scrubber/portale-ticket",
+        "Scrubber/tipo/modulo"
+      ],
+      "last_reply_at": "2026-10-15",
+      "next_action": "controlla-portale",
+      "next_action_due": "2026-10-30",
+      "next_recheck_at": "2027-01-13",
+      "cycle_count": 1,
+      "form_url": "https://rocketreach.co/remove-profile",
+      "ticket_id": "TKT-ESEMPIO-1006",
+      "proof_path": "example-proof/GDPR-2026-006.txt",
+      "verification_status": "verificato",
+      "proof": [
+        {
+          "kind": "ticket",
+          "ref": "TKT-ESEMPIO-1006",
+          "at": "2026-10-15"
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-10-15",
+          "event": "stato",
+          "from": "inviata",
+          "to": "portale-ticket",
+          "note": "Resta solo il portale."
+        }
+      ],
+      "notes": "Riga finta. Controllo portale nel ciclo settimanale."
     },
     {
-      "id": "ex-007",
+      "case_id": "GDPR-2026-007",
       "broker_id": "kaspr",
       "broker_name": "Kaspr",
-      "sent_on": "2026-06-15",
       "channel": "form",
-      "status": "reclamo",
-      "deadline": "2026-07-15",
-      "reference": "ESEMPIO-007",
-      "notes": "Riga finta. Reclamo già segnato, solo per il filtro."
+      "identifier_mask": "m***",
+      "sent_at": "2026-10-21",
+      "submitted_at": null,
+      "deadline": "2026-11-21",
+      "extended_deadline": null,
+      "status": "blocco-modulo",
+      "labels": [
+        "Scrubber/blocco-modulo"
+      ],
+      "last_reply_at": null,
+      "next_action": "passa-a-email",
+      "next_action_due": "2026-10-28",
+      "next_recheck_at": null,
+      "cycle_count": 0,
+      "form_url": "https://kaspr.privacy.saymine.io/kaspr",
+      "ticket_id": null,
+      "proof_path": null,
+      "verification_status": "fallito-http",
+      "proof": [],
+      "history": [
+        {
+          "at": "2026-10-21",
+          "event": "stato",
+          "from": "bozza",
+          "to": "blocco-modulo",
+          "note": "HTTP 400 dopo due submit."
+        }
+      ],
+      "notes": "Riga finta. Captcha non aggirato."
     },
     {
-      "id": "ex-008",
+      "case_id": "GDPR-2026-008",
       "broker_id": "criteo",
       "broker_name": "Criteo",
-      "sent_on": "2026-04-01",
       "channel": "email",
-      "status": "cancellato",
+      "identifier_mask": "m***",
+      "sent_at": "2026-04-01",
+      "submitted_at": null,
       "deadline": "2026-05-01",
-      "reference": "ESEMPIO-008",
-      "notes": "Riga finta. Cancellazione confermata, riga chiusa."
+      "extended_deadline": null,
+      "status": "cancellato",
+      "labels": [
+        "Scrubber/cancellato",
+        "Scrubber/tipo/risposta"
+      ],
+      "last_reply_at": "2026-04-20",
+      "next_action": "ricontrollo",
+      "next_action_due": "2026-06-30",
+      "next_recheck_at": "2026-06-30",
+      "cycle_count": 1,
+      "form_url": null,
+      "ticket_id": null,
+      "proof_path": "example-proof/GDPR-2026-008.txt",
+      "verification_status": "non-richiesto",
+      "proof": [
+        {
+          "kind": "email",
+          "ref": "conferma-esempio",
+          "at": "2026-04-20"
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-04-20",
+          "event": "stato",
+          "from": "risposta-da-leggere",
+          "to": "cancellato",
+          "note": "Cancellazione confermata, con prova finta."
+        }
+      ],
+      "notes": "Riga finta. Ricontrollo adtech a 90 giorni, già maturato nell'esempio."
+    },
+    {
+      "case_id": "GDPR-2026-009",
+      "broker_id": "192-com",
+      "broker_name": "192.com",
+      "channel": "form",
+      "identifier_mask": "+00 *** *** 12",
+      "sent_at": "2026-07-01",
+      "submitted_at": "2026-07-01",
+      "deadline": "2026-08-01",
+      "extended_deadline": null,
+      "status": "nessun-dato",
+      "labels": [
+        "Scrubber/nessun-dato"
+      ],
+      "last_reply_at": "2026-07-20",
+      "next_action": "ricontrollo",
+      "next_action_due": "2026-08-30",
+      "next_recheck_at": "2026-08-30",
+      "cycle_count": 1,
+      "form_url": "https://www.192.com/misc/privacy-policy/",
+      "ticket_id": "TKT-ESEMPIO-1009",
+      "proof_path": "example-proof/GDPR-2026-009.txt",
+      "verification_status": "non-richiesto",
+      "proof": [
+        {
+          "kind": "ticket",
+          "ref": "TKT-ESEMPIO-1009",
+          "at": "2026-07-20"
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-07-20",
+          "event": "stato",
+          "from": "risposta-da-leggere",
+          "to": "nessun-dato",
+          "note": "Nessun dato, con prova finta. People-search: ricontrollo a 60 giorni."
+        }
+      ],
+      "notes": "Riga finta. Prima si riverifica se la scheda esiste."
+    },
+    {
+      "case_id": "GDPR-2026-010",
+      "broker_id": "eyeota",
+      "broker_name": "Eyeota",
+      "channel": "form",
+      "identifier_mask": "m***",
+      "sent_at": "2026-03-01",
+      "submitted_at": "2026-03-01",
+      "deadline": "2026-04-01",
+      "extended_deadline": null,
+      "status": "escluso",
+      "labels": [
+        "Scrubber/escluso"
+      ],
+      "last_reply_at": "2026-03-20",
+      "next_action": "nessuno",
+      "next_action_due": null,
+      "next_recheck_at": null,
+      "cycle_count": 2,
+      "form_url": "https://www.eyeota.com/data-subject-request",
+      "ticket_id": "TKT-ESEMPIO-1010",
+      "proof_path": "example-proof/GDPR-2026-010.txt",
+      "verification_status": "non-richiesto",
+      "proof": [
+        {
+          "kind": "email",
+          "ref": "lista-soppressione-esempio",
+          "at": "2026-03-20"
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-03-20",
+          "event": "stato",
+          "from": "risposta-da-leggere",
+          "to": "escluso",
+          "note": "In lista di soppressione, con prova finta."
+        }
+      ],
+      "notes": "Riga finta. Nessun ricontrollo."
     }
   ]
 }</script>
   <script>
-    const STATUSES = ["inviata", "in attesa", "risposta", "cancellato", "nessun dato", "rifiutato", "reclamo"];
-    const OPEN = new Set(["inviata", "in attesa", "risposta"]);
-    const CLOSED = new Set(["cancellato", "nessun dato"]);
+    const STATUSES = ["bozza", "inviata", "in-attesa", "risposta-da-leggere", "richiesta-info", "verifica-otp", "blocco-modulo", "portale-ticket", "cancellato", "nessun-dato", "escluso", "rifiutato", "sollecito", "reclamo", "chiuso"];
+    const OPEN = new Set(["inviata", "in-attesa", "risposta-da-leggere", "richiesta-info", "verifica-otp", "blocco-modulo", "portale-ticket", "sollecito"]);
+    const FINAL = new Set(["cancellato", "nessun-dato", "escluso"]);
+    const CLOSED = new Set(["cancellato", "nessun-dato", "escluso", "chiuso"]);
     const embedded = JSON.parse(document.getElementById("example-registro").textContent);
     let current = embedded;
     let filter = "tutte";
 
     function parseDate(iso) {
-      const parts = String(iso || "").split("-").map(Number);
+      if (!iso) return null;
+      const parts = String(iso).split("-").map(Number);
       if (parts.length !== 3 || parts.some((n) => !Number.isInteger(n))) return null;
       return new Date(parts[0], parts[1] - 1, parts[2]);
     }
@@ -233,8 +548,12 @@
       return Math.round((to.getTime() - from.getTime()) / 86400000);
     }
 
+    function effectiveDeadline(request) {
+      return parseDate(request.extended_deadline) || parseDate(request.deadline);
+    }
+
     function tone(request, today) {
-      const deadline = parseDate(request.deadline);
+      const deadline = effectiveDeadline(request);
       if (!deadline || !OPEN.has(request.status)) return CLOSED.has(request.status) ? "closed" : "attention";
       const delta = dayDiff(today, deadline);
       if (delta < 0) return "overdue";
@@ -243,19 +562,36 @@
       return "open";
     }
 
+    function actionDue(request, today) {
+      const due = parseDate(request.next_action_due);
+      if (!due || request.next_action === "attendi" || request.next_action === "nessuno") return false;
+      return dayDiff(today, due) <= 7;
+    }
+
+    function recheckDue(request, today) {
+      if (request.status === "escluso") return false;
+      const due = parseDate(request.next_recheck_at);
+      return Boolean(due && dayDiff(today, due) <= 0);
+    }
+
+    function hasProof(request) {
+      return Array.isArray(request.proof) && request.proof.length > 0;
+    }
+
     function deadlineLabel(request, today) {
-      const deadline = parseDate(request.deadline);
-      if (!deadline) return "data non valida";
+      const deadline = effectiveDeadline(request);
+      if (!deadline) return request.deadline || "";
+      const iso = request.extended_deadline || request.deadline;
       const delta = dayDiff(today, deadline);
-      if (!OPEN.has(request.status)) return request.deadline;
-      if (delta < 0) return request.deadline + " · scaduta da " + Math.abs(delta) + " giorni";
-      if (delta === 0) return request.deadline + " · scade oggi";
-      return request.deadline + " · tra " + delta + " giorni";
+      if (!OPEN.has(request.status)) return iso;
+      if (delta < 0) return iso + " · scaduta da " + Math.abs(delta) + " giorni";
+      if (delta === 0) return iso + " · scade oggi";
+      return iso + " · tra " + delta + " giorni";
     }
 
     function validate(data) {
-      if (!data || data.schema !== "scrubber-registro/1" || !Array.isArray(data.requests)) {
-        throw new Error("Il file non ha schema scrubber-registro/1 oppure non ha l'elenco requests.");
+      if (!data || data.schema !== "scrubber-registro/2" || !Array.isArray(data.requests)) {
+        throw new Error("Il file non ha schema scrubber-registro/2 oppure non ha l'elenco requests.");
       }
       data.requests.forEach((request, index) => {
         if (!STATUSES.includes(request.status)) {
@@ -282,16 +618,33 @@
         banner.hidden = true;
       }
       const requests = current.requests || [];
-      const counts = { tutte: requests.length, scadute: 0, aperte: 0 };
+      const counts = { tutte: requests.length, scadute: 0, aperte: 0, azioni: 0, moduli: 0, ricontrolli: 0 };
       STATUSES.forEach((status) => { counts[status] = 0; });
+      let finalCount = 0;
+      let proved = 0;
       requests.forEach((request) => {
         counts[request.status] += 1;
         if (OPEN.has(request.status)) counts.aperte += 1;
         if (tone(request, today) === "overdue") counts.scadute += 1;
+        if (actionDue(request, today)) counts.azioni += 1;
+        if (request.channel === "form" || request.channel === "portal") counts.moduli += 1;
+        if (recheckDue(request, today)) counts.ricontrolli += 1;
+        if (FINAL.has(request.status)) {
+          finalCount += 1;
+          if (hasProof(request)) proved += 1;
+        }
       });
+      const coverage = finalCount === 0 ? 100 : Math.round((100 * proved) / finalCount);
       const cards = document.getElementById("cards");
       cards.replaceChildren();
-      [["Richieste", counts.tutte], ["Aperte", counts.aperte], ["Scadute", counts.scadute], ["Reclami", counts.reclamo]].forEach(([label, value]) => {
+      [
+        ["Richieste", counts.tutte],
+        ["Aperte", counts.aperte],
+        ["Scadute", counts.scadute],
+        ["Azioni 7 giorni", counts.azioni],
+        ["Ricontrolli", counts.ricontrolli],
+        ["Prove", coverage + "%"]
+      ].forEach(([label, value]) => {
         const card = document.createElement("div");
         card.className = "card";
         const strong = document.createElement("strong");
@@ -303,10 +656,11 @@
       });
       const filters = document.getElementById("filters");
       filters.replaceChildren();
-      ["tutte", "scadute", "aperte"].concat(STATUSES).forEach((name) => {
+      ["tutte", "scadute", "azioni", "ricontrolli", "moduli"].concat(STATUSES).forEach((name) => {
         const button = document.createElement("button");
         button.type = "button";
-        button.textContent = name + " (" + (counts[name] || 0) + ")";
+        const count = counts[name] === undefined ? "" : " (" + counts[name] + ")";
+        button.textContent = name + count;
         button.setAttribute("aria-pressed", String(filter === name));
         button.addEventListener("click", () => { filter = name; render(); });
         filters.append(button);
@@ -314,7 +668,9 @@
       const visible = requests.filter((request) => {
         if (filter === "tutte") return true;
         if (filter === "scadute") return tone(request, today) === "overdue";
-        if (filter === "aperte") return OPEN.has(request.status);
+        if (filter === "azioni") return actionDue(request, today);
+        if (filter === "ricontrolli") return recheckDue(request, today);
+        if (filter === "moduli") return request.channel === "form" || request.channel === "portal";
         return request.status === filter;
       });
       const body = document.getElementById("rows");
@@ -329,14 +685,31 @@
         tag.className = "tag" + (kind === "overdue" ? " overdue" : kind === "closed" ? " ok" : "");
         tag.textContent = request.status;
         status.append(tag);
+        const practice = document.createElement("td");
+        practice.dataset.label = "Pratica";
+        practice.textContent = (request.case_id || "") + " · ciclo " + (request.cycle_count || 0);
+        const details = document.createElement("details");
+        const summary = document.createElement("summary");
+        summary.textContent = "Cronologia";
+        const list = document.createElement("div");
+        (request.history || []).forEach((event) => {
+          const line = document.createElement("div");
+          line.textContent = [event.at, event.from, event.to, event.note].filter(Boolean).join(" — ");
+          list.append(line);
+        });
+        details.append(summary, list);
+        practice.append(details);
+        const proof = hasProof(request) ? request.proof.map((item) => item.kind).join(", ") : (FINAL.has(request.status) ? "manca" : "—");
         tr.append(
+          practice,
           cell("Titolare", request.broker_name),
           status,
-          cell("Inviata", request.sent_on),
-          cell("Scadenza", deadlineLabel(request, today)),
           cell("Canale", request.channel),
-          cell("Riferimento", request.reference),
-          cell("Note", request.notes)
+          cell("Inviata", request.sent_at),
+          cell("Scadenza", deadlineLabel(request, today)),
+          cell("Ricontrollo", request.next_recheck_at || (request.status === "escluso" ? "nessuno" : "")),
+          cell("Prossima azione", [request.next_action, request.next_action_due].filter(Boolean).join(" · ")),
+          cell("Prova", proof)
         );
         body.append(tr);
       });

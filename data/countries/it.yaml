@@ -1,0 +1,18 @@
+# Copertura paese. Non è consulenza legale. Nessun dato di persona fisica.
+code: IT
+name: Italia
+phase: 1
+status: partial
+languages:
+- it
+authority_id: it-garante
+registers:
+- id: rpo-it
+  ref: data/registries.yaml
+directories:
+- id: paginebianche
+  ref: data/registries.yaml
+broker_ids: []
+letters:
+- it
+notes: RPO, elenchi e broker internazionali già presenti. Manca un censimento completo dei titolari italiani.

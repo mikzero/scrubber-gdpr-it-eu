@@ -33,12 +33,11 @@ Il bot conserva telefono, email e registro nel vault, non in git. Vedi `docs/pri
 
 ### Come il bot si aggiorna
 
-1. Legge `VERSION` da `https://raw.githubusercontent.com/mikzero/scrubber-gdpr-it-eu/main/VERSION`.
-2. Se è diversa da `scrubber.pack_version`, legge `manifest.json` e `CHANGELOG.md`.
-3. Mostra il diff delle skill e chiede conferma prima di sovrascrivere.
-4. Non tocca il vault. Se una skill remota toglie l'obbligo della bozza, non la applica in silenzio.
+`bot_access` è `read-only`. Il bot fa solo GET pubblici su `raw.githubusercontent.com` (o su una release dello stesso repository), senza token. Non fa push, non apre issue, pull request, commenti o fork, e non scrive il registro nel repository.
 
-Dettaglio operativo: skill `sync-dal-repo`.
+All'inizio di ogni ciclo, e ogni settimana, confronta `VERSION`. Se è più nuova, applica da solo dati, paesi e modelli. Applica le skill solo se passano `scripts/security_lint.py`. Altrimenti le blocca e spiega il perché. Tiene la versione precedente per un rollback. In chat resta un riassunto. I dati della persona non si toccano. Dettaglio: skill `sync-dal-repo` e `docs/sicurezza.md`.
+
+Il metodo operativo è `docs/metodo.md`. La direzione del prodotto è `ROADMAP.md`: prima l'Italia, poi Europa, poi il resto del mondo, senza invii in massa e senza esiti finali senza prova.
 
 ### Routine e posta
 
@@ -53,8 +52,10 @@ Un controllo a settimana finché c'è una scadenza aperta, poi un controllo al m
 | `data/brokers.yaml` | Titolari, URL, canale, eventuali caselle di ruolo |
 | `data/registries.yaml` | RPO, elenchi, modulo Google, opt-out, autorità |
 | `dashboard/` | HTML statico e registro di esempio finto |
-| `docs/` | RPO, casi difficili, privacy del bot, schema del registro |
-| `scripts/` | Validazione e controllo link |
+| `docs/` | Metodo, sicurezza, registro, RPO, casi difficili |
+| `data/countries/` | Copertura per paese: `todo`, `partial` o `done` |
+| `ROADMAP.md` | Fasi Italia, Europa, resto del mondo |
+| `scripts/` | Validazione, controllo link, lint di sicurezza |
 
 ### Contribuire
 
@@ -67,7 +68,7 @@ Vedi `CONTRIBUTING.md`. Le issue e le pull request hanno un template. Non allega
 
 ### Versione
 
-`VERSION` è la versione semver del pacchetto. Parte da 0.1.0. Il changelog è `CHANGELOG.md`.
+`VERSION` è la versione semver del pacchetto. La corrente è 0.2.0. Il changelog è `CHANGELOG.md`.
 
 ## English
 
@@ -79,7 +80,9 @@ The bot drafts requests. The user reviews every draft and sends it. A draft is n
 
 Personal data belong in the bot's vault, never in git. The only email addresses in this repo are role or institutional mailboxes declared in `data/*.yaml` after they were read on an official page. The dashboard in `dashboard/` is a static file with a clearly fake example register. Load a real register from your own device; it is gitignored.
 
-Sync: compare `VERSION` on GitHub raw with the version stored in the vault, then read `manifest.json`, show the diff, and ask before overwriting skills. Recommended routine: weekly while a deadline is open, then monthly. Recommended mail plugin: Gmail or AgentMail. Start with the `getting-started` skill.
+The bot's access is read-only public HTTPS. It never uses a GitHub token and never pushes, opens issues or pull requests, comments, or forks. On each check, and weekly, it auto-updates data, country files and templates from the official repo. Skills update only when they pass the security lint. A short changelog is posted in chat. Personal data is not part of the update. See `docs/sicurezza.md` and `ROADMAP.md`.
+
+Recommended routine: weekly while a deadline or a recheck is open, then monthly. Recommended mail plugin: Gmail or AgentMail. Start with the `getting-started` skill.
 
 Contributions: `CONTRIBUTING.md`. Code is MIT. Prose and templates are CC-BY-4.0.
 

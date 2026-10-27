@@ -4,7 +4,7 @@ Not legal advice. Use this when the controller says it found no data. Send only 
 
 # Letter
 
-Subject: Follow-up to a "no data" reply — art. 21 par. 2 and art. 15 par. 1 point g
+Subject: {{CASE_ID}} — Follow-up to a "no data" reply — art. 21 par. 2 and art. 15 par. 1 point g
 
 {{BROKER}}
 

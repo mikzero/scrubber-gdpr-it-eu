@@ -24,7 +24,13 @@ CHANNELS = {"email", "form", "portal"}
 IDENTIFIERS = {"email", "phone", "ad_id", "profile_url"}
 RELEVANCE = {"high", "medium", "low"}
 DPO_BASIS = {None, "named-dpo", "rights-contact", "cookie-withdrawal"}
-STATUSES = {"inviata", "in attesa", "risposta", "cancellato", "nessun dato", "rifiutato", "reclamo"}
+STATUSES = {
+    "bozza", "inviata", "in-attesa", "risposta-da-leggere", "richiesta-info",
+    "verifica-otp", "blocco-modulo", "portale-ticket", "cancellato", "nessun-dato",
+    "escluso", "rifiutato", "sollecito", "reclamo", "chiuso",
+}
+FINAL_STATUSES = {"cancellato", "nessun-dato", "escluso"}
+COUNTRY_STATUS = {"todo", "partial", "done"}
 EMAIL_RE = re.compile(r"[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}")
 URL_RE = re.compile(r"https?://[^\s\]\)<>\"']+")
 PHONE_RE = re.compile(r"(?<![\w/])(?:\+\d{1,3}[\s.\-]?)?(?:\d[\s.\-]?){9,16}\d(?![\w/])")
@@ -138,8 +144,17 @@ def check_skills() -> None:
 def check_manifest(brokers: dict) -> None:
     manifest = json.loads((ROOT / "manifest.json").read_text(encoding="utf-8"))
     version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-    if version != "0.1.0":
-        fail(f"VERSION is {version}, expected 0.1.0 at bootstrap")
+    if version != "0.2.0":
+        fail(f"VERSION is {version}, expected 0.2.0")
+    if manifest.get("bot_access") != "read-only":
+        fail("manifest.bot_access must be read-only")
+    policy = manifest.get("update_policy") or {}
+    if policy.get("mode") != "auto" or policy.get("source") != "public-https-get":
+        fail("manifest.update_policy must auto-update over public HTTPS GET")
+    coverage = manifest.get("coverage") or {}
+    recheck = coverage.get("recheck_days") or {}
+    if recheck.get("people-search") != 60 or recheck.get("default") != 90:
+        fail("coverage.recheck_days must be 60 for people-search and 90 by default")
     if manifest.get("version") != version:
         fail("manifest.version does not match VERSION")
     changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
@@ -206,6 +221,20 @@ def check_brokers(brokers: dict) -> None:
             fail(f"{item['id']}: basis set without email")
         if item["dpo_email"] is not None and item["dpo_email_basis"] is None:
             fail(f"{item['id']}: email set without basis")
+        source = item.get("verified_source")
+        if not isinstance(source, dict) or any(not isinstance(source.get(key), bool) for key in ("page", "email", "form")):
+            fail(f"{item['id']}: verified_source must have boolean page, email, form")
+        else:
+            blocked = (item.get("automated_check") or {}).get("http_status") == 403
+            if source["page"] is blocked:
+                fail(f"{item['id']}: verified_source.page disagrees with the HTTP check")
+            if source["email"] != (item.get("dpo_email") is not None):
+                fail(f"{item['id']}: verified_source.email disagrees with dpo_email")
+            form_ok = item["channel"] in {"form", "portal"} and source["page"]
+            if source["form"] != form_ok:
+                fail(f"{item['id']}: verified_source.form disagrees with channel and page")
+        if "form_notes" in item and not isinstance(item["form_notes"], str):
+            fail(f"{item['id']}: form_notes must be a string")
         if not str(item["url"]).startswith("https://"):
             fail(f"{item['id']}: url must be https")
         if not isinstance(item["known_issues"], list):
@@ -224,19 +253,51 @@ def check_templates() -> None:
             fail(f"{path.relative_to(ROOT)}: community translation not marked")
 
 
+def check_countries(manifest: dict) -> None:
+    folder = ROOT / "data" / "countries"
+    files = sorted(folder.glob("*.yaml"))
+    if len(files) < 30:
+        fail("data/countries is missing the phase map")
+    found = {}
+    for path in files:
+        data = load_yaml(path)
+        code = data.get("code")
+        if code != path.stem.upper():
+            fail(f"{path.name}: code does not match filename")
+        if data.get("status") not in COUNTRY_STATUS:
+            fail(f"{path.name}: bad status")
+        found[code] = data.get("status")
+    declared = {item["code"]: item["status"] for item in (manifest.get("coverage") or {}).get("countries", [])}
+    if declared != found:
+        fail("manifest coverage.countries does not match data/countries")
+
+
 def check_dashboard() -> None:
     example_path = ROOT / "dashboard" / "example-registro.json"
     example = json.loads(example_path.read_text(encoding="utf-8"))
+    if example.get("schema") != "scrubber-registro/2":
+        fail("example registro schema must be scrubber-registro/2")
     if example.get("example") is not True:
         fail("example registro must set example true")
     if "FINTO" not in example.get("label", ""):
         fail("example registro must be labeled fake")
+    required = (
+        "case_id", "broker_id", "broker_name", "channel", "identifier_mask",
+        "sent_at", "deadline", "extended_deadline", "status", "labels",
+        "last_reply_at", "next_action", "next_action_due", "next_recheck_at",
+        "cycle_count", "proof", "history", "form_url", "submitted_at",
+        "ticket_id", "proof_path", "verification_status",
+    )
     for request in example["requests"]:
         if request["status"] not in STATUSES:
             fail(f"bad example status {request['status']}")
-        for key in ("id", "broker_id", "broker_name", "sent_on", "channel", "status", "deadline", "reference", "notes"):
+        for key in required:
             if key not in request:
                 fail(f"example request missing {key}")
+        if request["status"] in FINAL_STATUSES and not request.get("proof"):
+            fail(f"{request.get('case_id')}: final status without proof")
+        if request["status"] == "escluso" and request.get("next_recheck_at"):
+            fail(f"{request.get('case_id')}: escluso must not schedule a recheck")
     html = (ROOT / "dashboard" / "index.html").read_text(encoding="utf-8")
     match = re.search(r'<script id="example-registro" type="application/json">\s*(.*?)\s*</script>', html, re.S)
     if not match:
@@ -254,10 +315,19 @@ def main() -> int:
     load_yaml(ROOT / "data" / "registries.yaml")
     check_brokers(brokers)
     check_skills()
+    manifest = json.loads((ROOT / "manifest.json").read_text(encoding="utf-8"))
     check_manifest(brokers)
+    check_countries(manifest)
     check_templates()
     check_dashboard()
     check_personal_data(collect_declared_emails())
+    lint_path = ROOT / "scripts" / "security_lint.py"
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("security_lint", lint_path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    for hit in module.scan():
+        fail(f"security_lint: {hit}")
     if errors:
         print(f"{len(errors)} error(s):")
         for message in errors:

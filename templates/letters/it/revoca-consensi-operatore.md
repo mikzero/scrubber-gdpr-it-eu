@@ -6,7 +6,7 @@ Invia solo dopo un sì esplicito. Non inventare l'indirizzo email dell'operatore
 
 # Lettera
 
-Oggetto: Revoca del consenso all'elenco telefonico e opposizione art. 21 par. 2 — {{TELEFONO}}
+Oggetto: {{CASE_ID}} — Revoca del consenso all'elenco telefonico e opposizione art. 21 par. 2
 
 {{OPERATORE}}
 

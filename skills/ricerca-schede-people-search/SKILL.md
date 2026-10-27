@@ -5,7 +5,7 @@ description: Use when cerchi schede su elenchi e people-search, per esempio Pagi
 
 # Cercare schede e elenchi
 
-Non è consulenza legale. Cerchi se un elenco pubblica il numero o il nome. Non archivi la scheda nel repository.
+Non è consulenza legale. Cerchi se un elenco pubblica il numero o il nome, prima di qualsiasi invio. Se la scheda non c'è, non scrivere al titolare «per precauzione». Non archivi la scheda nel repository e non arricchisci un profilo della persona.
 
 Fonti da aprire nel browser, solo con i dati del vault e solo se l'utente ha chiesto la ricerca in questo turno:
 

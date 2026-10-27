@@ -6,7 +6,7 @@ Send only after an explicit yes. Do not invent the operator's email address.
 
 # Letter
 
-Subject: Withdrawal of directory consent and objection under art. 21 par. 2 — {{TELEFONO}}
+Subject: {{CASE_ID}} — Withdrawal of directory consent and objection under art. 21 par. 2
 
 {{OPERATORE}}
 

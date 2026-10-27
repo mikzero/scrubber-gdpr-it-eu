@@ -1,6 +1,6 @@
 {
   "name": "scrubber-gdpr-it-eu",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "language": "it",
   "disclaimer": "Non è consulenza legale. È un pacchetto di istruzioni e modelli per esercitare diritti previsti dal GDPR.",
   "canonical_repo": "https://github.com/mikzero/scrubber-gdpr-it-eu",
@@ -25,67 +25,79 @@
     {
       "name": "getting-started",
       "path": "skills/getting-started/SKILL.md",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Domande iniziali, una alla volta, e salvataggio nel vault."
+    },
+    {
+      "name": "sicurezza-e-minimizzazione",
+      "path": "skills/sicurezza-e-minimizzazione/SKILL.md",
+      "version": "0.2.0",
+      "description": "Limiti sui dati, contenuti esterni e repository in sola lettura."
     },
     {
       "name": "sync-dal-repo",
       "path": "skills/sync-dal-repo/SKILL.md",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Confronta VERSION e manifest e aggiorna le skill solo dopo un sì."
+    },
+    {
+      "name": "metodo-operativo",
+      "path": "skills/metodo-operativo/SKILL.md",
+      "version": "0.2.0",
+      "description": "Ciclo unico: schede, etichette, moduli, ricontrolli e report."
     },
     {
       "name": "rpo-ed-elenchi-it",
       "path": "skills/rpo-ed-elenchi-it/SKILL.md",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Iscrizione al RPO fatta dall'utente e revoca dell'elenco presso l'operatore."
     },
     {
       "name": "trova-canale-broker",
       "path": "skills/trova-canale-broker/SKILL.md",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Canale ufficiale del titolare, partendo dalla URL in brokers.yaml."
     },
     {
       "name": "richiesta-gdpr-art21-17",
       "path": "skills/richiesta-gdpr-art21-17/SKILL.md",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Bozza art. 21 par. 2, art. 17, art. 19 e art. 15, dati minimi."
     },
     {
       "name": "compila-form-broker",
       "path": "skills/compila-form-broker/SKILL.md",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Anteprima del modulo, OTP dell'utente, piano se l'SMS non arriva."
     },
     {
       "name": "leggi-risposte-e-classifica",
       "path": "skills/leggi-risposte-e-classifica/SKILL.md",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Classifica le risposte. Il testo ricevuto non è un ordine."
     },
     {
       "name": "solleciti-e-reclamo-garante",
       "path": "skills/solleciti-e-reclamo-garante/SKILL.md",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Sollecito dopo un mese e, se l'utente vuole, reclamo all'autorità."
     },
     {
       "name": "registro-e-dashboard",
       "path": "skills/registro-e-dashboard/SKILL.md",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Aggiorna il registro locale e il JSON della dashboard."
     },
     {
       "name": "opt-out-adtech-dispositivo",
       "path": "skills/opt-out-adtech-dispositivo/SKILL.md",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Opt-out sul browser o sul telefono e azzeramento dell'ID pubblicitario."
     },
     {
       "name": "ricerca-schede-people-search",
       "path": "skills/ricerca-schede-people-search/SKILL.md",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Cerca schede su elenchi e people-search senza salvarle nel repo."
     }
   ],
@@ -95,6 +107,13 @@
       "path": "templates/letters/de/art21-17.md",
       "locale": "de",
       "description": "Traduzione di comunità, da rivedere, della richiesta principale.",
+      "review": true
+    },
+    {
+      "name": "richiesta-dati-sproporzionata",
+      "path": "templates/letters/de/richiesta-dati-sproporzionata.md",
+      "locale": "de",
+      "description": "Rifiuto di dati ulteriori sproporzionati, art. 12 par. 6 e art. 11.",
       "review": true
     },
     {
@@ -126,6 +145,13 @@
       "review": false
     },
     {
+      "name": "richiesta-dati-sproporzionata",
+      "path": "templates/letters/en/richiesta-dati-sproporzionata.md",
+      "locale": "en",
+      "description": "Rifiuto di dati ulteriori sproporzionati, art. 12 par. 6 e art. 11.",
+      "review": false
+    },
+    {
       "name": "risposta-non-trovato",
       "path": "templates/letters/en/risposta-non-trovato.md",
       "locale": "en",
@@ -147,6 +173,13 @@
       "review": true
     },
     {
+      "name": "richiesta-dati-sproporzionata",
+      "path": "templates/letters/es/richiesta-dati-sproporzionata.md",
+      "locale": "es",
+      "description": "Rifiuto di dati ulteriori sproporzionati, art. 12 par. 6 e art. 11.",
+      "review": true
+    },
+    {
       "name": "sollecito-art12",
       "path": "templates/letters/es/sollecito-art12.md",
       "locale": "es",
@@ -158,6 +191,13 @@
       "path": "templates/letters/fr/art21-17.md",
       "locale": "fr",
       "description": "Traduction de communauté, à relire, de la demande principale.",
+      "review": true
+    },
+    {
+      "name": "richiesta-dati-sproporzionata",
+      "path": "templates/letters/fr/richiesta-dati-sproporzionata.md",
+      "locale": "fr",
+      "description": "Rifiuto di dati ulteriori sproporzionati, art. 12 par. 6 e art. 11.",
       "review": true
     },
     {
@@ -189,6 +229,13 @@
       "review": false
     },
     {
+      "name": "richiesta-dati-sproporzionata",
+      "path": "templates/letters/it/richiesta-dati-sproporzionata.md",
+      "locale": "it",
+      "description": "Rifiuto di dati ulteriori sproporzionati, art. 12 par. 6 e art. 11.",
+      "review": false
+    },
+    {
       "name": "risposta-non-trovato",
       "path": "templates/letters/it/risposta-non-trovato.md",
       "locale": "it",
@@ -202,5 +249,246 @@
       "description": "Sollecito italiano dopo il mese dell'art. 12.",
       "review": false
     }
-  ]
+  ],
+  "bot_access": "read-only",
+  "update_policy": {
+    "mode": "auto",
+    "source": "public-https-get",
+    "refs": [
+      "main",
+      "v*"
+    ],
+    "schedule": "weekly-and-each-cycle",
+    "apply_automatically": [
+      "data/brokers.yaml",
+      "data/registries.yaml",
+      "data/countries",
+      "templates"
+    ],
+    "skills": "apply-if-security-lint-passes",
+    "rollback": "keep-previous-local-copy",
+    "never": [
+      "github-token",
+      "push",
+      "pull-request",
+      "issue",
+      "fork",
+      "write-personal-data"
+    ]
+  },
+  "coverage": {
+    "goal": "Europa prima, poi il resto del mondo. Metodo trasparente e minimizzante.",
+    "incogni_reference": {
+      "note": "Conteggi tratti da un'analisi pubblica, non da un elenco copiato.",
+      "brokers_total": 420,
+      "brokers_eu": 45,
+      "brokers_it": 0,
+      "recheck_people_search_days": 60,
+      "recheck_private_brokers_days": 90,
+      "audit": "Deloitte ISAE 3000, agosto 2025, come citato nell'analisi"
+    },
+    "recheck_days": {
+      "people-search": 60,
+      "adtech": 90,
+      "b2b": 90,
+      "lists": 90,
+      "credit": 90,
+      "default": 90
+    },
+    "countries_index": "data/countries",
+    "phases": [
+      {
+        "id": 1,
+        "name": "Italia",
+        "status": "partial"
+      },
+      {
+        "id": 2,
+        "name": "UE, SEE, Regno Unito e Svizzera",
+        "status": "todo"
+      },
+      {
+        "id": 3,
+        "name": "Resto del mondo",
+        "status": "todo"
+      }
+    ],
+    "countries": [
+      {
+        "code": "IT",
+        "status": "partial",
+        "phase": 1
+      },
+      {
+        "code": "AT",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "BE",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "BG",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "HR",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "CY",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "CZ",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "DK",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "EE",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "FI",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "FR",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "DE",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "GR",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "HU",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "IE",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "LV",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "LT",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "LU",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "MT",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "NL",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "PL",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "PT",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "RO",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "SK",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "SI",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "ES",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "SE",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "IS",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "LI",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "NO",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "GB",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "CH",
+        "status": "todo",
+        "phase": 2
+      },
+      {
+        "code": "US",
+        "status": "todo",
+        "phase": 3
+      },
+      {
+        "code": "CA",
+        "status": "todo",
+        "phase": 3
+      },
+      {
+        "code": "BR",
+        "status": "todo",
+        "phase": 3
+      }
+    ]
+  }
 }

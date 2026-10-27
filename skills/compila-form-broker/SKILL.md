@@ -5,18 +5,17 @@ description: Use when il titolare usa un modulo web, con anteprima, OTP dell'ute
 
 # Compilare un modulo
 
-Non è consulenza legale. Il modulo è un invio. Trattalo come una lettera.
+Non è consulenza legale. Le regole sono il capitolo 6 di `docs/metodo.md` e `docs/sicurezza.md`. Il modulo è un invio. Il codice OTP non si ripete in chat né nei log.
 
-1. Parti dal canale trovato con `trova-canale-broker`. Leggi `known_issues` di quel `id`.
-2. Compila solo i campi necessari. Stessi limiti di `richiesta-gdpr-art21-17`: niente documento, data di nascita o indirizzo postale se l'utente non ha detto sì su quella richiesta precisa.
-3. Prima del submit mostra l'anteprima di ogni campo, compreso menu a tendina e caselle spuntate. Di' quale diritto stai chiedendo. Se il modulo non ha una voce per l'opposizione al marketing, dillo e prepara in parallelo la lettera art. 21 par. 2.
-4. Invia il modulo solo dopo un sì esplicito in questo turno. Non riusare un sì vecchio se hai cambiato un campo.
-5. L'OTP, il captcha e il link di verifica li legge e li esegue l'utente. Chiedi il codice a lui. Non indovinarlo, non leggerlo da un canale che non ti ha indicato, non aggirare il captcha e non creare account paralleli per saltare il controllo.
-6. Se l'OTP è un SMS e non arriva, in particolare verso numeri italiani su moduli OneTrust (caso noto: Samba, id `samba`), non riprovare molte volte. Passa al piano di riserva, in quest'ordine: OTP via email se il modulo lo offre; lettera alla casella di ruolo se è ancora sulla pagina ufficiale; avviso nel registro che il modulo è bloccato. Vedi `docs/casi-difficili.md`.
-7. Kaspr (`kaspr`) e gli altri moduli SayMine, fra cui Cognism: se la pagina risponde con errore HTTP 400 o mostra un captcha, fermati. L'utente completa il captcha nel suo browser. Se non c'è la voce art. 21 par. 2, usa la lettera e avvisa che in passato le email a Kaspr sono state rifiutate.
-8. Apollo (`apollo`): il modulo chiede un'email aziendale. Non inventare un dominio e non trasformare l'email personale in una email di lavoro. Se l'utente non ha un'email aziendale da usare, dillo e cerca un altro canale sulla stessa pagina ufficiale.
-9. Acxiom: se il modulo chiede l'indirizzo postale, fermati e applica la minimizzazione. LexisNexis: stessa regola per data di nascita e documento.
-10. North Data: incolla solo l'URL del profilo che l'utente ti ha dato.
-11. Dopo l'invio, o dopo uno stop, aggiorna il registro. Un modulo rifiutato dal sito non è uno stato `rifiutato` del titolare: è un blocco tecnico. Scrivilo nelle note, con stato `in attesa`, senza dati personali nelle note se il registro può uscire dal dispositivo.
+1. Usa questa skill se `channel` è `form` o `portal`. Leggi `form_notes`, `form_url` se c'è, `known_issues` e la pagina ufficiale (`trova-canale-broker`).
+2. Scheda in stato `bozza`, con `case_id`, prima di toccare il modulo. Il modulo non porterà l'id nell'oggetto: ti servirà dopo, insieme al dominio e al ticket.
+3. Checklist del minimo. Lascia vuoti data di nascita, documento, selfie, codice fiscale e indirizzo postale. Se uno è obbligatorio, non compilarlo: stato `blocco-modulo` e lettera art. 12 con `richiesta-gdpr-art21-17`, che spiega il rifiuto.
+4. Mostra l'anteprima di ogni campo, tendina e casella, e la `form_url`. Di' se manca la voce sull'opposizione art. 21 par. 2. Submit solo dopo un sì esplicito su quell'anteprima.
+5. Se compare un OTP o un codice email, stato `verifica-otp` e `verification_status` `attesa-otp`. Chiedi il codice in chat. Lo incolla l'utente. Non indovinarlo e non leggerlo da un altro messaggio.
+6. SMS verso un numero italiano, in particolare OneTrust (Samba, id `samba`): al massimo due invii. Se non arriva, `verification_status` `fallito-sms`, stato `blocco-modulo`, lettera di riserva che cita il mancato arrivo. Stesso stop dopo due codici rifiutati dal sito.
+7. Captcha o HTTP 400, in particolare SayMine (Kaspr, Cognism): l'utente risolve il captcha nel suo browser. Al massimo due submit. Poi `fallito-captcha` o `fallito-http` e `blocco-modulo`. Non aggirare il captcha.
+8. Apollo: se il campo chiede un'email aziendale e l'utente non ne ha una, lascialo vuoto. Non inventare un dominio. Se il submit è impossibile, `blocco-modulo`.
+9. Submit riuscito: `submitted_at` e `sent_at` uguali, scadenza da quel momento, `ticket_id` se visibile, `proof_path` sul dispositivo (screenshot della conferma o file della mail), `verification_status` `verificato` o `non-richiesto`. Stato `inviata`, oppure `portale-ticket` se resta solo un portale. Etichette `Scrubber/tipo/modulo` e lo stato. La mail di conferma si aggancia con dominio del mittente più ticket, poi riceve le etichette della scheda.
+10. Nel ciclo settimanale, se lo stato è `portale-ticket`, controlla il portale e scrivi in `history` solo l'esito.
 
-Non è un successo il messaggio generico «richiesta ricevuta» se non indica i diritti trattati. Conserva la conferma che l'utente vede e chiedigli di inoltrarla all'etichetta `scrubber`.
+Un errore tecnico del sito non è lo stato `rifiutato`. È `blocco-modulo`.

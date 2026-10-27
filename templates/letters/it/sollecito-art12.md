@@ -4,7 +4,7 @@ Non è consulenza legale. Invia solo dopo un sì esplicito. Non spostare la scad
 
 # Lettera
 
-Oggetto: Sollecito art. 12 — richiesta del {{DATA_INVIO}} — art. 21 par. 2, art. 17, art. 19 e art. 15
+Oggetto: {{CASE_ID}} — Sollecito art. 12 — richiesta del {{DATA_INVIO}} — art. 21 par. 2, art. 17, art. 19 e art. 15
 
 {{BROKER}}
 

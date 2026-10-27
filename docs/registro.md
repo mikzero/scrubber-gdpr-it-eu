@@ -1,33 +1,45 @@
 # Schema del registro
 
-Non è consulenza legale. Il registro vero sta nel vault o in un file locale ignorato da git. `dashboard/example-registro.json` è un esempio finto.
+Non è consulenza legale. Il registro vero sta nel vault o in `dashboard/registro.local.json`, ignorato da git. L'esempio è finto.
 
-`schema` vale `scrubber-registro/1`.
+`schema` vale `scrubber-registro/2`.
 
 | Campo | Obbligatorio | Senso |
 | --- | --- | --- |
-| `example` | sì | `true` solo nel file di esempio del repo. |
-| `label` | sì | Etichetta visibile. Nel file di esempio deve dire che i dati sono finti. |
-| `disclaimer` | no | Frase breve. Non è un parere legale. |
-| `subject_ref` | no | Riferimento opaco della persona, senza copiare il numero se il file può circolare. |
-| `country` | no | Paese, per esempio `IT`. |
-| `updated` | no | Data `AAAA-MM-GG` dell'ultimo aggiornamento del file. |
-| `requests` | sì | Elenco, anche vuoto. |
+| `example` | sì | `true` solo nell'esempio del repository |
+| `label` | sì | Nell'esempio deve dire che i dati sono finti |
+| `requests` | sì | Elenco, anche vuoto |
 
-Ogni elemento di `requests`:
+Ogni scheda:
 
 | Campo | Senso |
 | --- | --- |
-| `id` | Identificativo locale della riga, non il numero di telefono. |
-| `broker_id` | `id` di `data/brokers.yaml` o di `data/registries.yaml`. |
-| `broker_name` | Nome da mostrare. |
-| `sent_on` | Data di invio `AAAA-MM-GG`. |
-| `channel` | `email`, `form`, `portal`, `phone` o `pdf`. |
-| `status` | Uno fra `inviata`, `in attesa`, `risposta`, `cancellato`, `nessun dato`, `rifiutato`, `reclamo`. |
-| `deadline` | Un mese di calendario dopo `sent_on`: stesso giorno del mese successivo, o l'ultimo giorno di quel mese se il giorno non esiste. |
-| `reference` | Riferimento del titolare o `ESEMPIO-…` nel file finto. |
-| `notes` | Nota breve. Nel repo, solo testo finto. |
+| `case_id` | `GDPR-` anno `-` progressivo. Nell'oggetto delle email |
+| `broker_id` | `id` in `data/brokers.yaml` |
+| `broker_name` | Nome da mostrare |
+| `channel` | `email`, `form`, `portal`, `phone` o `pdf` |
+| `identifier_mask` | Maschera, per esempio `+00 *** *** 12`. Mai il dato intero |
+| `sent_at` | Data di invio o di submit, `AAAA-MM-GG` |
+| `submitted_at` | Uguale a `sent_at` se il canale è un modulo, altrimenti vuoto |
+| `deadline` | Un mese di calendario dopo `sent_at` |
+| `extended_deadline` | Vuoto, salvo proroga comunicata nel primo mese |
+| `status` | Vedi sotto |
+| `labels` | Etichette `Scrubber/…` applicate |
+| `last_reply_at` | Ultima risposta, o vuoto |
+| `next_action` | Azione proposta |
+| `next_action_due` | Data entro cui va fatta, o vuoto |
+| `next_recheck_at` | Prossimo ricontrollo. Vuoto se `escluso` |
+| `cycle_count` | Quanti invii sono partiti per questa scheda |
+| `form_url` | URL del modulo, o vuoto |
+| `ticket_id` | Riferimento del titolare, o vuoto |
+| `proof_path` | Percorso locale della prova, finto nell'esempio |
+| `verification_status` | `non-richiesto`, `attesa-otp`, `verificato`, `fallito-sms`, `fallito-captcha`, `fallito-http` |
+| `proof` | Elenco di `{kind, ref, at}`. `kind` è `email`, `ticket` o `screenshot` |
+| `history` | `{at, event, from, to, note}` |
+| `notes` | Nota senza dati della persona |
 
-La dashboard segna come scaduta una riga con stato `inviata`, `in attesa` o `risposta` la cui `deadline` è precedente a oggi. `cancellato` e `nessun dato` sono chiusure. `rifiutato` e `reclamo` restano in evidenza ma non come semplice attesa della prima risposta.
+Stati: `bozza`, `inviata`, `in-attesa`, `risposta-da-leggere`, `richiesta-info`, `verifica-otp`, `blocco-modulo`, `portale-ticket`, `cancellato`, `nessun-dato`, `escluso`, `rifiutato`, `sollecito`, `reclamo`, `chiuso`.
 
-Non aggiungere campi con il numero, l'email o l'indirizzo. Quei dati restano nel vault.
+`cancellato`, `nessun-dato` ed `escluso` richiedono almeno una prova. `escluso` significa lista di soppressione: non si ricontrolla. Gli altri due si ricontrollano dopo i giorni in `coverage.recheck_days` (60 per `people-search`, 90 per il resto, se non diversamente configurato).
+
+La dashboard calcola la percentuale di esiti finali che hanno una prova, le scadute, le azioni entro 7 giorni e i ricontrolli arrivati a data.

@@ -4,7 +4,7 @@ Non è consulenza legale. Not legal advice. Traduction de la communauté, non re
 
 # Lettre
 
-Objet : Relance art. 12 — demande du {{DATA_INVIO}} — art. 21 par. 2, art. 17, art. 19 et art. 15
+Objet : {{CASE_ID}} — Relance art. 12 — demande du {{DATA_INVIO}} — art. 21 par. 2, art. 17, art. 19 et art. 15
 
 {{BROKER}}
 

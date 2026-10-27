@@ -4,7 +4,7 @@ Not legal advice. Send only after an explicit yes. Do not move the original dead
 
 # Letter
 
-Subject: Reminder under art. 12 — request of {{DATA_INVIO}} — art. 21 par. 2, art. 17, art. 19 and art. 15
+Subject: {{CASE_ID}} — Reminder under art. 12 — request of {{DATA_INVIO}} — art. 21 par. 2, art. 17, art. 19 and art. 15
 
 {{BROKER}}
 

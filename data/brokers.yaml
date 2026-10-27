@@ -2,14 +2,17 @@
 # Non è consulenza legale. Nessun dato di persona fisica.
 # dpo_email è compilata solo se una casella di ruolo è stata letta sulla pagina ufficiale
 # il 2026-10-27. Va rilegguta prima di ogni invio. Le caselle nominative non sono copiate.
-# known_issues con "esperienza operativa" non sono stati riprodotti in questa versione.
+# verified_source: page è false se il controllo automatico ha ricevuto HTTP 403.
+# email è true solo se dpo_email è valorizzata. form è true solo se il canale è form o portal e page è true.
+# Il bot usa un canale solo quando il booleano corrispondente è true.
+# form_notes: note operative sul modulo, solo dove servono.
 # category: adtech | b2b | credit | lists | people-search
 # channel: email | form | portal
 # identifier_required: email | phone | ad_id | profile_url
 # phone_relevance: high | medium | low
 # dpo_email_basis: named-dpo | rights-contact | cookie-withdrawal | null
 # source: brokers-2026 (41 URL di partenza) | lusha-source | operational
-version: 0.1.0
+version: 0.2.0
 updated: '2026-10-27'
 disclaimer: Non è consulenza legale. Verifica il canale sulla pagina ufficiale prima di inviare.
 brokers:
@@ -30,6 +33,10 @@ brokers:
   source: brokers-2026
   notes: Il 2026-10-27 la pagina diritti invita a scrivere a questa casella per l'accesso. Rileggila prima
     di ogni invio.
+  verified_source:
+    page: true
+    email: true
+    form: false
 - id: adloox
   name: Adloox
   country: null
@@ -47,6 +54,10 @@ brokers:
   source: brokers-2026
   notes: La frase letta riguarda la revoca del consenso ai cookie, non una casella chiamata DPO. Usala
     solo se è ancora il canale per i diritti.
+  verified_source:
+    page: true
+    email: true
+    form: false
 - id: ogury
   name: Ogury
   country: null
@@ -66,6 +77,12 @@ brokers:
     http_status: 403
     result: warning
   notes: 'Portale di scelta utente. Il controllo automatico ha ricevuto 403: apri la pagina nel browser.'
+  verified_source:
+    page: false
+    email: false
+    form: false
+  form_notes: Pagina non verificata in automatico (HTTP 403). Non usare il canale finché verified_source
+    non è true.
 - id: sirdata
   name: Sirdata
   country: FR
@@ -84,6 +101,10 @@ brokers:
   last_verified: '2026-10-27'
   source: brokers-2026
   notes: DPO indicato in testa alla privacy policy. Non usare indirizzi di esempio pubblicati nella policy.
+  verified_source:
+    page: true
+    email: true
+    form: false
 - id: adikteev
   name: Adikteev
   country: FR
@@ -102,6 +123,10 @@ brokers:
     e mantieni l'opposizione sui trattamenti di cui è titolare.
   last_verified: '2026-10-27'
   source: brokers-2026
+  verified_source:
+    page: true
+    email: true
+    form: false
 - id: roq-ad
   name: Roq.ad
   country: null
@@ -118,6 +143,10 @@ brokers:
   last_verified: '2026-10-27'
   source: brokers-2026
   notes: La pagina opt-out dice di scrivere a questa casella per le richieste privacy.
+  verified_source:
+    page: true
+    email: true
+    form: true
 - id: samba
   name: Samba
   country: null
@@ -138,6 +167,12 @@ brokers:
   source: brokers-2026
   notes: La notice invita a scrivere a privacy@samba.tv per i diritti. Opt-out anche da TV, dispositivo,
     DAA e NAI, come pubblicato sulla stessa pagina.
+  verified_source:
+    page: true
+    email: true
+    form: true
+  form_notes: 'Spesso OneTrust. OTP via SMS verso numeri italiani: al massimo due invii, poi verification_status
+    fallito-sms e lettera di riserva solo se verified_source.email è true.'
 - id: virtual-minds
   name: Virtual Minds
   country: DE
@@ -154,6 +189,10 @@ brokers:
     Cerca un modulo o una casella di ruolo.
   last_verified: '2026-10-27'
   source: brokers-2026
+  verified_source:
+    page: true
+    email: false
+    form: true
 - id: captify
   name: Captify
   country: null
@@ -174,6 +213,12 @@ brokers:
     http_status: 403
     result: warning
   notes: 'Modulo diritti. Controllo automatico 403: apri nel browser.'
+  verified_source:
+    page: false
+    email: false
+    form: false
+  form_notes: Pagina non verificata in automatico (HTTP 403). Non usare il canale finché verified_source
+    non è true.
 - id: sovrn
   name: Sovrn
   country: null
@@ -193,6 +238,12 @@ brokers:
     http_status: 403
     result: warning
   notes: 'Pagina di opt-out. Controllo automatico 403: apri nel browser.'
+  verified_source:
+    page: false
+    email: false
+    form: false
+  form_notes: Pagina non verificata in automatico (HTTP 403). Non usare il canale finché verified_source
+    non è true.
 - id: blis
   name: Blis
   country: null
@@ -213,6 +264,12 @@ brokers:
     result: warning
   notes: 'Privacy centre. Controllo automatico 403: apri nel browser. Rilevanza telefonica bassa: è adtech
     di location, lavora su identificativi di dispositivo.'
+  verified_source:
+    page: false
+    email: false
+    form: false
+  form_notes: Pagina non verificata in automatico (HTTP 403). Non usare il canale finché verified_source
+    non è true.
 - id: loopme
   name: LoopMe
   country: null
@@ -230,6 +287,10 @@ brokers:
   source: brokers-2026
   notes: Il privacy center chiama questa casella anche data protection officer e la indica per accesso,
     rettifica e cancellazione.
+  verified_source:
+    page: true
+    email: true
+    form: true
 - id: yahoo-ie
   name: Yahoo IE
   country: IE
@@ -247,6 +308,10 @@ brokers:
   source: brokers-2026
   notes: Pagina privacy di Yahoo Ireland. Il DPO è questa casella. Non copiare l'indirizzo postale della
     società nel repo né nella bozza, salvo che l'utente scelga la posta cartacea.
+  verified_source:
+    page: true
+    email: true
+    form: false
 - id: adform
   name: Adform
   country: null
@@ -261,6 +326,10 @@ brokers:
   known_issues: []
   last_verified: '2026-10-27'
   source: brokers-2026
+  verified_source:
+    page: true
+    email: false
+    form: true
 - id: rtb-house
   name: RTB House
   country: null
@@ -278,6 +347,10 @@ brokers:
   source: brokers-2026
   notes: Opt-out anche su https://optout.rtbhouse.com. La policy indica la casella DPO. Non copiare nominativi
     o indirizzi postali di persone pubblicati accanto.
+  verified_source:
+    page: true
+    email: true
+    form: true
 - id: the-trade-desk
   name: The Trade Desk
   country: null
@@ -294,6 +367,10 @@ brokers:
   source: brokers-2026
   notes: Opt-out di dispositivo oltre alla pagina privacy. Nessuna casella DPO verificata su questa URL
     il 2026-10-27.
+  verified_source:
+    page: true
+    email: false
+    form: true
 - id: epsilon
   name: Epsilon
   country: null
@@ -313,6 +390,10 @@ brokers:
   source: brokers-2026
   notes: 'Piattaforma di richiesta dell''interessato. Categoria lists: è un broker di dati marketing,
     non solo un DSP.'
+  verified_source:
+    page: true
+    email: false
+    form: true
 - id: quantcast
   name: Quantcast
   country: null
@@ -328,6 +409,10 @@ brokers:
   known_issues: []
   last_verified: '2026-10-27'
   source: brokers-2026
+  verified_source:
+    page: true
+    email: false
+    form: true
 - id: magnite
   name: Magnite
   country: null
@@ -347,6 +432,12 @@ brokers:
     http_status: 403
     result: warning
   notes: 'Policy della piattaforma pubblicitaria. Controllo automatico 403: apri nel browser.'
+  verified_source:
+    page: false
+    email: false
+    form: false
+  form_notes: Pagina non verificata in automatico (HTTP 403). Non usare il canale finché verified_source
+    non è true.
 - id: eyeota
   name: Eyeota
   country: null
@@ -362,6 +453,10 @@ brokers:
   known_issues: []
   last_verified: '2026-10-27'
   source: brokers-2026
+  verified_source:
+    page: true
+    email: false
+    form: true
 - id: cognism
   name: Cognism
   country: null
@@ -380,6 +475,11 @@ brokers:
     un captcha, lo risolve l'utente nel proprio browser. Non aggirare il captcha.
   last_verified: '2026-10-27'
   source: brokers-2026
+  verified_source:
+    page: true
+    email: false
+    form: true
+  form_notes: Stesso portale SayMine di Kaspr. Stessi limiti di tentativi e di captcha.
 - id: dealfront
   name: Dealfront
   country: null
@@ -396,6 +496,10 @@ brokers:
   last_verified: '2026-10-27'
   source: brokers-2026
   notes: Anche Leadfeeder. Privacy cockpit.
+  verified_source:
+    page: true
+    email: false
+    form: true
 - id: zoominfo
   name: ZoomInfo
   country: null
@@ -416,6 +520,12 @@ brokers:
     http_status: 403
     result: warning
   notes: 'Modulo di rimozione. Controllo automatico 403: apri nel browser.'
+  verified_source:
+    page: false
+    email: false
+    form: false
+  form_notes: 'Controllo automatico HTTP 403: verified_source.form è false finché un umano non conferma
+    la pagina. Non inviare prima.'
 - id: lusha
   name: Lusha
   country: null
@@ -437,6 +547,12 @@ brokers:
   - ls-mobile-apps
   - mixrank
   - rampedup
+  verified_source:
+    page: true
+    email: false
+    form: true
+  form_notes: Modulo di rimozione. Dopo il submit conserva ticket_id e proof_path sulla scheda locale,
+    non nel repository.
 - id: apollo
   name: Apollo
   country: null
@@ -454,6 +570,12 @@ brokers:
     solo un'email personale, dillo e cerca sulla pagina un canale che la accetti.
   last_verified: '2026-10-27'
   source: brokers-2026
+  verified_source:
+    page: true
+    email: false
+    form: true
+  form_notes: Il modulo chiede un'email aziendale. Non inventarla. Se manca, lascia il campo vuoto. Se
+    il submit è impossibile, stato blocco-modulo.
 - id: rocketreach
   name: RocketReach
   country: null
@@ -469,6 +591,12 @@ brokers:
   known_issues: []
   last_verified: '2026-10-27'
   source: brokers-2026
+  verified_source:
+    page: true
+    email: false
+    form: true
+  form_notes: Dopo il submit può restare un portale. Stato portale-ticket. Aggancia la mail di conferma
+    con dominio e ticket, non con l'oggetto.
 - id: dun-bradstreet
   name: Dun & Bradstreet
   country: null
@@ -487,6 +615,10 @@ brokers:
   source: brokers-2026
   notes: Pagina di trasparenza, non un modulo di cancellazione già verificato. Cerca il canale diritti
     sul sito ufficiale prima di scrivere. Spesso i dati riguardano società e esponenti.
+  verified_source:
+    page: true
+    email: false
+    form: true
 - id: equifax-uk
   name: Equifax UK
   country: GB
@@ -506,6 +638,10 @@ brokers:
   source: brokers-2026
   notes: 'Credit bureau. L''opt-out marketing non cancella i dati di credito conservati per obbligo di
     legge: chiedi cosa tengono e perché.'
+  verified_source:
+    page: true
+    email: false
+    form: true
 - id: transunion-uk
   name: TransUnion UK
   country: GB
@@ -528,6 +664,12 @@ brokers:
     http_status: 403
     result: warning
   notes: 'Controllo automatico 403: apri nel browser.'
+  verified_source:
+    page: false
+    email: false
+    form: false
+  form_notes: Pagina non verificata in automatico (HTTP 403). Non usare il canale finché verified_source
+    non è true.
 - id: schufa
   name: SCHUFA
   country: DE
@@ -547,6 +689,10 @@ brokers:
   source: brokers-2026
   notes: 'La URL è il servizio di copia dei dati (art. 15), non da sola una cancellazione. Il credito
     può avere una base legale che l''art. 17 non supera: chiedi la base e opponiti comunque al marketing.'
+  verified_source:
+    page: true
+    email: false
+    form: true
 - id: crif-de
   name: CRIF DE
   country: DE
@@ -565,6 +711,10 @@ brokers:
   last_verified: '2026-10-27'
   source: brokers-2026
   notes: Selbstauskunft per persone fisiche. Stessa cautela della SCHUFA sui dati di credito.
+  verified_source:
+    page: true
+    email: false
+    form: true
 - id: creditsafe
   name: Creditsafe
   country: GB
@@ -584,6 +734,10 @@ brokers:
   last_verified: '2026-10-27'
   source: brokers-2026
   notes: Dati di imprese e esponenti, pagina UK. Nessuna casella DPO verificata il 2026-10-27.
+  verified_source:
+    page: true
+    email: false
+    form: true
 - id: experian-uk
   name: Experian UK
   country: GB
@@ -602,6 +756,10 @@ brokers:
   last_verified: '2026-10-27'
   source: brokers-2026
   notes: Pagina di opt-out. Distingui marketing e dati di credito.
+  verified_source:
+    page: true
+    email: false
+    form: true
 - id: selectabase
   name: Selectabase
   country: GB
@@ -618,6 +776,10 @@ brokers:
   last_verified: '2026-10-27'
   source: brokers-2026
   notes: Liste marketing UK, telefono rilevante. Non copiare numeri di contatto commerciale dell'azienda.
+  verified_source:
+    page: true
+    email: false
+    form: true
 - id: 192-com
   name: 192.com
   country: GB
@@ -638,6 +800,12 @@ brokers:
     http_status: 403
     result: warning
   notes: 'People-search UK. Controllo automatico 403: apri nel browser.'
+  verified_source:
+    page: false
+    email: false
+    form: false
+  form_notes: Pagina non verificata in automatico (HTTP 403). Non usare il canale finché verified_source
+    non è true.
 - id: acxiom-optout
   name: Acxiom optout
   country: null
@@ -660,6 +828,12 @@ brokers:
   source: brokers-2026
   notes: 'Opt-out. Nessuna casella DPO copiata: un indirizzo presente nel HTML non aveva una frase chiara
     che lo indicasse come canale diritti.'
+  verified_source:
+    page: true
+    email: false
+    form: true
+  form_notes: Il modulo può chiedere l'indirizzo postale. Lascialo vuoto. Se è obbligatorio, non inviare
+    e prepara la richiesta art. 12 sulla minimizzazione.
 - id: acxiom-it
   name: Acxiom IT
   country: null
@@ -678,6 +852,11 @@ brokers:
   source: brokers-2026
   notes: Pagina privacy in italiano dello stesso titolare dell'opt-out. Tienile entrambe. La sede non
     è stata verificata su questa pagina.
+  verified_source:
+    page: true
+    email: false
+    form: true
+  form_notes: Stessa regola di Acxiom optout sull'indirizzo postale.
 - id: liveramp
   name: LiveRamp
   country: null
@@ -696,6 +875,10 @@ brokers:
   notes: 'La privacy page elenca caselle per paese. Per l''Italia indica privacy.it@liveramp.com. Non
     è chiamata DPO nel testo letto. Rileggila: se l''utente non è in Italia, usa la casella del suo paese
     pubblicata lì, non questa.'
+  verified_source:
+    page: true
+    email: true
+    form: false
 - id: lexisnexis
   name: LexisNexis
   country: null
@@ -718,6 +901,12 @@ brokers:
   source: brokers-2026
   notes: Questa URL è la privacy policy globale, non necessariamente il modulo di rimozione. Cerca il
     modulo partendo da qui.
+  verified_source:
+    page: true
+    email: false
+    form: true
+  form_notes: Il flusso può chiedere data di nascita e documento. Campi da lasciare vuoti. Se sono obbligatori,
+    stop e modello richiesta-dati-sproporzionata.
 - id: companydata
   name: CompanyData
   country: null
@@ -736,6 +925,10 @@ brokers:
   source: brokers-2026
   notes: Informativa. Nessuna casella di ruolo verificata come canale diritti il 2026-10-27. Non usare
     un info@ generico se la pagina non lo indica per i diritti.
+  verified_source:
+    page: true
+    email: false
+    form: true
 - id: north-data
   name: North Data
   country: null
@@ -754,6 +947,10 @@ brokers:
   last_verified: '2026-10-27'
   source: brokers-2026
   notes: La pagina privacy dice che a questa casella si raggiunge il data protection officer.
+  verified_source:
+    page: true
+    email: true
+    form: false
 - id: kaspr
   name: Kaspr
   country: FR
@@ -777,6 +974,12 @@ brokers:
   form_url: https://kaspr.privacy.saymine.io/kaspr
   notes: Non era nell'elenco iniziale di 41 URL. Aggiunto perché il problema SayMine è noto. La policy
     dice di scrivere a privacy@kaspr.io per esercitare i diritti.
+  verified_source:
+    page: true
+    email: true
+    form: true
+  form_notes: 'SayMine. HTTP 400 o captcha: al massimo due submit, poi blocco-modulo. In passato l''email
+    è stata rifiutata: dillo all''utente prima della lettera di riserva.'
 - id: ls-mobile-apps
   name: L.S Mobile Apps
   country: null
@@ -798,6 +1001,10 @@ brokers:
   notes: 'Sito pubblicato come LSM Apps. La privacy policy renderizzata il 2026-10-27 indica dpo@lsmapps.com
     per i diritti e dice di condividere dati con Lusha, descritta come capogruppo. L''HTML statico è spesso
     una shell: conferma l''indirizzo sulla pagina prima di inviare.'
+  verified_source:
+    page: true
+    email: true
+    form: false
 - id: mixrank
   name: Mixrank
   country: US
@@ -819,6 +1026,11 @@ brokers:
     confirmed_on_lusha_page: false
   notes: La policy indica il Privacy Team a questa casella e il portale privacy-request per accesso, rettifica,
     cancellazione e opt-out. Fonte Lusha segnalata, non riconfermata sulla notice Lusha in questa versione.
+  verified_source:
+    page: true
+    email: true
+    form: true
+  form_notes: Modulo sul form_url. Anteprima di ogni campo prima del submit.
 - id: rampedup
   name: RampedUp
   country: null
@@ -845,3 +1057,9 @@ brokers:
     confirmed_on_lusha_page: false
   notes: Fonte Lusha segnalata, non riconfermata sulla notice Lusha in questa versione. Parti dal portale,
     non da una email generica.
+  verified_source:
+    page: true
+    email: false
+    form: true
+  form_notes: Il portale autentica l'email. verification_status attesa-otp finché l'utente non incolla
+    il codice. Non ripetere il codice in chat.

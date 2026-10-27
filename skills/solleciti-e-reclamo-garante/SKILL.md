@@ -5,22 +5,14 @@ description: Use when il mese dell'art. 12 è scaduto, la risposta non basta, o 
 
 # Sollecito e reclamo
 
-Non è consulenza legale. Prima il sollecito al titolare. Il reclamo all'autorità viene dopo, se l'utente lo vuole.
+Non è consulenza legale. I tempi sono in `docs/metodo.md`. Prima il sollecito al titolare. Il reclamo viene dopo, se l'utente lo vuole.
 
-Sollecito quando la scadenza nel registro è passata e lo stato è ancora `inviata` o `in attesa`, oppure lo stato è `risposta` o `rifiutato` e la risposta non tratta i diritti chiesti. Non sollecitare il giorno stesso dell'invio.
+Proponi il sollecito il giorno della scadenza effettiva (`extended_deadline` se c'è, altrimenti `deadline`) se lo stato è `inviata`, `in-attesa` o `portale-ticket`. `next_action` è `sollecito` e `next_action_due` è quella data più 7 giorni di grazia. Non inviare nel giorno stesso del primo invio. Dopo la grazia, se l'utente non ha ancora detto sì, il sollecito resta nel report fra le azioni in attesa.
 
-Usa `templates/letters/it/sollecito-art12.md` (o la lingua del primo invio). Richiama la data dell'invio, i diritti, l'art. 12 e il fatto che il mese è passato. Chiedi una risposta. Non insultare e non minacciare azioni che l'utente non ha deciso. Puoi scrivere che si riserva il reclamo all'autorità di controllo.
+Usa `templates/letters/it/sollecito-art12.md` o la lingua del primo invio. L'oggetto inizia con `{{CASE_ID}}`. Non spostare `deadline`. Mostra la bozza. Invia solo dopo un sì esplicito. Poi stato `sollecito`, etichetta `Scrubber/sollecito` e `Scrubber/tipo/sollecito`, e `next_action_due` a 14 giorni da questo invio.
 
-Mostra oggetto, destinatario e testo. Invia solo dopo un sì esplicito. Poi aggiorna la nota del registro, senza spostare la scadenza originale: la data da cui contare il ritardo resta quella del primo invio.
+Proponi il reclamo se quei 14 giorni passano senza una risposta nel merito, oppure se lo stato è `rifiutato` e il rifiuto non indica una base. Non aprire il reclamo da solo. Autorità del paese nel vault, elenco in `data/registries.yaml`. Per l'Italia, il Garante: modalità e indirizzo si leggono sulla pagina reclami, la PEC istituzionale è nel file e accetta solo PEC. Avvisa che la firma autografa, secondo quella pagina, chiede la copia di un documento. Il documento non entra nel repo.
 
-Reclamo se, dopo il sollecito, il silenzio o il rifiuto resta, e l'utente chiede di andare all'autorità. Non aprire il reclamo di tua iniziativa.
+Bozza `templates/letters/it/reclamo-garante.md` con il `case_id`, il titolare, l'URL, le date e l'esito. Sì esplicito, poi stato `reclamo` e etichetta `Scrubber/reclamo`.
 
-Scegli l'autorità del paese nel vault (`scrubber.country`), che è lo Stato della residenza abituale, oppure un'altra se l'utente lavora lì o lì è avvenuto il fatto. L'elenco è `data/registries.yaml`, chiave `authorities`. Se `complaint_url_verified` è false, apri il sito e cerca la pagina reclami corrente. Non inventare un modulo.
-
-Per l'Italia l'autorità è il Garante. La pagina reclami in `registries.yaml` descrive PEC, raccomandata o consegna a mano. La PEC istituzionale è nel file: accetta solo messaggi provenienti da PEC. L'indirizzo postale si legge sulla pagina, non da questo repo. Il Garante chiede un reclamo firmato. Con firma autografa la pagina pubblica chiede anche la copia di un documento. Spiegalo e lascia scegliere all'utente. Firma digitale o firma autenticata seguono le istruzioni della stessa pagina. Non conservare il documento nel repo.
-
-Prepara `templates/letters/it/reclamo-garante.md` con i fatti già nel registro: titolare, URL, data della richiesta, assenza di risposta o rifiuto, diritti invocati. Niente dati in più. Mostra la bozza completa, destinatario compreso. Invia solo dopo un sì esplicito. Segna lo stato `reclamo`.
-
-In Germania il reclamo verso un'azienda di solito va all'autorità del Land, non al BfDI. La URL in elenco porta all'indice dei Länder. In Spagna, se la sede elettronica non si apre, parti dalla home dell'AEPD.
-
-L'EDPB non riceve reclami contro aziende. L'EDPS serve per le istituzioni UE, non per un broker.
+In Germania il reclamo verso un'azienda di solito va all'autorità del Land. L'EDPB non riceve reclami contro aziende. L'EDPS non è l'autorità di un broker.

@@ -4,7 +4,7 @@ Non è consulenza legale. Not legal advice. Traducción de la comunidad, sin rev
 
 # Carta
 
-Asunto: Requerimiento art. 12 — solicitud del {{DATA_INVIO}} — art. 21 par. 2, art. 17, art. 19 y art. 15
+Asunto: {{CASE_ID}} — Requerimiento art. 12 — solicitud del {{DATA_INVIO}} — art. 21 par. 2, art. 17, art. 19 y art. 15
 
 {{BROKER}}
 

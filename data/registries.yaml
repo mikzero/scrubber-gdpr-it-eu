@@ -2,7 +2,7 @@
 # Non è consulenza legale. Nessun dato di persona fisica e nessun numero di telefono.
 # Le email presenti sono caselle istituzionali di ruolo, lette su pagine ufficiali.
 # complaint_url_verified false: la URL è la home o un ingresso da controllare, non un modulo già provato.
-version: 0.1.0
+version: 0.2.0
 updated: '2026-10-27'
 disclaimer: Non è consulenza legale. I nominativi delle persone fisiche pubblicati dall'EDPB non vanno
   copiati in questo repo.
@@ -94,7 +94,8 @@ authorities:
   website: https://www.cpdp.bg/
   complaint_url: https://www.cpdp.bg/
   complaint_url_verified: false
-  notes: Il 2026-10-27 il controllo automatico non ha completato la verifica del certificato TLS. Non è un 404. Apri il sito nel browser.
+  notes: Il 2026-10-27 il controllo automatico non ha completato la verifica del certificato TLS. Non
+    è un 404. Apri il sito nel browser.
 - id: hr-azop
   name: Agencija za zaštitu osobnih podataka
   country: HR

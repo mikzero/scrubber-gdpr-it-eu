@@ -4,7 +4,7 @@ Non è consulenza legale. Usala quando il titolare risponde che non trova dati. 
 
 # Lettera
 
-Oggetto: Precisazione sulla risposta «nessun dato» — art. 21 par. 2 e art. 15 par. 1 lett. g
+Oggetto: {{CASE_ID}} — Precisazione sulla risposta «nessun dato» — art. 21 par. 2 e art. 15 par. 1 lett. g
 
 {{BROKER}}
 
