@@ -1,5 +1,5 @@
 ---
-name: compila-form-broker
+name: scrubber-compila-form-broker
 description: Use when il titolare usa un modulo web, con anteprima, OTP dell'utente e piano se l'SMS non arriva.
 ---
 
@@ -7,9 +7,9 @@ description: Use when il titolare usa un modulo web, con anteprima, OTP dell'ute
 
 Non è consulenza legale. Le regole sono il capitolo 6 di `docs/metodo.md` e `docs/sicurezza.md`. Il modulo è un invio. Il codice OTP non si ripete in chat né nei log.
 
-1. Usa questa skill se `channel` è `form` o `portal`. Leggi `form_notes`, `form_url` se c'è, `known_issues` e la pagina ufficiale (`trova-canale-broker`).
+1. Usa questa skill se `channel` è `form` o `portal`. Leggi `form_notes`, `form_url` se c'è, `known_issues` e la pagina ufficiale (`scrubber-trova-canale-broker`).
 2. Scheda in stato `bozza`, con `case_id`, prima di toccare il modulo. Il modulo non porterà l'id nell'oggetto: ti servirà dopo, insieme al dominio e al ticket.
-3. Checklist del minimo. Lascia vuoti data di nascita, documento, selfie, codice fiscale e indirizzo postale. Se uno è obbligatorio, non compilarlo: stato `blocco-modulo` e lettera art. 12 con `richiesta-gdpr-art21-17`, che spiega il rifiuto.
+3. Checklist del minimo. Lascia vuoti data di nascita, documento, selfie, codice fiscale e indirizzo postale. Se uno è obbligatorio, non compilarlo: stato `blocco-modulo` e lettera art. 12 con `scrubber-richiesta-gdpr-art21-17`, che spiega il rifiuto.
 4. Mostra l'anteprima di ogni campo, tendina e casella, e la `form_url`. Di' se manca la voce sull'opposizione art. 21 par. 2. Submit solo dopo un sì esplicito su quell'anteprima.
 5. Se compare un OTP, chiedi se arriva via SMS o via email. Stato `verifica-otp` e `verification_status` `attesa-otp`. Il codice lo incolla l'utente. Non ripeterlo. Se non arriva, dopo due tentativi lo stato è `blocco-modulo`, non resta `verifica-otp`.
 6. SMS verso un numero italiano, in particolare OneTrust (Samba, id `samba`): al massimo due invii. Se non arriva, `verification_status` `fallito-sms`, stato `blocco-modulo`, lettera di riserva che cita il mancato arrivo. Stesso stop dopo due codici rifiutati dal sito.

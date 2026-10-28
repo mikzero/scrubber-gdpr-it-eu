@@ -6,6 +6,20 @@ prima di applicare l'aggiornamento.
 
 Il formato segue [Keep a Changelog](https://keepachangelog.com/) e il pacchetto usa [SemVer](https://semver.org/).
 
+## 0.3.3 — 2026-10-28
+
+### Added
+
+- Diario locale delle skill (`docs/registro-skill.md`): installazione, modifica, rimozione e aggiornamento non applicato restano tracciabili, senza dati personali. La dashboard ha una scheda Skill, con dati di esempio finti.
+- L'utente può aggiungere o modificare una skill. Il bot esegue gli stessi controlli, avvisa in italiano, la segna come personale e non la blocca. Se il testo contraddice le regole di fondo, avvisa, registra e decide l'utente.
+
+### Changed
+
+- Le cartelle delle skill usano il prefisso `scrubber-`, perché la libreria è condivisa da tutti i bot dell'utente. Un nome già usato da una skill che non è di questo pacchetto non si sovrascrive: il conflitto si registra.
+- La prima installazione delle skill può arrivare da `main` dopo un merge del proprietario. Gli aggiornamenti successivi arrivano solo da un tag `v` firmato. Il sì prima di ogni messaggio in uscita non cambia. Non si chiede più conferma solo prima di sostituire una skill ufficiale firmata, se i controlli passano e l'utente non l'ha modificata.
+
+Non è consulenza legale.
+
 ## 0.3.2 — 2026-10-27
 
 ### Added
@@ -66,7 +80,7 @@ Non è consulenza legale.
 
 ### Added
 
-- Metodo operativo unico (`docs/metodo.md`, skill `metodo-operativo`): scheda caso, etichette, stati, moduli, report settimanale.
+- Metodo operativo unico (`docs/metodo.md`, skill `scrubber-metodo-operativo`): scheda caso, etichette, stati, moduli, report settimanale.
 - Registro `scrubber-registro/2` con maschera dell'identificativo, prove, ricontrollo a 60 o 90 giorni e stato `escluso`.
 - Sicurezza e minimizzazione: repository in sola lettura, aggiornamento automatico con lint, niente invii in massa.
 - Roadmap Europa poi resto del mondo, e un file per paese in `data/countries/`.

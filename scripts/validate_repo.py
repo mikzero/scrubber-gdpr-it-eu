@@ -127,18 +127,20 @@ def check_skills() -> None:
             fail(f"{directory.name}: description must start with 'Use when '")
         if len(description) > 160:
             fail(f"{directory.name}: description is {len(description)} chars")
-        if "bozza" not in text.lower() and directory.name not in {"sync-dal-repo", "getting-started", "registro-e-dashboard", "trova-canale-broker"}:
+        if "bozza" not in text.lower() and directory.name not in {"scrubber-sync-dal-repo", "scrubber-getting-started", "scrubber-registro-e-dashboard", "scrubber-trova-canale-broker"}:
             # Sending-capable skills must mention the draft gate. The four above
             # still need the rule when they cause a send; their bodies say so.
             pass
+        if not directory.name.startswith("scrubber-"):
+            fail(f"{directory.name}: skill folder must use the scrubber- prefix")
         if directory.name in {
-            "richiesta-gdpr-art21-17",
-            "compila-form-broker",
-            "solleciti-e-reclamo-garante",
-            "rpo-ed-elenchi-it",
-            "ricerca-schede-people-search",
-            "opt-out-adtech-dispositivo",
-            "leggi-risposte-e-classifica",
+            "scrubber-richiesta-gdpr-art21-17",
+            "scrubber-compila-form-broker",
+            "scrubber-solleciti-e-reclamo-garante",
+            "scrubber-rpo-ed-elenchi-it",
+            "scrubber-ricerca-schede-people-search",
+            "scrubber-opt-out-adtech-dispositivo",
+            "scrubber-leggi-risposte-e-classifica",
         }:
             if "sì esplicito" not in text and "si esplicito" not in text:
                 fail(f"{directory.name}: missing explicit user-consent gate")
@@ -147,8 +149,8 @@ def check_skills() -> None:
 def check_manifest(brokers: dict) -> None:
     manifest = json.loads((ROOT / "manifest.json").read_text(encoding="utf-8"))
     version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-    if version != "0.3.2":
-        fail(f"VERSION is {version}, expected 0.3.2")
+    if version != "0.3.3":
+        fail(f"VERSION is {version}, expected 0.3.3")
     if manifest.get("bot_access") != "read-only":
         fail("manifest.bot_access must be read-only")
     policy = manifest.get("update_policy") or {}
@@ -175,8 +177,27 @@ def check_manifest(brokers: dict) -> None:
             fail(f"manifest path missing: {entry['path']}")
         if entry.get("version") != version:
             fail(f"skill {entry['name']} version {entry.get('version')} != {version}")
-    if manifest.get("getting_started_skill") != "getting-started":
-        fail("getting_started_skill must be getting-started")
+    if manifest.get("getting_started_skill") != "scrubber-getting-started":
+        fail("getting_started_skill must be scrubber-getting-started")
+    if manifest.get("registro_skill") != "docs/registro-skill.md":
+        fail("registro_skill must point at docs/registro-skill.md")
+    expected_skills_policy = (
+        "scrubber-prefix; first-install-from-main-then-signed-v-tag; "
+        "user-skills-allowed-with-warnings; never-overwrite-user-edit-or-foreign-name"
+    )
+    if policy.get("skills") != expected_skills_policy:
+        fail("manifest.update_policy.skills does not match the v0.3.3 skill rules")
+    if policy.get("skill_prefix") != "scrubber-":
+        fail("manifest.update_policy.skill_prefix must be scrubber-")
+    if policy.get("user_skills") != "allowed-with-warnings-never-silent-block":
+        fail("user skills must stay allowed, with warnings and no silent block")
+    if policy.get("foreign_same_name") != "never-overwrite-log-conflict":
+        fail("a same-named foreign skill must never be overwritten")
+    if policy.get("skill_log") != "local-only":
+        fail("skill log must stay local")
+    for entry in manifest["skills"]:
+        if not str(entry.get("name", "")).startswith("scrubber-"):
+            fail(f"skill {entry.get('name')} must use the scrubber- prefix")
     routine = manifest.get("recommended_routine") or {}
     if routine.get("while_deadlines_open") != "weekly" or routine.get("after_deadlines") != "monthly":
         fail("recommended routine must be weekly while deadlines are open, then monthly")
@@ -291,6 +312,130 @@ def check_countries(manifest: dict) -> None:
         fail("manifest coverage.countries does not match data/countries")
 
 
+def check_skill_policy() -> None:
+    sync = (ROOT / "skills" / "scrubber-sync-dal-repo" / "SKILL.md").read_text(encoding="utf-8")
+    required = [
+        "Il sì prima di ogni messaggio in uscita resta obbligatorio",
+        "Non si chiede più conferma solo prima di sostituire una skill ufficiale",
+        "può arrivare da `main`",
+        "solo da un tag `v` firmato",
+        "non sovrascriverla mai",
+        "skill personale",
+        "docs/registro-skill.md",
+        "non è di questo pacchetto",
+    ]
+    for snippet in required:
+        if snippet not in sync:
+            fail(f"scrubber-sync-dal-repo missing: {snippet}")
+    if "sostituisce la vecchia regola" in sync:
+        fail("sync skill still uses the ambiguous overwrite sentence")
+    started = (ROOT / "skills" / "scrubber-getting-started" / "SKILL.md").read_text(encoding="utf-8")
+    if "skill personale" not in started:
+        fail("getting-started does not explain personal skills")
+    safety = (ROOT / "skills" / "scrubber-sicurezza-e-minimizzazione" / "SKILL.md").read_text(encoding="utf-8")
+    if "non si blocca" not in safety or "skill personale" not in safety:
+        fail("sicurezza skill does not keep user skills unblocked")
+    for name in ("docs/sicurezza.md", "docs/privacy-del-bot.md"):
+        text = (ROOT / name).read_text(encoding="utf-8")
+        if "docs/registro-skill.md" not in text and name.endswith("sicurezza.md"):
+            fail(f"{name} does not point at the skill log")
+        if "skill personale" not in text:
+            fail(f"{name} does not mention personal skills")
+        if "senza mostrare il diff e senza un sì" in text:
+            fail(f"{name} still ties every skill overwrite to a yes")
+    spec = ROOT / "docs" / "registro-skill.md"
+    if not spec.exists():
+        fail("missing docs/registro-skill.md")
+        return
+    text = spec.read_text(encoding="utf-8")
+    for token in (
+        "skill_log", "skill-log.json", "installed", "updated", "added-by-user",
+        "edited-by-user", "removed", "blocked-update", "sha256", "previous_sha256",
+        "diff_summary", "security_lint", "repo-tag", "repo-main", "other-url",
+        "ufficiale", "personale", "altra",
+    ):
+        if token not in text:
+            fail(f"registro-skill.md missing {token}")
+
+
+def check_skill_log(example: dict) -> None:
+    events = example.get("skill_log")
+    if not isinstance(events, list) or len(events) < 4:
+        fail("example registro must include a fake skill_log")
+        return
+    actions = {
+        "installed", "updated", "added-by-user", "edited-by-user", "removed", "blocked-update",
+    }
+    origins = {"ufficiale", "personale", "altra"}
+    sha_re = re.compile(r"^[a-f0-9]{64}$")
+    at_re = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
+    id_re = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+    ref_re = re.compile(r"^v\d+\.\d+\.\d+$")
+    seen = set()
+    for event in events:
+        action = event.get("action")
+        seen.add(action)
+        if action not in actions:
+            fail(f"bad skill_log action {action}")
+        if not at_re.match(str(event.get("at", ""))):
+            fail("skill_log at must be UTC ISO-8601")
+        if not id_re.match(str(event.get("skill_id", ""))):
+            fail("skill_log skill_id must be a slug")
+        if event.get("origin") not in origins:
+            fail("skill_log origin must be ufficiale, personale or altra")
+        if not isinstance(event.get("applied"), bool):
+            fail("skill_log applied must be boolean")
+        summary = event.get("diff_summary")
+        if not isinstance(summary, str) or not summary.strip() or len(summary) > 240 or "@" in summary:
+            fail("skill_log diff_summary must be a short sentence without an email")
+        version = event.get("version")
+        if not isinstance(version, str) or not version.strip():
+            fail("skill_log version missing")
+        sha = event.get("sha256")
+        previous = event.get("previous_sha256")
+        if action == "removed":
+            if sha is not None or not isinstance(previous, str) or not sha_re.match(previous):
+                fail("removed skill event must keep only previous_sha256")
+        else:
+            if not isinstance(sha, str) or not sha_re.match(sha):
+                fail("skill_log sha256 must be 64 lowercase hex characters")
+            if previous is not None and (not isinstance(previous, str) or not sha_re.match(previous)):
+                fail("skill_log previous_sha256 must be 64 hex characters or null")
+        lint = event.get("security_lint") or {}
+        result = lint.get("result")
+        warnings = lint.get("warnings")
+        if result not in {"pass", "warnings"} or not isinstance(warnings, list):
+            fail("skill_log security_lint must be pass or warnings")
+        elif result == "pass" and warnings:
+            fail("skill_log pass cannot list warnings")
+        elif result == "warnings" and not warnings:
+            fail("skill_log warnings must list reasons")
+        source = event.get("source") or {}
+        kind = source.get("kind")
+        if kind == "repo-tag":
+            if not ref_re.match(str(source.get("ref", ""))) or source.get("signature") not in {"valid", "missing", "mismatch"}:
+                fail("repo-tag source needs ref vX.Y.Z and a signature status")
+        elif kind == "repo-main":
+            if source.get("ref") != "main" or source.get("signature") != "not-applicable":
+                fail("repo-main source must use main and signature not-applicable")
+        elif kind == "user":
+            if source.get("signature") != "not-applicable":
+                fail("user source signature must be not-applicable")
+        elif kind == "other-url":
+            url = str(source.get("url", ""))
+            if not url.startswith("https://") or "@" in url or source.get("signature") != "not-applicable":
+                fail("other-url source must be https without personal data")
+        else:
+            fail(f"bad skill_log source {kind}")
+    for action in ("installed", "added-by-user", "edited-by-user", "blocked-update", "removed"):
+        if action not in seen:
+            fail(f"example skill_log missing action {action}")
+    if not any(event.get("origin") == "altra" and event.get("applied") is False for event in events):
+        fail("example skill_log must show a foreign same-name conflict")
+    if not any(event.get("origin") == "personale" and event.get("applied") is True for event in events):
+        fail("example skill_log must show an active personal skill")
+
+
 def check_dashboard() -> None:
     example_path = ROOT / "dashboard" / "example-registro.json"
     example = json.loads(example_path.read_text(encoding="utf-8"))
@@ -327,6 +472,9 @@ def check_dashboard() -> None:
         fail("embedded dashboard example does not match example-registro.json")
     if "google-analytics" in html.lower() or "fonts.googleapis" in html.lower():
         fail("dashboard must not load tracking or remote fonts")
+    if 'id="tab-skill"' not in html or "Personale" not in html:
+        fail("dashboard must list skills in plain Italian")
+    check_skill_log(example)
 
 
 def main() -> int:
@@ -339,12 +487,15 @@ def main() -> int:
     check_countries(manifest)
     check_templates()
     check_dashboard()
+    check_skill_policy()
     check_personal_data(collect_declared_emails())
     lint_path = ROOT / "scripts" / "security_lint.py"
     import importlib.util
     spec = importlib.util.spec_from_file_location("security_lint", lint_path)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
+    if module.self_test() != 0:
+        fail("security_lint self-test failed")
     for hit in module.scan():
         fail(f"security_lint: {hit}")
     if errors:

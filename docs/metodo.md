@@ -6,7 +6,7 @@ I dati della persona stanno nel vault o nella memoria del bot. Non stanno in git
 
 ## 1. Dati iniziali
 
-Chiedi una sola cosa per turno, nell'ordine della skill `getting-started`. Salva solo nel vault:
+Chiedi una sola cosa per turno, nell'ordine della skill `scrubber-getting-started`. Salva solo nel vault:
 
 | Chiave | Contenuto |
 | --- | --- |
@@ -187,7 +187,7 @@ Ricontrollo, intervalli in `manifest.json` alla chiave `coverage.recheck_days`: 
 
 ## 4. Lettura e seguito
 
-Ciclo settimanale, finché esiste una scheda non chiusa. Poi il ciclo diventa mensile. All'inizio esegui anche `sync-dal-repo`.
+Ciclo settimanale, finché esiste una scheda non chiusa. Poi il ciclo diventa mensile. All'inizio esegui anche `scrubber-sync-dal-repo`.
 
 1. Cerca la posta con le query del capitolo 2.
 2. Aggancia ogni messaggio a una scheda. Se non ci riesci, chiedi, non indovinare.
@@ -227,7 +227,7 @@ La dashboard, per chi non è tecnico, mostra tre numeri, la barra di protezione 
 
 ## 6. Moduli web
 
-Scegli il canale dal campo `channel` in `data/brokers.yaml`, dopo aver riletto la pagina con `trova-canale-broker`.
+Scegli il canale dal campo `channel` in `data/brokers.yaml`, dopo aver riletto la pagina con `scrubber-trova-canale-broker`.
 
 - `email`: lettera, oggetto con `case_id`.
 - `form` o `portal`: modulo o portale. Leggi anche `form_notes` e `known_issues`.
@@ -307,9 +307,10 @@ Moduli
 Aggiornamento del pacchetto
 - versione precedente e versione nuova, oppure nessuna
 - broker aggiunti, rimossi, canali o URL cambiati
-- skill applicate in automatico, oppure bloccate e perché
+- skill ufficiali applicate, skill personali con avvisi, conflitti di nome o di modifica, aggiornamenti non applicati e perché
+- diario delle skill aggiornato, senza dati personali
 - rollback disponibile sulla versione precedente
 
 ```
 
-Se una sezione è vuota, scrivi «nessuna». L'aggiornamento del pacchetto non modifica il registro né il vault: vedi `sync-dal-repo` e `docs/sicurezza.md`.
+Se una sezione è vuota, scrivi «nessuna». L'aggiornamento del pacchetto non modifica le schede delle richieste né il vault. Aggiunge solo eventi al diario locale delle skill. Vedi `scrubber-sync-dal-repo`, `docs/sicurezza.md` e `docs/registro-skill.md`.

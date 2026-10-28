@@ -5,3 +5,4 @@ __pycache__/
 dashboard/registro.local.json
 dashboard/*-local.json
 !dashboard/example-registro.json
+skill-log.json

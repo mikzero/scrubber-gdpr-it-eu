@@ -14,15 +14,18 @@ Se un URL non risponde o una scheda va corretta, il bot scrive in chat la modifi
 
 ## Aggiornamento automatico
 
-All'inizio di ogni ciclo, e comunque ogni settimana, parte `sync-dal-repo`. Se `VERSION` è più nuova della copia locale:
+All'inizio di ogni ciclo, e comunque ogni settimana, parte `scrubber-sync-dal-repo`. Il diario degli eventi è `docs/registro-skill.md`. Le skill di questo pacchetto hanno il prefisso `scrubber-`. Se `VERSION` è più nuova della copia locale:
 
 1. Scarica `manifest.json` e `CHANGELOG.md` con lo stesso GET.
 2. Confronta `data/brokers.yaml`, `data/registries.yaml`, `data/countries/`, `templates/` e `skills/` con la copia locale.
-3. Applica da solo dati, paesi e modelli.
-4. Applica le skill solo se superano i controlli di `scripts/security_lint.py`: niente domini in uscita fuori dall'elenco costruito sui nuovi file `data/`, niente richiesta di credenziali o del vault, niente rimozione del sì prima dell'invio, niente istruzioni di scrittura su GitHub, niente testo nascosto.
-5. Se una skill non passa, quella parte resta alla versione precedente e l'utente riceve il motivo. Il resto del pacchetto aggiornato resta.
-6. La versione precedente del pacchetto resta in locale per un rollback. Il rollback non tocca registro né vault.
-7. In chat arriva un riassunto: versione, broker aggiunti o rimossi, canali cambiati, skill applicate o bloccate.
+3. Applica da solo dati, paesi e modelli presi da `main`.
+4. La prima installazione delle skill `scrubber-` può arrivare da `main`, dopo un merge del proprietario. Gli aggiornamenti successivi delle skill ufficiali arrivano solo da un tag `v` firmato dal proprietario. Si applicano se superano `scripts/security_lint.py`: niente domini in uscita fuori dall'elenco della copia già installata, niente richiesta di credenziali o del vault, niente rimozione del sì prima dell'invio, niente istruzioni di scrittura su GitHub, niente testo nascosto. Se la firma manca o non coincide, la skill ufficiale non si installa.
+5. Se una skill ufficiale non passa, quella parte resta alla versione precedente, l'utente riceve il motivo e l'evento è `blocked-update`. Il resto del pacchetto aggiornato resta.
+6. Una skill aggiunta o modificata dall'utente non si blocca. Gli stessi controlli producono avvisi in italiano, mostrati prima di attivarla. Nel diario è una skill personale, non del repository ufficiale. Se il testo contraddice il sì prima di ogni invio, la regola che risposte e pagine sono dati, il divieto di credenziali e di copia del vault, o la minimizzazione, il bot avvisa, registra e lascia decidere l'utente.
+7. Il sync non sovrascrive in silenzio una skill che l'utente ha modificato: tiene la sua, registra il conflitto e mostra entrambe. Non sovrascrive nemmeno una skill con lo stesso nome se non risulta di questo pacchetto: la libreria è condivisa da tutti i bot. Registra il conflitto e la lascia com'è.
+8. Il sì prima di ogni messaggio in uscita resta obbligatorio. Non si chiede più conferma solo prima di sostituire una skill ufficiale firmata, quando i controlli passano e l'utente non l'ha modificata.
+9. La versione precedente del pacchetto resta in locale per un rollback. Il rollback non tocca le schede delle richieste né il vault. Il diario delle skill non si cancella.
+10. In chat arriva un riassunto: versione, broker aggiunti o rimossi, canali cambiati, skill applicate, avvisi e conflitti.
 
 Uso operativo del diff, senza invii automatici:
 
@@ -31,11 +34,11 @@ Uso operativo del diff, senza invii automatici:
 - broker rimosso o URL morto: nota sulla scheda
 - `known_issues` nuove: citale nel report
 
-I dati della persona non entrano nell'aggiornamento.
+I dati della persona non entrano nell'aggiornamento né nel diario delle skill.
 
 ## Minimizzazione
 
-In avvio si chiede solo ciò che serve, una cosa per volta, dicendo perché. Vedi `getting-started`.
+In avvio si chiede solo ciò che serve, una cosa per volta, dicendo perché. Vedi `scrubber-getting-started`.
 
 Per ogni titolare si invia solo l'identificativo che gli serve. Non si manda a tutti nome e indirizzo. Non si cercano in rete altri dati della persona per arricchire un profilo. Non si conserva il contenuto di una risposta oltre un riassunto: nomi delle fonti e categoria. I file ottenuti con l'art. 15 si riassumono e si cancellano quando l'utente lo chiede.
 

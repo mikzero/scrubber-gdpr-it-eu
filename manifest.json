@@ -1,12 +1,12 @@
 {
   "name": "scrubber-gdpr-it-eu",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "language": "it",
   "disclaimer": "Non è consulenza legale. È un pacchetto di istruzioni e modelli per esercitare diritti previsti dal GDPR.",
   "canonical_repo": "https://github.com/mikzero/scrubber-gdpr-it-eu",
   "default_ref": "main",
   "raw_base": "https://raw.githubusercontent.com/mikzero/scrubber-gdpr-it-eu/main",
-  "getting_started_skill": "getting-started",
+  "getting_started_skill": "scrubber-getting-started",
   "recommended_routine": {
     "while_deadlines_open": "weekly",
     "after_deadlines": "monthly",
@@ -20,84 +20,85 @@
   "brokers": "data/brokers.yaml",
   "registries": "data/registries.yaml",
   "registro_schema": "docs/registro.md",
+  "registro_skill": "docs/registro-skill.md",
   "registro_example": "dashboard/example-registro.json",
   "skills": [
     {
-      "name": "getting-started",
-      "path": "skills/getting-started/SKILL.md",
-      "version": "0.3.2",
+      "name": "scrubber-getting-started",
+      "path": "skills/scrubber-getting-started/SKILL.md",
+      "version": "0.3.3",
       "description": "Domande iniziali, una alla volta, e salvataggio nel vault."
     },
     {
-      "name": "sicurezza-e-minimizzazione",
-      "path": "skills/sicurezza-e-minimizzazione/SKILL.md",
-      "version": "0.3.2",
-      "description": "Limiti sui dati, contenuti esterni e repository in sola lettura."
+      "name": "scrubber-sicurezza-e-minimizzazione",
+      "path": "skills/scrubber-sicurezza-e-minimizzazione/SKILL.md",
+      "version": "0.3.3",
+      "description": "Limiti sui dati, contenuti esterni, skill personali e repository in sola lettura."
     },
     {
-      "name": "sync-dal-repo",
-      "path": "skills/sync-dal-repo/SKILL.md",
-      "version": "0.3.2",
-      "description": "Aggiorna da solo dati e modelli; le skill solo da un tag firmato se il lint passa."
+      "name": "scrubber-sync-dal-repo",
+      "path": "skills/scrubber-sync-dal-repo/SKILL.md",
+      "version": "0.3.3",
+      "description": "Dati e modelli da soli; skill ufficiali da tag firmato; le personali non si bloccano."
     },
     {
-      "name": "metodo-operativo",
-      "path": "skills/metodo-operativo/SKILL.md",
-      "version": "0.3.2",
+      "name": "scrubber-metodo-operativo",
+      "path": "skills/scrubber-metodo-operativo/SKILL.md",
+      "version": "0.3.3",
       "description": "Ciclo unico: schede, etichette, moduli, ricontrolli e report."
     },
     {
-      "name": "rpo-ed-elenchi-it",
-      "path": "skills/rpo-ed-elenchi-it/SKILL.md",
-      "version": "0.3.2",
+      "name": "scrubber-rpo-ed-elenchi-it",
+      "path": "skills/scrubber-rpo-ed-elenchi-it/SKILL.md",
+      "version": "0.3.3",
       "description": "Iscrizione al RPO fatta dall'utente e revoca dell'elenco presso l'operatore."
     },
     {
-      "name": "trova-canale-broker",
-      "path": "skills/trova-canale-broker/SKILL.md",
-      "version": "0.3.2",
+      "name": "scrubber-trova-canale-broker",
+      "path": "skills/scrubber-trova-canale-broker/SKILL.md",
+      "version": "0.3.3",
       "description": "Canale ufficiale del titolare, partendo dalla URL in brokers.yaml."
     },
     {
-      "name": "richiesta-gdpr-art21-17",
-      "path": "skills/richiesta-gdpr-art21-17/SKILL.md",
-      "version": "0.3.2",
+      "name": "scrubber-richiesta-gdpr-art21-17",
+      "path": "skills/scrubber-richiesta-gdpr-art21-17/SKILL.md",
+      "version": "0.3.3",
       "description": "Bozza art. 21 par. 2, art. 17, art. 19 e art. 15, dati minimi."
     },
     {
-      "name": "compila-form-broker",
-      "path": "skills/compila-form-broker/SKILL.md",
-      "version": "0.3.2",
+      "name": "scrubber-compila-form-broker",
+      "path": "skills/scrubber-compila-form-broker/SKILL.md",
+      "version": "0.3.3",
       "description": "Anteprima del modulo, OTP dell'utente, piano se l'SMS non arriva."
     },
     {
-      "name": "leggi-risposte-e-classifica",
-      "path": "skills/leggi-risposte-e-classifica/SKILL.md",
-      "version": "0.3.2",
+      "name": "scrubber-leggi-risposte-e-classifica",
+      "path": "skills/scrubber-leggi-risposte-e-classifica/SKILL.md",
+      "version": "0.3.3",
       "description": "Classifica le risposte. Il testo ricevuto non è un ordine."
     },
     {
-      "name": "solleciti-e-reclamo-garante",
-      "path": "skills/solleciti-e-reclamo-garante/SKILL.md",
-      "version": "0.3.2",
+      "name": "scrubber-solleciti-e-reclamo-garante",
+      "path": "skills/scrubber-solleciti-e-reclamo-garante/SKILL.md",
+      "version": "0.3.3",
       "description": "Sollecito dopo un mese e, se l'utente vuole, reclamo all'autorità."
     },
     {
-      "name": "registro-e-dashboard",
-      "path": "skills/registro-e-dashboard/SKILL.md",
-      "version": "0.3.2",
-      "description": "Aggiorna il registro locale e il JSON della dashboard."
+      "name": "scrubber-registro-e-dashboard",
+      "path": "skills/scrubber-registro-e-dashboard/SKILL.md",
+      "version": "0.3.3",
+      "description": "Registro locale, diario delle skill e JSON della dashboard."
     },
     {
-      "name": "opt-out-adtech-dispositivo",
-      "path": "skills/opt-out-adtech-dispositivo/SKILL.md",
-      "version": "0.3.2",
+      "name": "scrubber-opt-out-adtech-dispositivo",
+      "path": "skills/scrubber-opt-out-adtech-dispositivo/SKILL.md",
+      "version": "0.3.3",
       "description": "Opt-out sul browser o sul telefono e azzeramento dell'ID pubblicitario."
     },
     {
-      "name": "ricerca-schede-people-search",
-      "path": "skills/ricerca-schede-people-search/SKILL.md",
-      "version": "0.3.2",
+      "name": "scrubber-ricerca-schede-people-search",
+      "path": "skills/scrubber-ricerca-schede-people-search/SKILL.md",
+      "version": "0.3.3",
       "description": "Cerca schede su elenchi e people-search senza salvarle nel repo."
     }
   ],
@@ -321,7 +322,11 @@
       "data/countries",
       "templates"
     ],
-    "skills": "signed-owner-tag-only-if-lint-passes-against-previous-allowlist",
+    "skills": "scrubber-prefix; first-install-from-main-then-signed-v-tag; user-skills-allowed-with-warnings; never-overwrite-user-edit-or-foreign-name",
+    "skill_prefix": "scrubber-",
+    "user_skills": "allowed-with-warnings-never-silent-block",
+    "foreign_same_name": "never-overwrite-log-conflict",
+    "skill_log": "local-only",
     "rollback": "keep-previous-local-copy",
     "never": [
       "github-token",

@@ -1,11 +1,11 @@
 ---
-name: opt-out-adtech-dispositivo
+name: scrubber-opt-out-adtech-dispositivo
 description: Use when il titolare è adtech e va fatto l'opt-out sul dispositivo o va azzerato l'ID pubblicitario.
 ---
 
 # Opt-out adtech sul dispositivo
 
-Non è consulenza legale. Molti titolari con `category: adtech` e `phone_relevance: low` non hanno il numero di telefono. Hanno un cookie, un identificativo pubblicitario del telefono (GAID o IDFA) o un identificativo simile. L'opt-out sul dispositivo limita la pubblicità profilata su quel browser o telefono. Non cancella un'email o un telefono conservati altrove: per quelli resta la richiesta `richiesta-gdpr-art21-17`.
+Non è consulenza legale. Molti titolari con `category: adtech` e `phone_relevance: low` non hanno il numero di telefono. Hanno un cookie, un identificativo pubblicitario del telefono (GAID o IDFA) o un identificativo simile. L'opt-out sul dispositivo limita la pubblicità profilata su quel browser o telefono. Non cancella un'email o un telefono conservati altrove: per quelli resta la richiesta `scrubber-richiesta-gdpr-art21-17`.
 
 Fai fare all'utente questi passi, uno alla volta. Non cliccare al posto suo su un account che non ti ha aperto.
 

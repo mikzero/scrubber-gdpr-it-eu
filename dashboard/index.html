@@ -156,6 +156,22 @@
       clip: rect(0, 0, 0, 0);
       border: 0;
     }
+    .tabs { display: flex; gap: 0.5rem; margin: 0.25rem 0 1rem; }
+    .tabs button[aria-selected="true"] { background: var(--ink); color: var(--card); }
+    .skill-card {
+      background: var(--card);
+      border: 2px solid var(--line);
+      border-left-width: 0.7rem;
+      padding: 0.9rem 1rem;
+      margin: 0 0 0.75rem;
+    }
+    .skill-card.ufficiale { border-left-color: var(--green); }
+    .skill-card.personale { border-left-color: #c8960a; background: var(--yellow-bg); }
+    .skill-card.altra { border-left-color: var(--grey); background: var(--grey-bg); }
+    .skill-card h3 { margin: 0 0 0.15rem; font-size: 1.35rem; }
+    .skill-card p { margin: 0.25rem 0; }
+    .skill-id { color: var(--muted); font-size: 1rem; }
+    .warn { color: var(--red); font-weight: 650; }
     footer { width: min(40rem, calc(100% - 1.5rem)); margin: 0 auto 2rem; color: var(--muted); }
   </style>
 </head>
@@ -167,6 +183,11 @@
     <div id="error" class="error" hidden></div>
   </header>
   <main>
+    <div class="tabs" role="tablist" aria-label="Sezioni">
+      <button type="button" id="tab-aziende" role="tab" aria-selected="true" aria-controls="view-aziende">Le aziende</button>
+      <button type="button" id="tab-skill" role="tab" aria-selected="false" aria-controls="view-skill">Skill</button>
+    </div>
+    <div id="view-aziende">
     <section class="numbers" aria-label="Riepilogo">
       <div class="number"><strong id="n-removed">0</strong> Dati rimossi</div>
       <div class="number"><strong id="n-waiting">0</strong> In attesa di risposta</div>
@@ -187,6 +208,14 @@
       <h2 id="list-title">Le aziende</h2>
       <div id="list"></div>
     </section>
+    </div>
+    <div id="view-skill" hidden>
+      <section aria-labelledby="skill-title">
+        <h2 id="skill-title">Skill</h2>
+        <p>Qui vedi da dove arrivano le istruzioni del bot. Personale vuol dire che le hai aggiunte o cambiate tu. Di un altro bot vuol dire che il nome era già usato e non è stato toccato.</p>
+        <div id="skill-list"></div>
+      </section>
+    </div>
     <details>
       <summary>Dettagli tecnici</summary>
       <p>Questa pagina funziona sul tuo telefono o computer e non invia nulla in rete. I dati di prova si vedono subito. Per i tuoi, scegli il file del registro.</p>
@@ -196,7 +225,7 @@
         </label>
       </p>
       <p><button id="reload" type="button">Torna ai dati di prova</button></p>
-      <p>Lo schema del file si chiama scrubber-registro/2 ed è descritto in docs/registro.md.</p>
+      <p>Lo schema del file si chiama scrubber-registro/2 ed è descritto in docs/registro.md. La scheda Skill legge skill_log, descritto in docs/registro-skill.md.</p>
     </details>
   </main>
   <footer>Non è una consulenza legale. Non pubblicare un registro vero.</footer>
@@ -207,7 +236,7 @@
   "disclaimer": "File di esempio. Maschere e ticket non appartengono a una persona. Non sostituirli con dati veri nel repository.",
   "subject_ref": "ESEMPIO",
   "country": "IT",
-  "updated": "2026-10-27",
+  "updated": "2026-10-28",
   "requests": [
     {
       "case_id": "GDPR-2026-001",
@@ -607,6 +636,190 @@
       ],
       "notes": "Riga finta. Nessun ricontrollo."
     }
+  ],
+  "skill_log": [
+    {
+      "at": "2026-10-28T08:00:00Z",
+      "skill_id": "scrubber-getting-started",
+      "action": "installed",
+      "source": {
+        "kind": "repo-main",
+        "ref": "main",
+        "signature": "not-applicable"
+      },
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "previous_sha256": null,
+      "diff_summary": "Prima installazione di esempio da main, dopo un merge finto del proprietario.",
+      "security_lint": {
+        "result": "pass",
+        "warnings": []
+      },
+      "version": "0.3.3",
+      "origin": "ufficiale",
+      "applied": true
+    },
+    {
+      "at": "2026-10-28T08:05:00Z",
+      "skill_id": "scrubber-sync-dal-repo",
+      "action": "updated",
+      "source": {
+        "kind": "repo-tag",
+        "ref": "v0.3.3",
+        "signature": "valid"
+      },
+      "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "previous_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "diff_summary": "Esempio finto: diario delle skill e prefisso scrubber-.",
+      "security_lint": {
+        "result": "pass",
+        "warnings": []
+      },
+      "version": "0.3.3",
+      "origin": "ufficiale",
+      "applied": true
+    },
+    {
+      "at": "2026-10-28T08:10:00Z",
+      "skill_id": "scrubber-compila-form-broker",
+      "action": "installed",
+      "source": {
+        "kind": "repo-tag",
+        "ref": "v0.3.2",
+        "signature": "valid"
+      },
+      "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "previous_sha256": null,
+      "diff_summary": "Esempio finto: copia ufficiale già presente.",
+      "security_lint": {
+        "result": "pass",
+        "warnings": []
+      },
+      "version": "0.3.2",
+      "origin": "ufficiale",
+      "applied": true
+    },
+    {
+      "at": "2026-10-28T08:15:00Z",
+      "skill_id": "scrubber-compila-form-broker",
+      "action": "blocked-update",
+      "source": {
+        "kind": "repo-tag",
+        "ref": "v0.3.3",
+        "signature": "valid"
+      },
+      "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "previous_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "diff_summary": "Esempio finto: aggiornamento ufficiale non applicato. Resta la copia precedente.",
+      "security_lint": {
+        "result": "warnings",
+        "warnings": [
+          "Esempio finto: il testo toglie il sì prima dell'invio."
+        ]
+      },
+      "version": "0.3.2",
+      "origin": "ufficiale",
+      "applied": false
+    },
+    {
+      "at": "2026-10-28T08:20:00Z",
+      "skill_id": "nota-di-esempio",
+      "action": "added-by-user",
+      "source": {
+        "kind": "other-url",
+        "url": "https://example.invalid/skill-finta.md",
+        "signature": "not-applicable"
+      },
+      "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "previous_sha256": null,
+      "diff_summary": "Skill personale di esempio. Non viene dal repository ufficiale.",
+      "security_lint": {
+        "result": "warnings",
+        "warnings": [
+          "Esempio finto: il testo chiede un invio saltando la conferma. Decide l'utente."
+        ]
+      },
+      "version": "locale",
+      "origin": "personale",
+      "applied": true
+    },
+    {
+      "at": "2026-10-28T08:25:00Z",
+      "skill_id": "scrubber-richiesta-gdpr-art21-17",
+      "action": "edited-by-user",
+      "source": {
+        "kind": "user",
+        "signature": "not-applicable"
+      },
+      "sha256": "abababababababababababababababababababababababababababababababab",
+      "previous_sha256": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd",
+      "diff_summary": "Esempio finto: l'utente ha cambiato una frase. Resta la sua copia.",
+      "security_lint": {
+        "result": "pass",
+        "warnings": []
+      },
+      "version": "0.3.3",
+      "origin": "personale",
+      "applied": true
+    },
+    {
+      "at": "2026-10-28T08:30:00Z",
+      "skill_id": "scrubber-richiesta-gdpr-art21-17",
+      "action": "blocked-update",
+      "source": {
+        "kind": "repo-tag",
+        "ref": "v0.3.3",
+        "signature": "valid"
+      },
+      "sha256": "efefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefef",
+      "previous_sha256": "abababababababababababababababababababababababababababababababab",
+      "diff_summary": "Conflitto di esempio: tenuta la versione personale. Quella ufficiale non è stata copiata sopra.",
+      "security_lint": {
+        "result": "pass",
+        "warnings": []
+      },
+      "version": "0.3.3",
+      "origin": "personale",
+      "applied": false
+    },
+    {
+      "at": "2026-10-28T08:35:00Z",
+      "skill_id": "getting-started",
+      "action": "blocked-update",
+      "source": {
+        "kind": "repo-main",
+        "ref": "main",
+        "signature": "not-applicable"
+      },
+      "sha256": "babababababababababababababababababababababababababababababababa",
+      "previous_sha256": "acacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacac",
+      "diff_summary": "Conflitto di esempio: getting-started appartiene a un altro bot. Non è stata sovrascritta.",
+      "security_lint": {
+        "result": "pass",
+        "warnings": []
+      },
+      "version": "altrui",
+      "origin": "altra",
+      "applied": false
+    },
+    {
+      "at": "2026-10-28T08:40:00Z",
+      "skill_id": "promemoria-esempio",
+      "action": "removed",
+      "source": {
+        "kind": "user",
+        "signature": "not-applicable"
+      },
+      "sha256": null,
+      "previous_sha256": "bcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbc",
+      "diff_summary": "Esempio finto: skill personale tolta. Nessun dato di persona.",
+      "security_lint": {
+        "result": "pass",
+        "warnings": []
+      },
+      "version": "locale",
+      "origin": "personale",
+      "applied": true
+    }
   ]
 }</script>
   <script>
@@ -732,6 +945,143 @@
       return "entro il " + due.getDate() + " " + MONTHS[due.getMonth()];
     }
 
+    const SKILL_ACTIONS = {
+      installed: "Installata",
+      updated: "Aggiornata",
+      "added-by-user": "Aggiunta da te",
+      "edited-by-user": "Modificata da te",
+      removed: "Rimossa",
+      "blocked-update": "Aggiornamento non applicato"
+    };
+    const SKILL_ORIGINS = {
+      ufficiale: "Ufficiale",
+      personale: "Personale",
+      altra: "Di un altro bot"
+    };
+
+    function skillTitle(id) {
+      const raw = String(id || "skill");
+      const bare = raw.indexOf("scrubber-") === 0 ? raw.slice(9) : raw;
+      const text = bare.replace(/-/g, " ");
+      return text.charAt(0).toUpperCase() + text.slice(1);
+    }
+
+    function skillWhen(iso) {
+      const parsed = parseDate(String(iso || "").slice(0, 10));
+      if (!parsed) return "";
+      return parsed.getDate() + " " + MONTHS[parsed.getMonth()] + " " + parsed.getFullYear();
+    }
+
+    function actionLabel(event) {
+      if ((event.action === "added-by-user" || event.action === "edited-by-user") && event.applied === false) {
+        return "Vista, non attivata";
+      }
+      return SKILL_ACTIONS[event.action] || "Cambiamento";
+    }
+
+    function skillCards(events) {
+      const rows = new Map();
+      events.slice().sort((a, b) => String(a.at).localeCompare(String(b.at))).forEach((event) => {
+        if (!event || !event.skill_id) return;
+        const row = rows.get(event.skill_id) || {
+          id: event.skill_id,
+          active: false,
+          visibleConflict: false,
+          warnings: [],
+          summary: "",
+          origin: event.origin,
+          version: event.version,
+          last: event
+        };
+        row.last = event;
+        if (event.origin) row.origin = event.origin;
+        if (event.version) row.version = event.version;
+        const lint = event.security_lint && Array.isArray(event.security_lint.warnings)
+          ? event.security_lint.warnings.filter(Boolean)
+          : [];
+        if (event.action === "removed") {
+          row.active = false;
+          row.visibleConflict = false;
+          row.warnings = lint;
+          row.summary = event.diff_summary || "";
+        } else if (event.applied === false) {
+          row.warnings = lint;
+          row.summary = event.diff_summary || "";
+          if (!row.active) row.visibleConflict = true;
+        } else {
+          row.active = true;
+          row.visibleConflict = false;
+          row.warnings = lint;
+          row.summary = event.diff_summary || "";
+        }
+        rows.set(event.skill_id, row);
+      });
+      return Array.from(rows.values()).filter((row) => row.active || row.visibleConflict).sort((a, b) => {
+        const score = (row) => (row.warnings.length ? 0 : row.visibleConflict || (row.last && row.last.applied === false) ? 1 : 2);
+        return score(a) - score(b) || skillTitle(a.id).localeCompare(skillTitle(b.id), "it");
+      });
+    }
+
+    function renderSkills() {
+      const list = document.getElementById("skill-list");
+      list.replaceChildren();
+      const events = Array.isArray(current.skill_log) ? current.skill_log : null;
+      if (!events) {
+        const empty = document.createElement("p");
+        empty.textContent = "Non ci sono ancora cambiamenti delle skill.";
+        list.append(empty);
+        return;
+      }
+      const cards = skillCards(events);
+      if (!cards.length) {
+        const empty = document.createElement("p");
+        empty.textContent = "Non ci sono skill attive.";
+        list.append(empty);
+        return;
+      }
+      cards.forEach((row) => {
+        const article = document.createElement("article");
+        article.className = "skill-card " + (row.origin || "");
+        const title = document.createElement("h3");
+        title.textContent = skillTitle(row.id);
+        const idLine = document.createElement("p");
+        idLine.className = "skill-id";
+        idLine.textContent = row.id;
+        const origin = document.createElement("p");
+        origin.textContent = (SKILL_ORIGINS[row.origin] || "Da controllare") + " · versione " + (row.version || "non indicata");
+        const when = document.createElement("p");
+        const last = row.last || {};
+        when.textContent = "Ultimo cambiamento: " + [skillWhen(last.at), actionLabel(last)].filter(Boolean).join(" — ");
+        article.append(title, idLine, origin, when);
+        if (row.summary) {
+          const summary = document.createElement("p");
+          summary.textContent = row.summary;
+          article.append(summary);
+        }
+        if (row.warnings.length) {
+          row.warnings.forEach((warning) => {
+            const line = document.createElement("p");
+            line.className = "warn";
+            line.textContent = "Avviso: " + warning;
+            article.append(line);
+          });
+        } else if (!last || last.action !== "blocked-update") {
+          const calm = document.createElement("p");
+          calm.textContent = "Nessun avviso.";
+          article.append(calm);
+        }
+        list.append(article);
+      });
+    }
+
+    function showView(name) {
+      const aziende = name !== "skill";
+      document.getElementById("view-aziende").hidden = !aziende;
+      document.getElementById("view-skill").hidden = aziende;
+      document.getElementById("tab-aziende").setAttribute("aria-selected", aziende ? "true" : "false");
+      document.getElementById("tab-skill").setAttribute("aria-selected", aziende ? "false" : "true");
+    }
+
     function validate(data) {
       if (!data || data.schema !== "scrubber-registro/2" || !Array.isArray(data.requests)) {
         throw new Error("Questo file non è un registro riconoscibile.");
@@ -844,6 +1194,7 @@
         article.append(dot, body);
         list.append(article);
       });
+      renderSkills();
     }
 
     function showError(message) {
@@ -852,6 +1203,8 @@
       box.textContent = message || "";
     }
 
+    document.getElementById("tab-aziende").addEventListener("click", () => showView("aziende"));
+    document.getElementById("tab-skill").addEventListener("click", () => showView("skill"));
     document.getElementById("reload").addEventListener("click", () => {
       current = embedded;
       showError("");

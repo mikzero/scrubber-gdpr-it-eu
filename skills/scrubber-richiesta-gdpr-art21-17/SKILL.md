@@ -1,11 +1,11 @@
 ---
-name: richiesta-gdpr-art21-17
+name: scrubber-richiesta-gdpr-art21-17
 description: Use when prepari una richiesta art. 21 par. 2, art. 17, art. 19 e art. 15 verso un titolare.
 ---
 
 # Richiesta art. 21 par. 2, art. 17, art. 19 e art. 15
 
-Non è consulenza legale. Segui `docs/metodo.md`. Se `channel` in `data/brokers.yaml` è `form` o `portal`, non mandare l'email come primo passo: passa a `compila-form-broker`. Questa skill è il canale `email`, e anche la lettera di riserva quando il modulo è in `blocco-modulo`.
+Non è consulenza legale. Segui `docs/metodo.md`. Se `channel` in `data/brokers.yaml` è `form` o `portal`, non mandare l'email come primo passo: passa a `scrubber-compila-form-broker`. Questa skill è il canale `email`, e anche la lettera di riserva quando il modulo è in `blocco-modulo`.
 
 Se la categoria è `contract`, o `default_action` è `consent-withdrawal`, non chiedere la cancellazione del rapporto. Il contratto resta. Chiedi la revoca dei consensi a marketing, profilazione e cessione a terzi, più l'opposizione art. 21 par. 2, con i modelli già presenti. La cancellazione si prepara solo se l'utente dice che il contratto è finito. Queste schede sono opt-in: non contattarle se l'utente non ha detto di essere cliente. Se per una semplice revoca chiedono un documento, usa `richiesta-dati-sproporzionata` e l'art. 12 par. 6.
 
