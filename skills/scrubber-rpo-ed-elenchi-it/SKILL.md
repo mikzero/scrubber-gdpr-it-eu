@@ -1,5 +1,5 @@
 ---
-name: rpo-ed-elenchi-it
+name: scrubber-rpo-ed-elenchi-it
 description: Use when l'utente in Italia deve iscriversi al RPO o revocare l'elenco telefonico presso l'operatore.
 ---
 
@@ -31,6 +31,6 @@ Fino a cinque numeri per richiesta, secondo le istruzioni correnti del RPO. Non 
 
 Dopo l'iscrizione, occupati dell'elenco. Chiedi il nome dell'operatore, una domanda sola. Prepara la bozza con `templates/letters/it/revoca-consensi-operatore.md`. Mostra destinatario, oggetto e testo. Invia solo dopo un sì esplicito in questo turno. Un sì dato per un'altra bozza non vale.
 
-Nel registro locale segna `rpo-it` e l'operatore come passi a parte, con la data e l'esito che l'utente riferisce (`inviata`, `in attesa`, `risposta`). Non salvare il numero in chiaro nel file se quel file può finire nel repo. Il registro vero resta fuori da git. Vedi `registro-e-dashboard`.
+Nel registro locale segna `rpo-it` e l'operatore come passi a parte, con la data e l'esito che l'utente riferisce (`inviata`, `in attesa`, `risposta`). Non salvare il numero in chiaro nel file se quel file può finire nel repo. Il registro vero resta fuori da git. Vedi `scrubber-registro-e-dashboard`.
 
 Se l'utente non è in Italia, non spingerlo sul RPO. Cerca nell'elenco autorità il paese del vault e dillo.

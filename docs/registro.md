@@ -47,4 +47,6 @@ Stati: `bozza`, `inviata`, `in-attesa`, `risposta-da-leggere`, `richiesta-info`,
 
 `cancellato`, `nessun-dato` ed `escluso` richiedono almeno una prova. `escluso` significa lista di soppressione: non si ricontrolla. Gli altri due si ricontrollano dopo i giorni in `coverage.recheck_days` (60 per `people-search`, 90 per il resto, se non diversamente configurato).
 
-La dashboard, in prima vista, mostra tre numeri (dati rimossi, in attesa di risposta, interventi tuoi), una barra «quanto sei protetto» e l'elenco delle aziende con un semaforo. Identificativi, date, prove e caricamento del file stanno nella sezione Dettagli.
+La dashboard, in prima vista, mostra tre numeri (dati rimossi, in attesa di risposta, interventi tuoi), una barra «quanto sei protetto» e l'elenco delle aziende con un semaforo. Identificativi, date, prove e caricamento del file stanno nella sezione Dettagli. La scheda Skill legge `skill_log`, se c'è.
+
+`skill_log` è facoltativo in questo schema. Il diario delle skill è specificato in `docs/registro-skill.md`: può stare in quella chiave oppure in `skill-log.json` nello store del bot, mai nel repository. Non contiene dati della persona. L'esempio nel repository è finto.

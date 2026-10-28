@@ -1,5 +1,5 @@
 ---
-name: solleciti-e-reclamo-garante
+name: scrubber-solleciti-e-reclamo-garante
 description: Use when il mese dell'art. 12 è scaduto, la risposta non basta, o serve un reclamo all'autorità.
 ---
 

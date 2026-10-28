@@ -1,5 +1,5 @@
 ---
-name: ricerca-schede-people-search
+name: scrubber-ricerca-schede-people-search
 description: Use when cerchi schede su elenchi e people-search, per esempio PagineBianche, senza salvarle nel repo.
 ---
 
@@ -19,8 +19,8 @@ Se trovi una scheda, dillo a parole: sito, se compaiono telefono o indirizzo, se
 
 Poi, con l'utente:
 
-1. Se l'elenco italiano dipende dall'operatore, torna a `rpo-ed-elenchi-it` per la revoca.
-2. Prepara la richiesta al titolare della scheda con `richiesta-gdpr-art21-17` o il modulo con `compila-form-broker`.
+1. Se l'elenco italiano dipende dall'operatore, torna a `scrubber-rpo-ed-elenchi-it` per la revoca.
+2. Prepara la richiesta al titolare della scheda con `scrubber-richiesta-gdpr-art21-17` o il modulo con `scrubber-compila-form-broker`.
 3. Se la scheda è indicizzata da un motore, puoi proporre il modulo Google sul diritto all'oblio (`search_delisting` in `registries.yaml`). Quel modulo toglie il risultato di ricerca, non la pagina di origine. Lo compila l'utente. Se prepari tu il testo da incollare, mostra la bozza e invia o incolla solo dopo un sì esplicito.
 
 Se non trovi nulla, non marcare `nessun dato` per un broker a cui non avete scritto. `nessun dato` significa che il titolare ha risposto così.

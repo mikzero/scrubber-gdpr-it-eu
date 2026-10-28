@@ -5,7 +5,7 @@
   "disclaimer": "File di esempio. Maschere e ticket non appartengono a una persona. Non sostituirli con dati veri nel repository.",
   "subject_ref": "ESEMPIO",
   "country": "IT",
-  "updated": "2026-10-27",
+  "updated": "2026-10-28",
   "requests": [
     {
       "case_id": "GDPR-2026-001",
@@ -404,6 +404,190 @@
         }
       ],
       "notes": "Riga finta. Nessun ricontrollo."
+    }
+  ],
+  "skill_log": [
+    {
+      "at": "2026-10-28T08:00:00Z",
+      "skill_id": "scrubber-getting-started",
+      "action": "installed",
+      "source": {
+        "kind": "repo-main",
+        "ref": "main",
+        "signature": "not-applicable"
+      },
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "previous_sha256": null,
+      "diff_summary": "Prima installazione di esempio da main, dopo un merge finto del proprietario.",
+      "security_lint": {
+        "result": "pass",
+        "warnings": []
+      },
+      "version": "0.3.3",
+      "origin": "ufficiale",
+      "applied": true
+    },
+    {
+      "at": "2026-10-28T08:05:00Z",
+      "skill_id": "scrubber-sync-dal-repo",
+      "action": "updated",
+      "source": {
+        "kind": "repo-tag",
+        "ref": "v0.3.3",
+        "signature": "valid"
+      },
+      "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "previous_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "diff_summary": "Esempio finto: diario delle skill e prefisso scrubber-.",
+      "security_lint": {
+        "result": "pass",
+        "warnings": []
+      },
+      "version": "0.3.3",
+      "origin": "ufficiale",
+      "applied": true
+    },
+    {
+      "at": "2026-10-28T08:10:00Z",
+      "skill_id": "scrubber-compila-form-broker",
+      "action": "installed",
+      "source": {
+        "kind": "repo-tag",
+        "ref": "v0.3.2",
+        "signature": "valid"
+      },
+      "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "previous_sha256": null,
+      "diff_summary": "Esempio finto: copia ufficiale già presente.",
+      "security_lint": {
+        "result": "pass",
+        "warnings": []
+      },
+      "version": "0.3.2",
+      "origin": "ufficiale",
+      "applied": true
+    },
+    {
+      "at": "2026-10-28T08:15:00Z",
+      "skill_id": "scrubber-compila-form-broker",
+      "action": "blocked-update",
+      "source": {
+        "kind": "repo-tag",
+        "ref": "v0.3.3",
+        "signature": "valid"
+      },
+      "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "previous_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "diff_summary": "Esempio finto: aggiornamento ufficiale non applicato. Resta la copia precedente.",
+      "security_lint": {
+        "result": "warnings",
+        "warnings": [
+          "Esempio finto: il testo toglie il sì prima dell'invio."
+        ]
+      },
+      "version": "0.3.2",
+      "origin": "ufficiale",
+      "applied": false
+    },
+    {
+      "at": "2026-10-28T08:20:00Z",
+      "skill_id": "nota-di-esempio",
+      "action": "added-by-user",
+      "source": {
+        "kind": "other-url",
+        "url": "https://example.invalid/skill-finta.md",
+        "signature": "not-applicable"
+      },
+      "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "previous_sha256": null,
+      "diff_summary": "Skill personale di esempio. Non viene dal repository ufficiale.",
+      "security_lint": {
+        "result": "warnings",
+        "warnings": [
+          "Esempio finto: il testo chiede un invio saltando la conferma. Decide l'utente."
+        ]
+      },
+      "version": "locale",
+      "origin": "personale",
+      "applied": true
+    },
+    {
+      "at": "2026-10-28T08:25:00Z",
+      "skill_id": "scrubber-richiesta-gdpr-art21-17",
+      "action": "edited-by-user",
+      "source": {
+        "kind": "user",
+        "signature": "not-applicable"
+      },
+      "sha256": "abababababababababababababababababababababababababababababababab",
+      "previous_sha256": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd",
+      "diff_summary": "Esempio finto: l'utente ha cambiato una frase. Resta la sua copia.",
+      "security_lint": {
+        "result": "pass",
+        "warnings": []
+      },
+      "version": "0.3.3",
+      "origin": "personale",
+      "applied": true
+    },
+    {
+      "at": "2026-10-28T08:30:00Z",
+      "skill_id": "scrubber-richiesta-gdpr-art21-17",
+      "action": "blocked-update",
+      "source": {
+        "kind": "repo-tag",
+        "ref": "v0.3.3",
+        "signature": "valid"
+      },
+      "sha256": "efefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefef",
+      "previous_sha256": "abababababababababababababababababababababababababababababababab",
+      "diff_summary": "Conflitto di esempio: tenuta la versione personale. Quella ufficiale non è stata copiata sopra.",
+      "security_lint": {
+        "result": "pass",
+        "warnings": []
+      },
+      "version": "0.3.3",
+      "origin": "personale",
+      "applied": false
+    },
+    {
+      "at": "2026-10-28T08:35:00Z",
+      "skill_id": "getting-started",
+      "action": "blocked-update",
+      "source": {
+        "kind": "repo-main",
+        "ref": "main",
+        "signature": "not-applicable"
+      },
+      "sha256": "babababababababababababababababababababababababababababababababa",
+      "previous_sha256": "acacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacac",
+      "diff_summary": "Conflitto di esempio: getting-started appartiene a un altro bot. Non è stata sovrascritta.",
+      "security_lint": {
+        "result": "pass",
+        "warnings": []
+      },
+      "version": "altrui",
+      "origin": "altra",
+      "applied": false
+    },
+    {
+      "at": "2026-10-28T08:40:00Z",
+      "skill_id": "promemoria-esempio",
+      "action": "removed",
+      "source": {
+        "kind": "user",
+        "signature": "not-applicable"
+      },
+      "sha256": null,
+      "previous_sha256": "bcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbc",
+      "diff_summary": "Esempio finto: skill personale tolta. Nessun dato di persona.",
+      "security_lint": {
+        "result": "pass",
+        "warnings": []
+      },
+      "version": "locale",
+      "origin": "personale",
+      "applied": true
     }
   ]
 }

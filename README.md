@@ -35,13 +35,13 @@ Il bot conserva telefono, email e registro nel vault, non in git. Vedi `docs/pri
 
 `bot_access` è `read-only`. Il bot fa solo GET pubblici su `raw.githubusercontent.com` (o su una release dello stesso repository), senza token. Non fa push, non apre issue, pull request, commenti o fork, e non scrive il registro nel repository.
 
-All'inizio di ogni ciclo, e ogni settimana, confronta `VERSION`. Se è più nuova, applica da solo dati, paesi e modelli. Applica le skill solo se passano `scripts/security_lint.py`. Altrimenti le blocca e spiega il perché. Tiene la versione precedente per un rollback. In chat resta un riassunto. I dati della persona non si toccano. Dettaglio: skill `sync-dal-repo` e `docs/sicurezza.md`.
+All'inizio di ogni ciclo, e ogni settimana, confronta `VERSION`. Se è più nuova, applica da solo dati, paesi e modelli. Le skill si chiamano `scrubber-…`. La prima installazione può arrivare da `main` dopo un merge del proprietario; gli aggiornamenti successivi solo da un tag `v` firmato, e solo se passano `scripts/security_lint.py`. Una skill aggiunta o modificata dall'utente non si blocca: il bot avvisa in italiano e la segna come personale. Non sovrascrive in silenzio una modifica dell'utente, né una skill omonima che non è di questo pacchetto. Il sì prima di ogni messaggio in uscita resta. Dettaglio: `scrubber-sync-dal-repo`, `docs/sicurezza.md` e `docs/registro-skill.md`.
 
 Il metodo operativo è `docs/metodo.md`. La direzione del prodotto è `ROADMAP.md`: prima l'Italia, poi Europa, poi il resto del mondo, senza invii in massa e senza esiti finali senza prova.
 
 ### Routine e posta
 
-Un controllo a settimana finché c'è una scadenza aperta, poi un controllo al mese. Canale raccomandato: Gmail o AgentMail. Skill di partenza: `getting-started`.
+Un controllo a settimana finché c'è una scadenza aperta, poi un controllo al mese. Canale raccomandato: Gmail o AgentMail. Skill di partenza: `scrubber-getting-started`.
 
 ### Struttura
 
@@ -52,7 +52,7 @@ Un controllo a settimana finché c'è una scadenza aperta, poi un controllo al m
 | `data/brokers.yaml` | Titolari, URL, canale, eventuali caselle di ruolo |
 | `data/registries.yaml` | RPO, elenchi, modulo Google, opt-out, autorità |
 | `dashboard/` | HTML statico e registro di esempio finto |
-| `docs/` | Metodo, sicurezza, registro, RPO, casi difficili |
+| `docs/` | Metodo, sicurezza, registro, diario delle skill, RPO, casi difficili |
 | `data/countries/` | Copertura per paese: `todo`, `partial` o `done` |
 | `ROADMAP.md` | Fasi Italia, Europa, resto del mondo |
 | `scripts/` | Validazione, controllo link, lint di sicurezza |
@@ -68,7 +68,7 @@ Vedi `CONTRIBUTING.md`. Le issue e le pull request hanno un template. Non allega
 
 ### Versione
 
-`VERSION` è la versione semver del pacchetto. La corrente è 0.3.2. Il changelog è `CHANGELOG.md`.
+`VERSION` è la versione semver del pacchetto. La corrente è 0.3.3. Il changelog è `CHANGELOG.md`.
 
 ## English
 
@@ -80,9 +80,9 @@ The bot drafts requests. The user reviews every draft and sends it. A draft is n
 
 Personal data belong in the bot's vault, never in git. The only email addresses in this repo are role or institutional mailboxes declared in `data/*.yaml` after they were read on an official page. The dashboard in `dashboard/` is a static file with a clearly fake example register. Load a real register from your own device; it is gitignored.
 
-The bot's access is read-only public HTTPS. It never uses a GitHub token and never pushes, opens issues or pull requests, comments, or forks. On each check, and weekly, it auto-updates data, country files and templates from the official repo. Skills update only when they pass the security lint. A short changelog is posted in chat. Personal data is not part of the update. See `docs/sicurezza.md` and `ROADMAP.md`.
+The bot's access is read-only public HTTPS. It never uses a GitHub token and never pushes, opens issues or pull requests, comments, or forks. On each check, and weekly, it auto-updates data, country files and templates from the official repo. Skill folders use the `scrubber-` prefix because the library is shared by every bot. The first install may read skills from `main` after an owner merge. Later skill updates come only from a signed version tag, and only when the security lint passes. Skills the user adds or edits stay allowed: the bot warns in Italian and records the event. It never silently overwrites a user edit or a same-named skill that is not its own. The yes before every outgoing message stays mandatory. See `docs/sicurezza.md` and `docs/registro-skill.md`.
 
-Recommended routine: weekly while a deadline or a recheck is open, then monthly. Recommended mail plugin: Gmail or AgentMail. Start with the `getting-started` skill.
+Recommended routine: weekly while a deadline or a recheck is open, then monthly. Recommended mail plugin: Gmail or AgentMail. Start with the `scrubber-getting-started` skill.
 
 Contributions: `CONTRIBUTING.md`. Code is MIT. Prose and templates are CC-BY-4.0.
 

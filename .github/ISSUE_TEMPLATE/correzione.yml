@@ -12,7 +12,7 @@ body:
     id: file
     attributes:
       label: File
-      placeholder: skills/richiesta-gdpr-art21-17/SKILL.md
+      placeholder: skills/scrubber-richiesta-gdpr-art21-17/SKILL.md
     validations:
       required: true
   - type: textarea
