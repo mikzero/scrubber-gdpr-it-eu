@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>I tuoi dati — Scrubber</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1a1a1a;
+      --muted: #3f3a34;
+      --line: #d9d3c7;
+      --paper: #f7f4ee;
+      --card: #fffefb;
+      --green: #0b5c32;
+      --green-bg: #e7f6ee;
+      --yellow: #6b4a00;
+      --yellow-bg: #fff6dc;
+      --red: #8f1d1d;
+      --red-bg: #fdecee;
+      --grey: #3d3d3d;
+      --grey-bg: #eceae6;
+      --focus: #0b57d0;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font: 1.125rem/1.45 "Segoe UI", system-ui, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+    }
+    header, main { width: min(40rem, calc(100% - 1.5rem)); margin: 0 auto; }
+    header { padding: 1.25rem 0 0.25rem; }
+    h1 { font-size: 2rem; line-height: 1.15; margin: 0 0 0.35rem; }
+    h2 { font-size: 1.35rem; margin: 0 0 0.75rem; }
+    .lead { margin: 0; color: var(--muted); }
+    .banner {
+      background: var(--yellow-bg);
+      border: 2px solid #e0c36a;
+      padding: 0.8rem 1rem;
+      margin: 1rem 0;
+      font-weight: 650;
+    }
+    .numbers {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    @media (min-width: 40rem) {
+      .numbers { grid-template-columns: repeat(3, 1fr); }
+    }
+    .number {
+      background: var(--card);
+      border: 2px solid var(--ink);
+      padding: 0.9rem 1rem;
+      min-height: 7rem;
+    }
+    .number strong {
+      display: block;
+      font-size: 3rem;
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+    .protect { margin: 0.5rem 0 1.25rem; }
+    .protect p { margin: 0 0 0.4rem; font-weight: 650; }
+    .bar {
+      height: 1.25rem;
+      background: #e4dfd4;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .bar > span {
+      display: block;
+      height: 100%;
+      background: var(--green);
+      width: 0;
+    }
+    .todo {
+      background: var(--card);
+      border: 3px solid var(--ink);
+      padding: 1rem;
+      margin: 0 0 1.25rem;
+    }
+    .todo ol { margin: 0; padding-left: 1.2rem; }
+    .todo li { margin: 0.55rem 0; }
+    .todo li span { display: block; color: var(--muted); font-size: 1rem; }
+    .company {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.8rem;
+      background: var(--card);
+      border: 2px solid var(--line);
+      border-left-width: 0.7rem;
+      padding: 0.9rem 1rem;
+      margin: 0 0 0.75rem;
+    }
+    .company.green { border-left-color: var(--green); background: var(--green-bg); }
+    .company.yellow { border-left-color: #c8960a; background: var(--yellow-bg); }
+    .company.red { border-left-color: var(--red); background: var(--red-bg); }
+    .company.grey { border-left-color: var(--grey); background: var(--grey-bg); }
+    .light {
+      width: 1.25rem;
+      height: 1.25rem;
+      border-radius: 50%;
+      margin-top: 0.35rem;
+      border: 2px solid var(--ink);
+    }
+    .green .light { background: var(--green); }
+    .yellow .light { background: #e0a800; }
+    .red .light { background: var(--red); }
+    .grey .light { background: #8a8680; }
+    .company h3 { margin: 0 0 0.15rem; font-size: 1.35rem; }
+    .state { margin: 0; font-weight: 700; }
+    .explain { margin: 0.2rem 0 0; }
+    details {
+      background: var(--card);
+      border: 2px solid var(--line);
+      padding: 0.7rem 1rem;
+      margin: 0.75rem 0 1.5rem;
+    }
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+      min-height: 2.75rem;
+      display: flex;
+      align-items: center;
+    }
+    summary:focus-visible, button:focus-visible, input:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+    button, .file {
+      font: inherit;
+      background: var(--card);
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      padding: 0.6rem 0.8rem;
+      min-height: 2.75rem;
+      cursor: pointer;
+    }
+    .error {
+      border: 2px solid var(--red);
+      background: var(--red-bg);
+      padding: 0.7rem 0.9rem;
+      margin: 0.6rem 0;
+    }
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+    footer { width: min(40rem, calc(100% - 1.5rem)); margin: 0 auto 2rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>I tuoi dati</h1>
+    <p class="lead">Qui vedi se le aziende hanno tolto i tuoi dati e che cosa devi fare tu.</p>
+    <div id="banner" class="banner" hidden></div>
+    <div id="error" class="error" hidden></div>
+  </header>
+  <main>
+    <section class="numbers" aria-label="Riepilogo">
+      <div class="number"><strong id="n-removed">0</strong> Dati rimossi</div>
+      <div class="number"><strong id="n-waiting">0</strong> In attesa di risposta</div>
+      <div class="number"><strong id="n-you">0</strong> Serve un tuo intervento</div>
+    </section>
+    <section class="protect">
+      <p id="protect-label">Quanto sei protetto</p>
+      <div id="bar" class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-labelledby="protect-label">
+        <span id="bar-fill"></span>
+      </div>
+      <p id="protect-text"></p>
+    </section>
+    <section class="todo" aria-labelledby="todo-title">
+      <h2 id="todo-title">Cosa devi fare tu</h2>
+      <ol id="todo"></ol>
+    </section>
+    <section aria-labelledby="list-title">
+      <h2 id="list-title">Le aziende</h2>
+      <div id="list"></div>
+    </section>
+    <details>
+      <summary>Dettagli tecnici</summary>
+      <p>Questa pagina funziona sul tuo telefono o computer e non invia nulla in rete. I dati di prova si vedono subito. Per i tuoi, scegli il file del registro.</p>
+      <p>
+        <label class="file">Carica il tuo registro
+          <input id="file" type="file" accept="application/json,.json">
+        </label>
+      </p>
+      <p><button id="reload" type="button">Torna ai dati di prova</button></p>
+      <p>Lo schema del file si chiama scrubber-registro/2 ed è descritto in docs/registro.md.</p>
+    </details>
+  </main>
+  <footer>Non è una consulenza legale. Non pubblicare un registro vero.</footer>
+  <script id="example-registro" type="application/json">{
+  "schema": "scrubber-registro/2",
+  "example": true,
+  "label": "ESEMPIO FINTO — NON SONO DATI REALI",
+  "disclaimer": "File di esempio. Maschere e ticket non appartengono a una persona. Non sostituirli con dati veri nel repository.",
+  "subject_ref": "ESEMPIO",
+  "country": "IT",
+  "updated": "2026-10-27",
+  "requests": [
+    {
+      "case_id": "GDPR-2026-001",
+      "broker_id": "lusha",
+      "broker_name": "Lusha",
+      "channel": "form",
+      "identifier_mask": "+00 *** *** 12",
+      "sent_at": "2026-09-02",
+      "submitted_at": "2026-09-02",
+      "deadline": "2026-10-02",
+      "extended_deadline": null,
+      "status": "inviata",
+      "labels": [
+        "Scrubber/inviata",
+        "Scrubber/tipo/modulo"
+      ],
+      "last_reply_at": null,
+      "next_action": "sollecito",
+      "next_action_due": "2026-10-09",
+      "next_recheck_at": "2026-12-01",
+      "cycle_count": 1,
+      "form_url": "https://www.lusha.com/privacy-center/request-removal/",
+      "ticket_id": "TKT-ESEMPIO-1001",
+      "proof_path": "example-proof/GDPR-2026-001.txt",
+      "verification_status": "non-richiesto",
+      "proof": [
+        {
+          "kind": "ticket",
+          "ref": "TKT-ESEMPIO-1001",
+          "at": "2026-09-02"
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-09-02",
+          "event": "stato",
+          "from": "bozza",
+          "to": "inviata",
+          "note": "Modulo di esempio inviato."
+        }
+      ],
+      "notes": "Riga finta. Scadenza passata, sollecito in attesa di un sì."
+    },
+    {
+      "case_id": "GDPR-2026-002",
+      "broker_id": "apollo",
+      "broker_name": "Apollo",
+      "channel": "form",
+      "identifier_mask": "m***",
+      "sent_at": "2026-10-20",
+      "submitted_at": "2026-10-20",
+      "deadline": "2026-11-20",
+      "extended_deadline": null,
+      "status": "in-attesa",
+      "labels": [
+        "Scrubber/in-attesa",
+        "Scrubber/tipo/modulo"
+      ],
+      "last_reply_at": "2026-10-20",
+      "next_action": "attendi",
+      "next_action_due": "2026-11-20",
+      "next_recheck_at": "2027-01-18",
+      "cycle_count": 1,
+      "form_url": "https://www.apollo.io/privacy-policy/remove",
+      "ticket_id": "TKT-ESEMPIO-1002",
+      "proof_path": "example-proof/GDPR-2026-002.txt",
+      "verification_status": "verificato",
+      "proof": [
+        {
+          "kind": "email",
+          "ref": "conferma-esempio",
+          "at": "2026-10-20"
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-10-20",
+          "event": "stato",
+          "from": "bozza",
+          "to": "in-attesa",
+          "note": "Ticket automatico, senza merito."
+        }
+      ],
+      "notes": "Riga finta. Campo email aziendale lasciato vuoto."
+    },
+    {
+      "case_id": "GDPR-2026-003",
+      "broker_id": "samba",
+      "broker_name": "Samba",
+      "channel": "portal",
+      "identifier_mask": "+00 *** *** 12",
+      "sent_at": "2026-10-22",
+      "submitted_at": null,
+      "deadline": "2026-11-22",
+      "extended_deadline": null,
+      "status": "blocco-modulo",
+      "labels": [
+        "Scrubber/blocco-modulo"
+      ],
+      "last_reply_at": null,
+      "next_action": "passa-a-email",
+      "next_action_due": "2026-10-29",
+      "next_recheck_at": null,
+      "cycle_count": 0,
+      "form_url": "https://samba.com/privacy-center/notice-of-right-to-opt-out",
+      "ticket_id": null,
+      "proof_path": null,
+      "verification_status": "fallito-sms",
+      "proof": [],
+      "history": [
+        {
+          "at": "2026-10-22",
+          "event": "stato",
+          "from": "verifica-otp",
+          "to": "blocco-modulo",
+          "note": "SMS non arrivato dopo due invii."
+        }
+      ],
+      "notes": "Riga finta. OTP non ripetuto."
+    },
+    {
+      "case_id": "GDPR-2026-004",
+      "broker_id": "north-data",
+      "broker_name": "North Data",
+      "channel": "email",
+      "identifier_mask": "profilo ***",
+      "sent_at": "2026-09-27",
+      "submitted_at": null,
+      "deadline": "2026-10-27",
+      "extended_deadline": null,
+      "status": "in-attesa",
+      "labels": [
+        "Scrubber/in-attesa",
+        "Scrubber/tipo/richiesta"
+      ],
+      "last_reply_at": null,
+      "next_action": "sollecito",
+      "next_action_due": "2026-11-03",
+      "next_recheck_at": "2026-12-26",
+      "cycle_count": 1,
+      "form_url": null,
+      "ticket_id": null,
+      "proof_path": null,
+      "verification_status": "non-richiesto",
+      "proof": [],
+      "history": [
+        {
+          "at": "2026-09-27",
+          "event": "stato",
+          "from": "bozza",
+          "to": "inviata",
+          "note": "Lettera di esempio."
+        },
+        {
+          "at": "2026-09-28",
+          "event": "stato",
+          "from": "inviata",
+          "to": "in-attesa",
+          "note": "Ricevuta automatica."
+        }
+      ],
+      "notes": "Riga finta. Scade nella data di esempio 0.2.0."
+    },
+    {
+      "case_id": "GDPR-2026-005",
+      "broker_id": "acxiom-optout",
+      "broker_name": "Acxiom optout",
+      "channel": "form",
+      "identifier_mask": "m***",
+      "sent_at": "2026-10-10",
+      "submitted_at": null,
+      "deadline": "2026-11-10",
+      "extended_deadline": null,
+      "status": "richiesta-info",
+      "labels": [
+        "Scrubber/richiesta-info"
+      ],
+      "last_reply_at": "2026-10-18",
+      "next_action": "bozza-risposta",
+      "next_action_due": "2026-10-30",
+      "next_recheck_at": null,
+      "cycle_count": 1,
+      "form_url": "https://www.acxiom.com/optout/",
+      "ticket_id": "TKT-ESEMPIO-1005",
+      "proof_path": null,
+      "verification_status": "non-richiesto",
+      "proof": [],
+      "history": [
+        {
+          "at": "2026-10-18",
+          "event": "stato",
+          "from": "in-attesa",
+          "to": "richiesta-info",
+          "note": "Chiesto un indirizzo. Campo lasciato vuoto."
+        }
+      ],
+      "notes": "Riga finta. Modello art. 12 par. 6 e art. 11 in attesa di sì."
+    },
+    {
+      "case_id": "GDPR-2026-006",
+      "broker_id": "rocketreach",
+      "broker_name": "RocketReach",
+      "channel": "form",
+      "identifier_mask": "m***",
+      "sent_at": "2026-10-15",
+      "submitted_at": "2026-10-15",
+      "deadline": "2026-11-15",
+      "extended_deadline": null,
+      "status": "portale-ticket",
+      "labels": [
+        "Scrubber/portale-ticket",
+        "Scrubber/tipo/modulo"
+      ],
+      "last_reply_at": "2026-10-15",
+      "next_action": "controlla-portale",
+      "next_action_due": "2026-10-30",
+      "next_recheck_at": "2027-01-13",
+      "cycle_count": 1,
+      "form_url": "https://rocketreach.co/remove-profile",
+      "ticket_id": "TKT-ESEMPIO-1006",
+      "proof_path": "example-proof/GDPR-2026-006.txt",
+      "verification_status": "verificato",
+      "proof": [
+        {
+          "kind": "ticket",
+          "ref": "TKT-ESEMPIO-1006",
+          "at": "2026-10-15"
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-10-15",
+          "event": "stato",
+          "from": "inviata",
+          "to": "portale-ticket",
+          "note": "Resta solo il portale."
+        }
+      ],
+      "notes": "Riga finta. Controllo portale nel ciclo settimanale."
+    },
+    {
+      "case_id": "GDPR-2026-007",
+      "broker_id": "kaspr",
+      "broker_name": "Kaspr",
+      "channel": "form",
+      "identifier_mask": "m***",
+      "sent_at": "2026-10-21",
+      "submitted_at": null,
+      "deadline": "2026-11-21",
+      "extended_deadline": null,
+      "status": "blocco-modulo",
+      "labels": [
+        "Scrubber/blocco-modulo"
+      ],
+      "last_reply_at": null,
+      "next_action": "passa-a-email",
+      "next_action_due": "2026-10-28",
+      "next_recheck_at": null,
+      "cycle_count": 0,
+      "form_url": "https://kaspr.privacy.saymine.io/kaspr",
+      "ticket_id": null,
+      "proof_path": null,
+      "verification_status": "fallito-http",
+      "proof": [],
+      "history": [
+        {
+          "at": "2026-10-21",
+          "event": "stato",
+          "from": "bozza",
+          "to": "blocco-modulo",
+          "note": "HTTP 400 dopo due submit."
+        }
+      ],
+      "notes": "Riga finta. Captcha non aggirato."
+    },
+    {
+      "case_id": "GDPR-2026-008",
+      "broker_id": "criteo",
+      "broker_name": "Criteo",
+      "channel": "email",
+      "identifier_mask": "m***",
+      "sent_at": "2026-04-01",
+      "submitted_at": null,
+      "deadline": "2026-05-01",
+      "extended_deadline": null,
+      "status": "cancellato",
+      "labels": [
+        "Scrubber/cancellato",
+        "Scrubber/tipo/risposta"
+      ],
+      "last_reply_at": "2026-04-20",
+      "next_action": "ricontrollo",
+      "next_action_due": "2026-06-30",
+      "next_recheck_at": "2026-06-30",
+      "cycle_count": 1,
+      "form_url": null,
+      "ticket_id": null,
+      "proof_path": "example-proof/GDPR-2026-008.txt",
+      "verification_status": "non-richiesto",
+      "proof": [
+        {
+          "kind": "email",
+          "ref": "conferma-esempio",
+          "at": "2026-04-20"
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-04-20",
+          "event": "stato",
+          "from": "risposta-da-leggere",
+          "to": "cancellato",
+          "note": "Cancellazione confermata, con prova finta."
+        }
+      ],
+      "notes": "Riga finta. Ricontrollo adtech a 90 giorni, già maturato nell'esempio."
+    },
+    {
+      "case_id": "GDPR-2026-009",
+      "broker_id": "192-com",
+      "broker_name": "192.com",
+      "channel": "form",
+      "identifier_mask": "+00 *** *** 12",
+      "sent_at": "2026-07-01",
+      "submitted_at": "2026-07-01",
+      "deadline": "2026-08-01",
+      "extended_deadline": null,
+      "status": "nessun-dato",
+      "labels": [
+        "Scrubber/nessun-dato"
+      ],
+      "last_reply_at": "2026-07-20",
+      "next_action": "ricontrollo",
+      "next_action_due": "2026-08-30",
+      "next_recheck_at": "2026-08-30",
+      "cycle_count": 1,
+      "form_url": "https://www.192.com/misc/privacy-policy/",
+      "ticket_id": "TKT-ESEMPIO-1009",
+      "proof_path": "example-proof/GDPR-2026-009.txt",
+      "verification_status": "non-richiesto",
+      "proof": [
+        {
+          "kind": "ticket",
+          "ref": "TKT-ESEMPIO-1009",
+          "at": "2026-07-20"
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-07-20",
+          "event": "stato",
+          "from": "risposta-da-leggere",
+          "to": "nessun-dato",
+          "note": "Nessun dato, con prova finta. People-search: ricontrollo a 60 giorni."
+        }
+      ],
+      "notes": "Riga finta. Prima si riverifica se la scheda esiste."
+    },
+    {
+      "case_id": "GDPR-2026-010",
+      "broker_id": "eyeota",
+      "broker_name": "Eyeota",
+      "channel": "form",
+      "identifier_mask": "m***",
+      "sent_at": "2026-03-01",
+      "submitted_at": "2026-03-01",
+      "deadline": "2026-04-01",
+      "extended_deadline": null,
+      "status": "escluso",
+      "labels": [
+        "Scrubber/escluso"
+      ],
+      "last_reply_at": "2026-03-20",
+      "next_action": "nessuno",
+      "next_action_due": null,
+      "next_recheck_at": null,
+      "cycle_count": 2,
+      "form_url": "https://www.eyeota.com/data-subject-request",
+      "ticket_id": "TKT-ESEMPIO-1010",
+      "proof_path": "example-proof/GDPR-2026-010.txt",
+      "verification_status": "non-richiesto",
+      "proof": [
+        {
+          "kind": "email",
+          "ref": "lista-soppressione-esempio",
+          "at": "2026-03-20"
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-03-20",
+          "event": "stato",
+          "from": "risposta-da-leggere",
+          "to": "escluso",
+          "note": "In lista di soppressione, con prova finta."
+        }
+      ],
+      "notes": "Riga finta. Nessun ricontrollo."
+    }
+  ]
+}</script>
+  <script>
+    const USER_ACTIONS = new Set(["sollecito", "passa-a-email", "bozza-risposta", "ricontrollo", "controlla-portale", "incolla-otp", "iscriviti-rpo"]);
+    const WAITING = new Set(["inviata", "in-attesa", "portale-ticket", "sollecito", "reclamo"]);
+    const WEEKDAYS = ["domenica", "lunedì", "martedì", "mercoledì", "giovedì", "venerdì", "sabato"];
+    const MONTHS = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"];
+    const embedded = JSON.parse(document.getElementById("example-registro").textContent);
+    let current = embedded;
+
+    function parseDate(iso) {
+      if (!iso) return null;
+      const parts = String(iso).split("-").map(Number);
+      if (parts.length !== 3 || parts.some((n) => !Number.isInteger(n))) return null;
+      return new Date(parts[0], parts[1] - 1, parts[2]);
+    }
+
+    function today() {
+      const now = new Date();
+      return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    }
+
+    function daysBetween(from, to) {
+      return Math.round((to.getTime() - from.getTime()) / 86400000);
+    }
+
+    function deadlineOf(request) {
+      return parseDate(request.extended_deadline) || parseDate(request.deadline);
+    }
+
+    function hasProof(request) {
+      return Array.isArray(request.proof) && request.proof.length > 0;
+    }
+
+    function removed(request) {
+      return (request.status === "cancellato" || request.status === "escluso") && hasProof(request);
+    }
+
+    function closedWithProof(request) {
+      return (request.status === "cancellato" || request.status === "nessun-dato" || request.status === "escluso") && hasProof(request);
+    }
+
+    function recheckDue(request, now) {
+      if (request.status === "escluso") return false;
+      const due = parseDate(request.next_recheck_at);
+      return Boolean(due && daysBetween(now, due) <= 0);
+    }
+
+    function overdue(request, now) {
+      if (closedWithProof(request) || request.status === "chiuso" || request.status === "rifiutato") return false;
+      const deadline = deadlineOf(request);
+      return Boolean(deadline && daysBetween(now, deadline) < 0);
+    }
+
+    function needsYou(request) {
+      if (request.status === "verifica-otp" || request.status === "blocco-modulo" || request.status === "richiesta-info") return true;
+      if (request.broker_id === "rpo-it") return true;
+      return USER_ACTIONS.has(request.next_action);
+    }
+
+    function waitingOnThem(request, now) {
+      return WAITING.has(request.status) && !overdue(request, now) && !needsYou(request);
+    }
+
+    function lightOf(request, now) {
+      if (request.status === "rifiutato" || overdue(request, now)) return "red";
+      if (recheckDue(request, now)) return "grey";
+      if (removed(request) || (request.status === "nessun-dato" && hasProof(request))) return "green";
+      return "yellow";
+    }
+
+    function lightWord(kind, request) {
+      if (kind === "red" && request.status === "rifiutato") return "Rifiutato";
+      if (kind === "red") return "Scaduto";
+      if (kind === "grey") return "Da ricontrollare";
+      if (kind === "green" && request.status === "escluso") return "Escluso";
+      if (kind === "green" && request.status === "nessun-dato") return "Non risulta";
+      if (kind === "green") return "Rimosso";
+      return "In attesa";
+    }
+
+    function explain(request, kind) {
+      if (kind === "red" && request.status === "rifiutato") return "Hanno detto di no. Si può insistere o reclamare.";
+      if (kind === "red") return "Il tempo per la risposta è finito.";
+      if (kind === "grey") return "È ora di controllare di nuovo se i dati sono tornati.";
+      if (request.status === "escluso") return "Sei in una lista di esclusione: non dovrebbero più contattarti.";
+      if (request.status === "nessun-dato") return "Hanno detto di non avere i tuoi dati.";
+      if (kind === "green") return "Hanno confermato di aver tolto i dati.";
+      if (request.status === "verifica-otp") return "Manca il codice che ti è arrivato.";
+      if (request.status === "blocco-modulo") return "Il modulo online si è bloccato. Serve una tua conferma per continuare.";
+      if (request.status === "richiesta-info") return "Hanno chiesto altri dati. Non inviare documenti se non serve.";
+      if (request.status === "portale-ticket") return "La richiesta è partita. Lo stato si vede sul loro sito.";
+      return "Stiamo aspettando la loro risposta.";
+    }
+
+    function actionSentence(request) {
+      const name = request.broker_name || "questa azienda";
+      if (request.broker_id === "rpo-it" || request.next_action === "iscriviti-rpo") {
+        return "Iscriviti al registro delle opposizioni dal tuo telefono";
+      }
+      if (request.status === "verifica-otp" || request.next_action === "incolla-otp") {
+        return "Inserisci il codice arrivato per " + name;
+      }
+      const text = {
+        "sollecito": "Approva il sollecito per " + name,
+        "passa-a-email": "Approva il messaggio di riserva per " + name,
+        "bozza-risposta": "Approva la risposta per " + name,
+        "ricontrollo": "Approva un nuovo controllo di " + name,
+        "controlla-portale": "Controlla lo stato sul sito di " + name,
+        "iscriviti-rpo": "Iscriviti al registro delle opposizioni dal tuo telefono"
+      };
+      return text[request.next_action] || ("C'è una decisione da prendere per " + name);
+    }
+
+    function humanWhen(iso, now) {
+      const due = parseDate(iso);
+      if (!due) return "";
+      const delta = daysBetween(now, due);
+      if (delta < 0) return "in ritardo";
+      if (delta === 0) return "entro oggi";
+      if (delta === 1) return "entro domani";
+      if (delta <= 6) return "entro " + WEEKDAYS[due.getDay()];
+      return "entro il " + due.getDate() + " " + MONTHS[due.getMonth()];
+    }
+
+    function validate(data) {
+      if (!data || data.schema !== "scrubber-registro/2" || !Array.isArray(data.requests)) {
+        throw new Error("Questo file non è un registro riconoscibile.");
+      }
+      return data;
+    }
+
+    function render() {
+      const now = today();
+      const requests = current.requests || [];
+      const banner = document.getElementById("banner");
+      if (current.example === true) {
+        banner.hidden = false;
+        banner.textContent = "Questi sono dati di prova, non i tuoi.";
+      } else {
+        banner.hidden = true;
+      }
+      const you = requests.filter(needsYou).slice().sort((a, b) => {
+        const da = parseDate(a.next_action_due);
+        const db = parseDate(b.next_action_due);
+        if (!da && !db) return 0;
+        if (!da) return 1;
+        if (!db) return -1;
+        return da - db;
+      });
+      document.getElementById("n-removed").textContent = String(requests.filter(removed).length);
+      document.getElementById("n-waiting").textContent = String(requests.filter((item) => waitingOnThem(item, now)).length);
+      document.getElementById("n-you").textContent = String(you.length);
+      const proved = requests.filter(closedWithProof).length;
+      const total = requests.length;
+      const percent = total === 0 ? 0 : Math.round((100 * proved) / total);
+      const bar = document.getElementById("bar");
+      bar.setAttribute("aria-valuenow", String(percent));
+      document.getElementById("bar-fill").style.width = percent + "%";
+      document.getElementById("protect-text").textContent = total === 0
+        ? "Non ci sono ancora aziende in elenco."
+        : proved + " aziende su " + total + " sono a posto, con una prova.";
+      const todo = document.getElementById("todo");
+      todo.replaceChildren();
+      if (you.length === 0) {
+        const item = document.createElement("li");
+        item.textContent = "Non c'è nulla da fare adesso.";
+        todo.append(item);
+      } else {
+        you.forEach((request) => {
+          const item = document.createElement("li");
+          item.textContent = actionSentence(request);
+          const when = document.createElement("span");
+          when.textContent = humanWhen(request.next_action_due, now);
+          item.append(when);
+          todo.append(item);
+        });
+      }
+      const order = { red: 0, grey: 1, yellow: 2, green: 3 };
+      const list = document.getElementById("list");
+      list.replaceChildren();
+      if (requests.length === 0) {
+        const empty = document.createElement("p");
+        empty.textContent = "Nessuna azienda in elenco.";
+        list.append(empty);
+      }
+      requests.slice().sort((a, b) => order[lightOf(a, now)] - order[lightOf(b, now)]).forEach((request) => {
+        const kind = lightOf(request, now);
+        const article = document.createElement("article");
+        article.className = "company " + kind;
+        const dot = document.createElement("div");
+        dot.className = "light";
+        dot.setAttribute("aria-hidden", "true");
+        const body = document.createElement("div");
+        const title = document.createElement("h3");
+        title.textContent = request.broker_name || "Azienda";
+        const state = document.createElement("p");
+        state.className = "state";
+        state.textContent = lightWord(kind, request);
+        const line = document.createElement("p");
+        line.className = "explain";
+        line.textContent = explain(request, kind);
+        const details = document.createElement("details");
+        const summary = document.createElement("summary");
+        summary.textContent = "Dettagli";
+        const extra = document.createElement("div");
+        const rows = [
+          ["Pratica", request.case_id],
+          ["Come è stato chiesto", request.channel],
+          ["Dato usato", request.identifier_mask],
+          ["Inviata il", request.sent_at],
+          ["Risposta attesa entro", request.extended_deadline || request.deadline],
+          ["Prossimo controllo", request.next_recheck_at || "nessuno"],
+          ["Volte chiesto", String(request.cycle_count || 0)],
+          ["Riferimento", request.ticket_id || "nessuno"],
+          ["File della prova", request.proof_path || "nessuno"]
+        ];
+        rows.forEach(([label, value]) => {
+          const row = document.createElement("p");
+          row.textContent = label + ": " + (value || "—");
+          extra.append(row);
+        });
+        if (Array.isArray(request.proof) && request.proof.length) {
+          const proof = document.createElement("p");
+          proof.textContent = "Prove: " + request.proof.map((item) => item.kind + " " + (item.ref || "")).join("; ");
+          extra.append(proof);
+        }
+        (request.history || []).forEach((event) => {
+          const row = document.createElement("p");
+          row.textContent = [event.at, event.note].filter(Boolean).join(" — ");
+          extra.append(row);
+        });
+        details.append(summary, extra);
+        body.append(title, state, line, details);
+        article.append(dot, body);
+        list.append(article);
+      });
+    }
+
+    function showError(message) {
+      const box = document.getElementById("error");
+      box.hidden = !message;
+      box.textContent = message || "";
+    }
+
+    document.getElementById("reload").addEventListener("click", () => {
+      current = embedded;
+      showError("");
+      render();
+    });
+    document.getElementById("file").addEventListener("change", (event) => {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          current = validate(JSON.parse(String(reader.result)));
+          showError("");
+          render();
+        } catch (error) {
+          showError(error.message || "File non valido.");
+        }
+      };
+      reader.readAsText(file);
+    });
+    render();
+  </script>
+</body>
+</html>

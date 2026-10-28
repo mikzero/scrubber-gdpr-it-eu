@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+dashboard/registro.local.json
+dashboard/*-local.json
+!dashboard/example-registro.json

@@ -1,0 +1,54 @@
+name: Broker o URL
+description: Proponi un titolare, correggi un URL o segnala un canale ufficiale.
+title: "[broker] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Non scrivere dati personali: niente numeri, email tue, nomi, indirizzi, screenshot di schede o risposte ricevute.
+        Non è consulenza legale.
+  - type: input
+    id: name
+    attributes:
+      label: Nome del titolare
+      placeholder: Esempio, Acme Data
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: URL della pagina privacy o del modulo ufficiale
+      description: Deve essere una pagina del titolare, non un articolo di terzi.
+      placeholder: https://
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Categoria
+      options:
+        - adtech
+        - b2b
+        - credit
+        - lists
+        - people-search
+        - non so
+    validations:
+      required: true
+  - type: textarea
+    id: channel
+    attributes:
+      label: Cosa va aggiornato
+      description: Canale, errore del modulo, casella di ruolo vista sulla pagina. Incolla solo caselle di ruolo (dpo@, privacy@), mai email di persone.
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Conferma
+      options:
+        - label: Questa issue non contiene dati personali.
+          required: true
+        - label: Ho aperto la pagina ufficiale, oppure segnalo che l'URL non si apre.
+          required: true

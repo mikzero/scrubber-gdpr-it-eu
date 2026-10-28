@@ -1,0 +1,108 @@
+# Copertura paese. Non è consulenza legale. Nessun dato di persona fisica.
+code: IT
+name: Italia
+phase: 1
+status: partial
+languages:
+- it
+authority_id: it-garante
+registers:
+- id: rpo-it
+  ref: data/registries.yaml
+directories:
+- id: paginebianche
+  ref: data/registries.yaml
+broker_ids:
+- italiaonline-elenchi
+- tuttocitta
+- pronto-892424
+- tim-1254
+- infobel-it
+- dbu-elenchi
+- tim-elenchi
+- vodafone-elenchi
+- windtre-elenchi
+- iliad-elenchi
+- fastweb-elenchi
+- postemobile-elenchi
+- kena-elenchi
+- homobile-elenchi
+- very-elenchi
+- coopvoce-elenchi
+- tiscali-elenchi
+- ediscom
+- concorsiweb
+- digital-metrics
+- foryou
+- realmaps
+- toleadoo
+- mxt-international
+- consodata
+- crif-it
+- experian-it
+- ctc
+- cerved
+- creditsafe-it
+- cribis-dnb
+- coface-it
+- spaziodati-atoka
+- openapi
+- tinexta-visura
+- tellows-it
+- truecaller
+- michiama
+- ghostcallers
+- nocall
+- getcontact
+- syncme
+- callapp
+- hiya
+- eyecon
+- agcom-antispoofing
+- occhio-al-numero
+- ancic-portale
+- unicredit
+- intesa-sanpaolo
+- bper
+- banco-bpm
+- mps
+- poste-bancoposta
+- fineco
+- findomestic
+- agos
+- compass
+- generali-italia
+- allianz
+- unipol
+- axa-italia
+- reale-mutua
+- prima-assicurazioni
+- enel-energia
+- eni-plenitude
+- edison-energia
+- a2a-energia
+- hera-comm
+- iren-mercato
+- acea-energia
+- engie-italia
+- sorgenia
+- esselunga-fidaty
+- conad
+- coop-alleanza
+- carrefour-italia
+- lidl-italia
+- mediaworld
+- unieuro
+- facile-it
+- segugio
+- supermoney
+- lycamobile-it
+- spusu-it
+- 1mobile
+- optima-italia
+- sky-mobile
+- digi-it
+letters:
+- it
+notes: Fase 1 e 1b, 27 ottobre 2026. RPO e Garante solo in registries.yaml. uncertain non si contatta.
+  I contratti sono opt-in. Vedi docs/italia.md.
